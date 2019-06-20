@@ -43,3 +43,7 @@ ensure
     puts "Ahihi"
 end
 
+a = 2
+b = 4
+
+puts a.lcm(b)
