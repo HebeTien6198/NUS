@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Feed</title>
+        <!-- style.css -->
+        <link rel="stylesheet" href="style.css">
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+        <!-- Bootrap 4-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Google fonts-->
+        <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+
+        <!-- Load icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+
+    <body class="feed-body"> 
+        <header>
+            <nav class="header">
+                <div class="logo">
+                    <h2>Instagram</h2>
+                </div>
+                <div class="search">
+                    <form action="#">
+                        <input class="search-bar" type="text" placeholder="Search">
+                    </form>
+                </div> 
+                <div class="info">
+                    <ul class="list-inline inline-info">
+                        <li><a style="color:blue" href="#" class="list-item">Log out</a></li>
+                        <li><a style="color:blue" href="#" class="list-item">Hi Manh</a></li>
+                    </ul> 
+                    
+                </div>
+                <hr>
+            </nav>
+            
+        </header>
+        <div class="blank"></div>
+        <hr>
+        <main class="feed-container">
+           
+            
+                <div class="col-md-2">
+                    <div class="container">
+                        <a id="feed" href="#" onclick="feed()">Feeds</a>
+                        <br />
+                        <a id="discover" href="#" onclick="discover()">Discover</a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-8">
+                        <div class="col-md-12 top-button">
+                            <div class="button">
+                                <button id="photo" class="btn btn-primary" onclick="photo()">Photo</button>
+                                <button id="album" class="btn btn-primary" onclick="album()">Album</button>
+                            </div>
+
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-md-6">                               
+                                <div class="photo">
+                                    <img class="image" src="http://img2-ak.lst.fm/i/u/arO/bbd86feae3f14c9f9b1b0aaea855aad8">
+                                </div>
+                                <div class="infoo">
+                                    <div class="head">
+                                        <div class="avatar">
+                                            <p>SM</p>
+                                        </div>
+                                    </div>
+                                    <div class="body">cccc</div>
+                                    <div class="footer"></div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="photo"></div>
+                                <div class="infoo"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="photo"></div>
+                                <div class="infoo"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="photo"></div>
+                                <div class="infoo"></div>
+                            </div>
+                        </div>
+                     
+                </div>
+                      
+               
+                <div class="col-md-2">
+                  One of three columns
+                      
+        </main>
+    </body>
+
+    <script src="js/script.js"></script>
+</html>
