@@ -39,4 +39,7 @@ begin
     10 / 0
 rescue => exception
     puts exception
+ensure
+    puts "Ahihi"
 end
+
