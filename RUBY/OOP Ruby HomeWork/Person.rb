@@ -36,7 +36,7 @@ class Student < Person
     end
 
     def info()
-        super
+        puts numOfPerson()
         puts "Role #{@role}"
     end
 
@@ -57,3 +57,12 @@ puts manh.numOfPerson()
 manh.info()
 
 puts $globalVariable
+
+
+a = 18
+a >= 18 and puts "ccccc"
+
+p = {
+    age: 21
+}
+puts p[:age]

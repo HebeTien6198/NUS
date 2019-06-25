@@ -3,10 +3,13 @@
     <head>
         <title>Login</title>
         <!-- style.css -->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
 
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+        <!-- JQuery validate-->
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
         <!-- Bootrap 4-->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
@@ -16,40 +19,69 @@
         <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
 
         <!-- Load icon library -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
-    <body class="login-body">
+    <body>
+        <!---------------------------------------------------------HEADER---------------------------------------------------------------------->
         <header>
-            <nav class="header">
-                <div class="logo">
-                    <h2>Instagram</h2>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                <!---------------------------Logo------------------------------->
+                <a class="navbar-brand" href="#">Instagram</a>
+                
+
+                <!----------------------------Search Bar------------------------------------->
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                  </form>
+                  <!--------------------------------Info------------------------------------------->
+                <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+                  <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#"> <img class="avatar-image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-water-drops-on-pink-flower-royalty-free-image-1129286570-1550867689.jpg"> Manh <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Login</a>
+                    </li>
+                    </li>
+                  </ul>                  
                 </div>
-                <div class="search">
-                    <form action="#">
-                        <input class="search-bar" type="text" placeholder="Search">
-                    </form>
-                </div> 
-                <div class="info">
-                    <ul class="list-inline">
-                        <li><a style="color:blue" href="#">Register</a></li>
-                    </ul>
                 </div>
-            </nav>
+              </nav>
         </header>
-        <div class="blank"></div>
-        <hr>
-        <main class="container">            
+
+        <!--------------------------------------------------------BODY------------------------------------------------------------------>
+        <main>
+            <hr>
             
-            <div class="login-form">
-                <h1>Login</h1>
-                <form method="POST" action="">
-                    <input type="email" class="input-bar" placeholder="Email" required>
-                    <input type="password" class="input-bar" placeholder="password" required>
-                    <button class="login-button btn btn-primary" type="submit">Login</button>
-                </form>               
-                <a href="#">Forgot password?</a>
-                <a href="#">Create an account</a>
+        
+            <div class="container form-body">
+                    <h1 class="text-header text-primary">Login</h1>
+                </br>
+                <div class="row">
+                <div class="col-md-4"></div>
+                    <!----------------------------------Login Form-------------------------------------------------->
+                    <form class="col-md-4">
+                        
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        
+                        <a href="#" class="text-center">Fogot password?</a>
+                        <br>
+                        <a href="#">Register</a>
+                        <br />
+                        <br />
+                    </form>
+                <div class="col-md-4"></div>
+                </div>
             </div>
         </main>
     </body>
