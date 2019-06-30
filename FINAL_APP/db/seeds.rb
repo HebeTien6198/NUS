@@ -6,11 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-manh = User.create(name: "Tran Dao Si Manh", email: "trandaosimanh@gmail.com")
-quan = User.create(name: "Le Minh QUan", email: "leminhquan@gmail.com")
-chau = User.create(name: "Le Nguyen Ngan Chau", email: "lenguyennganchau@gmail.com")
-quynh = User.create(name: "Diep Phuong Quynh", email: "diepphuongquynh@gmail.com")
-faye = User.create(name: "Faye Wong", email: "fayewong@gmail.com")
+manh = User.create(firstName: "Tran Dao", lastName: "Si Manh", email: "trandaosimanh@gmail.com", password: "123456")
+quan = User.create(firstName: "Le", lastName: "Minh Quan", email: "leminhquan@gmail.com", password: "123456")
+chau = User.create(firstName: "Le Nguyen", lastName: "Ngan Chau", email: "lenguyennganchau@gmail.com", password: "123456")
+quynh = User.create(firstName: "Diep", lastName: "Phuong Quynh", email: "diepphuongquynh@gmail.com", password: "123456")
+faye = User.create(firstName: "Wong",lastName: "Faye", email: "fayewong@gmail.com", password: "123456")
 
 album1 = Album.create(name: "Album1", User: manh)
 album2 = Album.create(name: "Album2", User: quan)
