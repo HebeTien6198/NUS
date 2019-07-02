@@ -1,6 +1,8 @@
 class LoginController < ApplicationController
-  @message = "dd"
   def login
+    if session[:user]
+      redirect_to feed_url
+    end
   end
 
   def validateLogin
@@ -20,10 +22,18 @@ class LoginController < ApplicationController
       @message = "Wrong password!"
     #If every thing is OK
     else
-      #set session 
-      session[:user] = dataUser.firstName 
+      #set session user
+      session[:user] = dataUser
+      #check admin
+      if (dataUser.admin == true)
+        #set session admin
+        session[:admin] = true
+        #go to admin page
+        redirect_to admin_path
+      else
       #go to home page
-      redirect_to feed_feed_url    
+      redirect_to feed_url 
+      end   
     end
     
     
@@ -31,6 +41,6 @@ class LoginController < ApplicationController
 
   #--------take login input data from user-------------
   def user_params
-    params.require(:User).permit(:email, :password)
+    return params.require(:User).permit(:email, :password)
   end
 end

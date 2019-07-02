@@ -38,11 +38,9 @@
                   <!--------------------------------Info------------------------------------------->
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
-                    <li class="nav-item active">
-                      <a class="nav-link" href="#"> <img class="avatar-image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-water-drops-on-pink-flower-royalty-free-image-1129286570-1550867689.jpg"> Manh <span class="sr-only">(current)</span></a>
-                    </li>
+                    
                     <li class="nav-item">
-                      <a class="nav-link" href="#">Login</a>
+                      <a class="nav-link" href="/register">Register</a>
                     </li>
                     </li>
                   </ul>                  
@@ -69,7 +67,7 @@
                     <!----------------------------------Login Form-------------------------------------------------->
                     <form class="col-md-4" method="POST" action="/login">
                       <input name="utf8" type="hidden" value="&#x2713;" />
-                    <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  
+                      <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  
                         <div class="form-group">
                             <input type="email" name="User[email]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -82,7 +80,7 @@
                         
                         <a href="#" class="text-center">Fogot password?</a>
                         <br>
-                        <a href="#">Register</a>
+                        <a href="/register">Register</a>
                         <br />
                         <br />
                     </form>

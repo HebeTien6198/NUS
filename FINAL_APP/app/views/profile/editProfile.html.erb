@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Profile</title>
+        <!-- style.css -->
+   
+
+        <!-- JQuery -->
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <!-- JQuery validate-->
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+
+        <!-- Bootrap 4-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Google fonts-->
+        <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+
+        <!-- Load icon library -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' 
+    integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+        <!--Javascript-->
+  
+    </head>
+
+    <body id="feed" >
+        <!----------------Header from layout-------------------->
+        <%= render "/layouts/header"%>
+        <!--------------------------------------------------------BODY------------------------------------------------------------------>
+        <main class="feed-body">
+            <hr>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="container">
+                        <a href="#" class="link">Discover</a>
+                        <br>
+                        <a href="#" class="link">Feeds</a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-8 col-xs-8 photo-body">
+                    <div class="container">
+                    <br />
+                   
+                        <h6><strong>Edit User's Profile</strong></h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-7"><img class="edit-profile-photo m-auto"
+                        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-water-drops-on-pink-flower-royalty-free-image-1129286570-1550867689.jpg">
+                        </div></div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-7"><h6 class="text text-primary"><strong>Basic Information</strong></h6></div>
+                        </div>
+                        <!-------------------------------Basic Information------------------------------>
+                        <form method="POST" action="/editBasicProfile" onsubmit="return validation()">
+                            <input name="utf8" type="hidden" value="&#x2713;" />
+                            <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  
+                            <!-----------------First Name---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end" for="User[firstName]"><strong>First Name</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="first-name" name="User[firstName]" aria-describedby="emailHelp" placeholder="Your First Name">
+                                    <small id="first-name-message" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------Last Name---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end"><strong>Last Name</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="last-name" name="User[lastName]" aria-describedby="emailHelp" placeholder="Your Last Name">
+                                    <div id="last-name-message" class="form-text text-muted">It should be your last name</div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------Email---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end"><strong>Email</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="email" name="User[email]" aria-describedby="emailHelp" placeholder="someone@example.com">
+                                    <small id="email-message" class="form-text text-muted">It should be your email</small>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-7">
+                                    <button type="submit" value="submit" class="btn btn-success" >Save</button>
+                                </div>
+                            </div>
+                       
+                        </form>
+
+                        <br />
+                        <br />
+                        <br />
+
+                        <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-7"><h6 class="text text-primary"><strong>Password</strong></h6></div>
+                            </div>
+                         <!-------------------------------Password------------------------------>
+                        <form method="POST" action="/editPassword" onsubmit="return validation()">
+                            <input name="utf8" type="hidden" value="&#x2713;" />
+                            <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  
+                            <!-----------------Password---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end" for="current-password"><strong>Current password</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="password" class="form-control" id="current-password" name="currentPassword" aria-describedby="emailHelp" placeholder="12345678">
+                                    <small id="password-message" class="form-text text-muted">Your password should have more than 8 characters</small>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------New Password---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end"><strong>New Password</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="password" class="form-control" id="new-password" name="newPassword" aria-describedby="emailHelp" placeholder="12345678">
+                                    <small id="new-password-message" class="form-text text-muted">Your password should have more than 8 characters</small>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------Confirm password---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end"><strong>Confirm Password</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="password" class="form-control" id="confirm-password" name="confirmPassword" aria-describedby="emailHelp" placeholder="12345678">
+                                    <small id="confirm-password-message" class="form-text text-muted">It should be the same as your password</small>
+                                </div>
+                            </div>
+                            </div>
+                            <!-------------------Save button --------------->
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-7">
+                                    <button type="submit" value="submit" class="btn btn-success" >Save</button>
+                                </div>
+                            </div>
+                       
+                        </form>
+                   <br />
+                   <br />
+                   <br />
+                </div>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    right
+                </div>
+            </div>
+        
+            
+        </main>
+    </body>
+     <!-- Java Script -->
+    
+</html>

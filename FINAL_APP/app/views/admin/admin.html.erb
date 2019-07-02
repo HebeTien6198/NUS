@@ -1,0 +1,68 @@
+ 
+ <!----------------Header from layout-------------------->
+<%= render "/layouts/adminHeader"%>
+<main class="feed-body">
+    <hr>
+    <div class="row">
+        <div class="col-md-2 col-xs-2">
+            <div class="container">
+                <a href="#" class="link">Manage Photos</a>
+                <br>
+                <a href="#" class="link">Manage Album</a>
+                <br>
+                <a href="#" class="link active">Manage User</a>
+            </div>
+        </div>
+        <div class="col-md-8 col-xs-8 photo-body">
+            <div class="container">
+            <br />
+                <div class="row">
+                    <div class="col-md-2">
+                        <h6><strong>First Name</strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6><strong>Last Name</strong></h6>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><strong>Email</strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6><strong>Last Login</strong></h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h6><strong>cc</strong></h6>
+                    </div>
+                </div>
+                <hr>
+                <% for user in @Users %>
+                    <div class="row">
+                    <div class="col-md-2">
+                        <p><%=user.firstName%></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p><%=user.lastName%></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p><%=user.email%></p>
+                    </div>
+                    <div class="col-md-2">
+                        <p>cc</p>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <button class="btn btn-success">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                 <%end%>   
+                
+            </div>
+        </div>            
+        <div class="col-md-2 col-xs-2">
+            right
+        </div>
+    </div>
+        
+            
+</main>

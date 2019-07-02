@@ -1,6 +1,11 @@
-$("document").ready(function(){
-    let isValidate = true;
-    //-------------Ckech Validation on key up----------------
+
+$("#document").ready(function(){
+
+    console.log("----------------EDIT INFO---------------------")
+    let basicValidate = true;
+    let passwordValidate = true;
+
+//-------------Ckech Validation on key up----------------
     //--------Check Name----------------
     $("#first-name").keyup(function () { 
         firstNameValidation();
@@ -10,12 +15,12 @@ $("document").ready(function(){
     });
 
     //--------Check Pass------------------
-    $("#password").keyup(function () { 
-        passwordValidation();
+    $("#new-password").keyup(function () { 
+        resetPasswordValidation();
     });
 
     $("#confirm-password").keyup(function () { 
-        passwordValidation();
+        resetPasswordValidation();
     });
 
     //---------Check Email----------------
@@ -34,7 +39,7 @@ $("document").ready(function(){
         firstNameValidation()
         lastNameValidation()
         //----------Check pass----------------
-        passwordValidation()
+        resetPasswordValidation()
         //----------Check email-----------------
         emailValidateion()
         return isValidate;
@@ -48,8 +53,9 @@ $("document").ready(function(){
         $("#confirm-password-message").text("");
       }
 
-    //----------------First Name Check-----------------------
-    firstNameValidation = function() {
+
+     //----------------First Name Check-----------------------
+     firstNameValidation = function() {
         let firstName = $("#first-name").val();
         // $("#first-name").removeClass("is-invalid");
         console.log("First Name" + firstName)
@@ -68,6 +74,7 @@ $("document").ready(function(){
             $("#first-name-message").text("Look good");
         }
     }
+
     //----------------Last Name Check-----------------------
     lastNameValidation = function() {
         let lastName = $("#last-name").val();
@@ -85,32 +92,6 @@ $("document").ready(function(){
         else {
             valid("#last-name", "#last-name-message");
             $("#last-name-message").text("Look good");
-        }
-    }
-
-    //----------------Password Check-----------------------------------
-    passwordValidation = function() {
-        let password = $("#password").val();
-        let confirmPassword = $("#confirm-password").val();
-        console.log("Password: " + password);
-        console.log("Confirm password " + confirmPassword) ;
-
-        if (password.length < 8) {
-            invalid("#password", "#password-message");
-            $("#password-message").text("You need at least 8 character for password");
-            isValidate = false;
-        }
-
-        else if (password != confirmPassword) {
-            invalid("#confirm-password", "#confirm-password-message");
-            $("#confirm-password-message").text("Please confirm correct password");
-            isValidate = false;
-        }
-        if (password.length >= 8){
-            valid("#password", "#password-message");
-        }
-        if (password === confirmPassword && confirmPassword.length >= 8) {
-            valid("#confirm-password", "#confirm-password-message");
         }
     }
 
@@ -133,6 +114,32 @@ $("document").ready(function(){
         }
       }
 
+
+    //----------------Password Check-----------------------------------
+    resetPasswordValidation = function() {
+        let password = $("#new-password").val();
+        let confirmPassword = $("#confirm-password").val();
+        console.log("Password: " + password);
+        console.log("Confirm password " + confirmPassword) ;
+
+        if (password.length < 8) {
+            invalid("#new-password", "#new-password-message");
+            $("#new-password-message").text("You need at least 8 character for password");
+            isValidate = false;
+        }
+
+        else if (password != confirmPassword) {
+            invalid("#confirm-password", "#confirm-password-message");
+            $("#confirm-password-message").text("Please confirm correct password");
+            isValidate = false;
+        }
+        if (password.length >= 8){
+            valid("#new-password", "#new-password-message");
+        }
+        if (password === confirmPassword && confirmPassword.length >= 8) {
+            valid("#confirm-password", "#confirm-password-message");
+        }
+    }
     //----valid-invalid stuff---------------------------
     invalid = function(id, idMessage) {
         $(id).removeClass("is-valid");
