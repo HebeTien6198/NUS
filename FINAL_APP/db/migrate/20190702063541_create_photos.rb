@@ -1,10 +1,10 @@
 class CreatePhotos < ActiveRecord::Migration[5.2]
   def change
     create_table :photos do |t|
-      t.string :name
+      t.string :title
       t.string :des
       t.string :url
-      t.references :image, polymorphic: true
+      t.references :User, foreign_key: true
 
       t.timestamps
     end

@@ -1,15 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  title: MyString
   des: MyString
   url: MyString
-  imgae: one
-  imgae_type: Imgae
+  User: one
 
 two:
-  name: MyString
+  title: MyString
   des: MyString
   url: MyString
-  imgae: two
-  imgae_type: Imgae
+  User: two

@@ -6,6 +6,8 @@ class LoginController < ApplicationController
   end
 
   def validateLogin
+    #Get current time
+    lastLogin = DateTime.current
     #Get input from user
     guest = User.new(user_params)
     puts guest.email
@@ -24,6 +26,11 @@ class LoginController < ApplicationController
     else
       #set session user
       session[:user] = dataUser
+      #Get current time and add to last Login
+      lastLogin = DateTime.current
+      dataUser.lastLogin = lastLogin
+      dataUser.save
+
       #check admin
       if (dataUser.admin == true)
         #set session admin

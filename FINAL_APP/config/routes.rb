@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'profile/profile'
   get 'profile/editProfile'
   #------------------------GET-----------------------------
@@ -11,9 +12,12 @@ Rails.application.routes.draw do
   get 'login', to: "login#login"
   get 'feed', to: "feed#feed"
   get 'profile', to: "profile#profile"
+  get 'editPhoto', to: "profile#editPhoto"
+  get 'newPhoto', to: "profile#newPhoto"
   #--admin---
   get 'admin', to: "admin#admin"
-
+  get 'admin/edit', to: "admin#edit"
+  get 'admin/managePhoto', to: "admin#managePhoto"
   
   #------------------------POST------------------------------
   post 'register', to: "register#create"
@@ -25,5 +29,11 @@ Rails.application.routes.draw do
   #--------------Edit------------
   post 'editBasicProfile', to: "profile#editBasicProfile"
   post 'editPassword', to: "profile#editPassword"
+  post 'updateProfile', to: "admin#updateProfile"
+  post 'editPhotoServer', to: "profile#editPhotoServer"
+  post 'uploadPhoto', to: "profile#uploadPhoto"
+
+  #-------Delete-------#
+  post 'deletePhoto', to: "profile#deletePhoto"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

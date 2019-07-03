@@ -1,28 +1,28 @@
 class ProfileController < ApplicationController
-
+  before_action :set_user
+  before_action :set_photo, only: [:editPhoto, :deletePhoto]
   #-----------------------GET--------------------------#
   def profile
-    if session[:user]
-      @name = session[:user]["firstName"]
-      @fullName = "#{session[:user]["firstName"]} #{session[:user]["lastName"]}"
-    else
-      redirect_to login_login_url
-    end
   end
 
   def editProfile
-    if session[:user]
-      @name = session[:user]["firstName"]
-    else
-      redirect_to login_login_url
-    end
+  end
+  
+  def editPhoto
   end
 
+  def newPhoto
+    @photo = Photo.new
+    @image = "assets/default/img/default-img.gif"
+
+  end
   #-------------------------POST--------------------------#
   #--------Log out-------------------#
   def logOut
     redirect_to login_login_url
   end
+
+
   #-------edit Basic profile---------#
   def editBasicProfile
     edit = User.new(user_basic_params);
@@ -40,6 +40,7 @@ class ProfileController < ApplicationController
     end
 
   end
+
 
   #-------------CHange Password------------#
   def editPassword
@@ -64,12 +65,86 @@ class ProfileController < ApplicationController
   end
 
   
-  #--------take login input data from user-------------
-  def user_basic_params
-    params.require(:User).permit(:firstName, :lastName, :email)
+  #----------------------Edit Photo----------------------------#
+  def editPhotoServer
+    photo = Photo.new(photo_params)
+    databasePhoto = Photo.where(id: photo.id).first
+    databasePhoto.title = photo.title
+    puts "ccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    puts "-------------------#{photo.sharingMode}---------------"
+    databasePhoto.sharingMode = photo.sharingMode
+    databasePhoto.des = photo.des
+    if (databasePhoto.save)
+      redirect_to editPhoto_path(databasePhoto.id)
+    else
+      @message = "Something wrong"
+    end
   end
 
+  #----------Upload new photo--------------
+  def uploadPhoto
+    photo = Photo.new(upload_photo_params)
+    photo.User = @user
+    #set URL
+    photo.url = photo.image.url
+
+    if (photo.save)
+      redirect_to feed_url
+    else
+      redirect_to profile_url
+      puts "------------------------------"
+      puts photo.errors.messages
+    end
+  end
+
+
+  #------------Delete Photo-----------------------#
+  def deletePhoto
+    puts "---------------deletePhoto #{@photo}------------------"
+    if @photo.delete
+      redirect_to profile_url
+    else
+    end
+  end
+
+  #--------take login input data from user-------------
+  #---Basic Profile---#
+  def user_basic_params()
+    return params.require(:User).permit(:firstName, :lastName, :email)
+  end
+
+  #---Password Profile---#
   def user_password
     return params.permit(:currentPassword, :newPassword)
+  end
+
+  #----Photo Info-----#
+  def photo_params
+    return params.require(:Photo).permit(:id, :title, :sharingMode, :des)
+    puts "ccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    puts "-------------------#{params.require(:Photo).permit(:id, :title, :sharingMode, :des)}---------------"
+  end
+
+  def upload_photo_params
+    return params.require(:Photo).permit(:title, :sharingMode, :image, :des)
+  end
+
+  #-------------------------------Before Action-----------------------------------------#
+  def set_user
+    if session[:user]
+      @user = User.where(id: session[:user]["id"]).first
+      @name = session[:user]["firstName"]
+      @fullName = "#{session[:user]["firstName"]} #{session[:user]["lastName"]}"
+      @avatar = @user.avatar
+      @photos = @user.photos
+    else
+      redirect_to login_login_url
+    end
+    
+  end
+
+  def set_photo
+    @photo = @photos.where(id: params[:format]).first
+
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_031321) do
+ActiveRecord::Schema.define(version: 2019_07_03_064624) do
 
   create_table "albums", force: :cascade do |t|
     t.string "name"
@@ -22,16 +22,8 @@ ActiveRecord::Schema.define(version: 2019_06_30_031321) do
     t.index ["User_id"], name: "index_albums_on_User_id"
   end
 
-  create_table "photos", force: :cascade do |t|
-    t.string "name"
-    t.string "des"
-    t.string "url"
-    t.string "image_type"
-    t.integer "image_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["image_type", "image_id"], name: "index_photos_on_image_type_and_image_id"
-  end
+# Could not dump table "photos" because of following StandardError
+#   Unknown type 'ingeger' for column 'sharingMode'
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -41,6 +33,8 @@ ActiveRecord::Schema.define(version: 2019_06_30_031321) do
     t.string "firstName"
     t.string "lastName"
     t.boolean "admin"
+    t.datetime "lastLogin"
+    t.string "avatar"
   end
 
 end

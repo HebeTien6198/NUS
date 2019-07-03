@@ -1,0 +1,110 @@
+  <body id="feed" >
+        <!----------------Header from layout-------------------->
+        <%= render "/layouts/header"%>
+        <!--------------------------------------------------------BODY------------------------------------------------------------------>
+        <main class="feed-body">
+            <hr>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="container">
+                        <a href="#" class="link">Manage Photos</a>
+                        <br>
+                        <a href="#" class="link">Manage Album</a>
+                        <br>
+                        <a href="#" class="link active">Manage User</a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-8 col-xs-8 photo-body">
+                    <div class="container">
+                    <br />
+                   
+                        <h6><strong>Edit User's Profile</strong></h6>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-7"><img class="edit-profile-photo m-auto"
+                        src="<%=@targetAvatar%>">
+                        </div></div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-7"><h6 class="text text-primary"><strong>Basic Information</strong></h6></div>
+                        </div>
+                        <!-------------------------------Basic Information------------------------------>
+                        <form method="POST" action="/updateProfile" onsubmit="return validation()">
+                            <input name="utf8" type="hidden" value="&#x2713;" />
+                            <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  
+                            <input type="hidden" name="User[id]" value='<%=@user.id%>'>
+                            <!-----------------First Name---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end" for="User[firstName]"><strong>First Name</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="first-name" name="User[firstName]" value='<%=@targetUser.firstName%>' placeholder="Your First Name">
+                                    <small id="first-name-message" class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------Last Name---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end"><strong>Last Name</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="last-name" name="User[lastName]" value='<%=@targetUser.lastName%>' placeholder="Your Last Name">
+                                    <div id="last-name-message" class="form-text text-muted">It should be your last name</div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------Email---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end"><strong>Email</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="email" name="User[email]" value='<%=@targetUser.email%>' aria-describedby="emailHelp" placeholder="someone@example.com">
+                                    <small id="email-message" class="form-text text-muted">It should be your email</small>
+                                </div>
+                            </div>
+                            </div>
+                            <!-----------------Password---------------------->
+                            <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label class="col-form-label d-flex justify-content-end" for="current-password"><strong>Current password</strong></label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="password" class="form-control" id="current-password" name="User[password]" value='<%=@targetUser.password%>' placeholder="12345678">
+                                    <small id="password-message" class="form-text text-muted">Your password should have more than 8 characters</small>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-7">
+                                    <button type="submit" value="submit" class="btn btn-success" >Save</button>
+                                </div>
+                            </div>
+                       
+                        </form>
+
+                        <br />
+                        <br />
+                        <br />
+
+                <div class="col-md-2 col-xs-2">
+                    right
+                </div>
+            </div>
+        
+            
+        </main>
+    </body>
+     <!-- Java Script -->
+    
+</html>

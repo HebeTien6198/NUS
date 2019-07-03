@@ -14,18 +14,14 @@
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#"> <img class="avatar-image" src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/close-up-of-water-drops-on-pink-flower-royalty-free-image-1129286570-1550867689.jpg"></a>
+                      <a class="nav-link" href="#"> <img class="avatar-image" src="<%=@avatar%>"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/profile"><%=@name%></a> <span class="sr-only">(current)</span>
                     </li>
                     <li class="nav-item">
-                    <%# <form method="POST" action="logOut">
-                        <input name="utf8" type="hidden" value="&#x2713;" />
-                        <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  %>
-                        <%# <a class="nav-link" method="POST" href="/logOut" id="log-out" value="submit">Log out</a> %>
                         <%= link_to "Log Out", logOut_url, class: "nav-link",method: :post %>
-                    <%# </form> %>
+                    
                     </li>
                     </li>
                   </ul>                  

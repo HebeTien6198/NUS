@@ -1,0 +1,79 @@
+
+
+    <body id="feed" >
+        <!----------------Header from layout-------------------->
+        <%= render "/layouts/header"%>
+        <!--------------------------------------------------------BODY------------------------------------------------------------------>
+        <main class="feed-body">
+            <hr>
+            <div class="row">
+                <div class="col-md-2 col-xs-2">
+                    <div class="container">
+                        <a href="#" class="link">Discover</a>
+                        <br>
+                        <a href="#" class="link">Feeds</a>
+                    </div>
+                    
+                </div>
+                <div class="col-md-8 col-xs-8 photo-body">
+                    <div class="container">
+                    <br />
+                   
+                        <h6><strong>Edit Photo</strong></h6>
+                        <hr>
+                    <!-------------------------Edit Photo Form------------------------------------------->
+                    <form method="POST" action="/editPhotoServer">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                    <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />
+                    <!----------ID----------->
+                    <input type="hidden" name="Photo[id]" value="<%=@photo.id%>">
+                    <div class="row">
+                    <!----------Title--------->
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="title"><strong>Title:</strong></label>
+                                <input type="text" value="<%=@photo.title%>" name="Photo[title]" class="form-control" id="title">
+                            </div>
+                    <!-----------Mode---------->
+                            <div class="form-group">
+                                <label for="sharing-mode"><strong>Sharing mode:</strong></label>
+                                <select type="text" class="form-control" name="Photo[sharingMode]" id="sharing" value="<%=@photo.sharingMode%>">
+                                    <option name="Photo[sharingMode]" value="isPrivate">Private</option>
+                                    <option name="Photo[sharingMode]" value="isPublic">Public</option>
+                                </select>
+                            </div>
+                    <!-----------Image---------->
+                            <div class='' style="background: url('<%=@photo.image.url%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px"></div>                                  
+                        </div>
+                        <div class="col">
+                    <!------------Description---------->
+                        <div class="form-group">
+                                <label for="des"><strong>Description:</strong></label>
+                                <textarea rows="5" class="form-control" name="Photo[des]" id="des"><%=@photo.des%></textarea>
+                            </div>
+                        </div>
+                    </div>  
+                    <br/>
+                    <br/>
+                    <div class="row">
+                    <!----------------Button-------------->
+                        <div class="col-md-3">
+                            <button value="submit" type="submit" class="btn btn-success pull-left">Save</button>
+                            <button class="btn btn-danger pull-right"><%= link_to "Delete", deletePhoto_url(@photo.id), method: :post%> </button>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    right
+                </div>
+            </div>
+        
+            
+        </main>
+    </body>
+     <!-- Java Script -->
+    
+</html>
