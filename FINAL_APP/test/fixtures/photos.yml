@@ -3,11 +3,11 @@
 one:
   title: MyString
   des: MyString
-  url: MyString
   User: one
+  sharingMode: 1
 
 two:
   title: MyString
   des: MyString
-  url: MyString
   User: two
+  sharingMode: 1

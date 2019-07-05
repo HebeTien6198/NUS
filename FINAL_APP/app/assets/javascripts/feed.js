@@ -15,6 +15,26 @@ $("#document").ready(function() {
         $("#photo-button").removeClass("btn-primary");
     });
 
+    $("i.like").click(function(){
+       
+        follower_id =  $(this).attr('follower');
+        following_id = $(this).attr('following');
+        
+        Rails.ajax({
+            url: "/like",
+            type: "post",
+            data: "follower_id=>${follower_id}, following_id=>${following_id}",
+            // data: "follower_id=>cc, following_id=>ccc",
+            success: function(data) {
+                
+            },
+            error: function(data) {
+                alert("Eror")
+            }
+          })
+        
+    });
+
     //----------------------Log out--------------------------------
     // $("#log-out").click(function(){
     //     var form = $('<form method="post" id="logOut"></form>')
@@ -25,7 +45,7 @@ $("#document").ready(function() {
 	// 	// form.append($('<input type="hidden">').attr({name: "logOut", value: "true"}));
 	// 	$('body').append(form);
 	// 	form.submit();
-    // });
+    //  });
 
 
 

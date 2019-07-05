@@ -34,14 +34,10 @@
         <main class="feed-body">
             <hr>
             <div class="row">
-                <div class="col-md-2 col-xs-2">
-                    <div class="container">
-                        <a href="#" class="link">Discover</a>
-                        <br>
-                        <a href="#" class="link">Feeds</a>
-                    </div>
-                    
-                </div>
+                <!---------------Left tab from Layput-------------->
+                <%= render "/layouts/leftTab"%>
+                <!------------------End left tab------------------->
+
                 <div class="col-md-8 col-xs-8 photo-body">
                     <!----------------------------------HEADER BUTTON----------------------------------------->
                     <div class="row photo-body" >
@@ -61,25 +57,82 @@
                                 <!------------------------A photo----------------------------------->
                                 <div></div>
                                 <%for photo in @photos%>
-                                <div class="photo-container shadow-sm rounded">
+                                <div class="photo-container shadow-sm rounded " data-toggle="modal" data-target="#myModal<%=photo.id%>">
                                     <div class="row">
                                         <div class="col">
                                             <img src="<%=photo.image.url%>" class="photo-review-image">
                                         </div>
                                         <div class="col">
                                             <div class="review-header">
-                                                <img src="/assets/1/photos/rose.jpeg" class="header-img">
-                                                <p class="header-text text-primary"><%= @user.firstName %></p>
+                                            <!------Avatar------>
+                                                <img src="<%=photo.User.avatar%>" class="header-img">
+                                          
+                                            <!------User's Name------>
+                                                <p class="header-text text-primary"><%= photo.User.firstName  %></p>
                                             </div>
                                             <div class="review-body">
                                                 <p class="header-text"><%=photo.title%></p>
                                                 <p><%=photo.des%></p>
                                             </div>
                                             <div class="review-footer">
-                                                <i class="fas fa-heart"> 123</i>             
-                                                <div class="date ml-auto">5pm 23/5/2019</div>                          
+                                                <i class="like fas fa-heart"> 123</i>             
+                                                <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>                          
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <!-- The Modal -->
+                                <div class="modal fade " id="myModal<%=photo.id%>">
+                                    <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <!-----Image------>
+                                        <div class="row">
+                                        <div class="col-md-7"><img class="center" src="<%=photo.image.url%>" style="height: 700px;width: 100%;"></div>
+                                        <div class="col-md-5">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <!------Avatar------>
+                                                <img src="<%=photo.User.avatar%>" style="width: 50px; height: 50px; border-radius: 50%;">
+                                          
+                                                <!------User's Name------>
+                                                <h4 class="header-text text-primary" style="padding-left: 20px;"><%= "  " + photo.User.firstName + " " + photo.User.lastName  %></h4>
+                                                <br/>
+                                                
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                        
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <h4 class="modal-title"><%=photo.title%></h4>
+                                                <%=photo.des%>
+                                            </div>
+                                        
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                            <!--Like button-->
+                                            <i user_id="<%=@user.id%>" photo_id='<%=photo.id%>' class="like fas fa-heart" style="color: blue"> 123</i>     
+                                            <button class="btn">Comment</button>  
+                                            <button class="btn">Share</button>        
+                                            <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                                            </div>
+                                            <!---Comment----->
+                                            <div class="row">
+                                       
+                                                <img class="ml-2" src="<%=photo.User.avatar%>" style="width: 45px; height: 45px; border-radius: 50%">
+                      
+                                                <div class="col-md-10">
+                                                    <form>
+                                                        <input style="border-radius: 10px; margin-right: 5px" class="form-control" placeholder="Enter your comment here">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                
+                                
+        
+                                    </div>
                                     </div>
                                 </div>
                                 <%end%>

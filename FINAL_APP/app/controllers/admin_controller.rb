@@ -24,8 +24,6 @@ class AdminController < ApplicationController
 
     #--------Edit User----------#
     def updateProfile
-        @user = session[:user]
-        @name = @user["firstName"]
         editUser = User.new(edit_user_params)
         user = User.where(id: editUser.id).first
         user.email = editUser.email

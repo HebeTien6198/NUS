@@ -3,6 +3,11 @@ class ProfileController < ApplicationController
   before_action :set_photo, only: [:editPhoto, :deletePhoto]
   #-----------------------GET--------------------------#
   def profile
+    #---Find all records that the user is the one that follow (follower)--#
+    @followingRecords = Follow.where(follower: @user)
+    #---Find all records that the user is followed (following)--#
+    @followerRecords = Follow.where(following: @user)
+   
   end
 
   def editProfile
@@ -86,7 +91,6 @@ class ProfileController < ApplicationController
     photo = Photo.new(upload_photo_params)
     photo.User = @user
     #set URL
-    photo.url = photo.image.url
 
     if (photo.save)
       redirect_to feed_url
@@ -137,6 +141,7 @@ class ProfileController < ApplicationController
       @fullName = "#{session[:user]["firstName"]} #{session[:user]["lastName"]}"
       @avatar = @user.avatar
       @photos = @user.photos
+      
     else
       redirect_to login_login_url
     end

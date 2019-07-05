@@ -7,14 +7,9 @@
         <main class="feed-body">
             <hr>
             <div class="row">
-                <div class="col-md-2 col-xs-2">
-                    <div class="container">
-                        <a href="#" class="link">Discover</a>
-                        <br>
-                        <a href="#" class="link">Feeds</a>
-                    </div>
-                    
-                </div>
+              <!---------------Left tab from Layput-------------->
+                <%= render "/layouts/leftTab"%>
+                <!------------------End left tab------------------->
                 <div class="col-md-8 col-xs-8 photo-body">
                     <div class="container">
                     <br />
@@ -30,7 +25,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="title"><strong>Title:</strong></label>
-                                <input type="text" value="<%=@photo.title%>" name="Photo[title]" class="form-control" id="title">
+                                <input type="text" value="Photo Title goes here" name="Photo[title]" class="form-control" id="title">
                             </div>
                     <!-----------Mode---------->
                             <div class="form-group">
@@ -49,7 +44,7 @@
                     <!------------Description---------->
                         <div class="form-group">
                                 <label for="des"><strong>Description:</strong></label>
-                                <textarea rows="5" class="form-control" name="Photo[des]" id="des"></textarea>
+                                <textarea rows="5" class="form-control" name="Photo[des]" id="des">Description goes here</textarea>
                             </div>
                         </div>
                     </div>  

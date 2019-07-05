@@ -8,12 +8,19 @@ Rails.application.routes.draw do
   get 'login/login'
 
   #---For shoter Get----
+  #feed#
+  get 'feed', to: "feed#feed"
+  get 'discover', to: "feed#discover"
+  get 'info', to: "feed#info"
+  #login-out#
   get 'register', to: "register#register"
   get 'login', to: "login#login"
-  get 'feed', to: "feed#feed"
+ 
+  #profile#
   get 'profile', to: "profile#profile"
   get 'editPhoto', to: "profile#editPhoto"
   get 'newPhoto', to: "profile#newPhoto"
+
   #--admin---
   get 'admin', to: "admin#admin"
   get 'admin/edit', to: "admin#edit"
@@ -26,6 +33,11 @@ Rails.application.routes.draw do
   post 'profile/logOut', to: "profile#logOut"
   post 'logOut', to: "feed#logOut"
 
+  #-----------Follow-Unfollow---------#
+  post 'follow', to: "feed#follow"
+  post 'unfollow', to: "feed#unfollow"
+  #-----------Like-Unlike------------#
+  post 'like', to: "feed#like"
   #--------------Edit------------
   post 'editBasicProfile', to: "profile#editBasicProfile"
   post 'editPassword', to: "profile#editPassword"
