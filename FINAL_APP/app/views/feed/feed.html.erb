@@ -1,161 +1,270 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Feed</title>
-        <!-- style.css -->
-   
+<style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
 
-        <!-- JQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<body id="feed">
+  <%= render "/layouts/header"%>
 
-        <!-- JQuery validate-->
-        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/leftTab"%>
+      <!------------------End left tab------------------->
 
-        <!-- Bootrap 4-->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <div class="col-md-8 col-xs-8 photo-body">
+        <!----------------------------------HEADER BUTTON----------------------------------------->
+        <div class="row photo-body">
+          <div class="col">
+            <button id="photo-button" href="#photo" type="button" role="tab" data-toggle="tab"
+              class="btn btn-primary pull-right photo-button">PHOTO</button>
+          </div>
+          <div class="col">
+            <button id="album-button" href="#album" type="button" role="tab" data-toggle="tab"
+              class="btn btn-primary pull-left album-button">AlBUM</button>
+          </div>
+        </div>
+        <br>
+        <!-------------------------------------PHOTO---------------------------------------------->
+        <!----------------------Photo Tab--------------------->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="photo">
+            <div class="wrap photo-body">
+              <!------------------------A photo----------------------------------->
+              <div></div>
+              <%for photo in @photos%>
+              <div class="photo-container shadow-sm rounded " data-toggle="modal" data-target="#myModal<%=photo.id%>">
+                <div class="row">
+                  <div class="col">
+                    <img src="<%=photo.image.url%>" class="photo-review-image">
+                  </div>
+                  <div class="col">
+                    <div class="review-header">
+                      <!------Avatar------>
+                      <img src="<%=photo.User.avatar%>" class="header-img">
 
-        <!-- Google fonts-->
-        <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
-
-        <!-- Load icon library -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' 
-    integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
-        <!--Javascript-->
-  
-    </head>
-
-    <body id="feed" >
-        <%= render "/layouts/header"%>
-
-        <!--------------------------------------------------------BODY------------------------------------------------------------------>
-        <main class="feed-body">
-            <hr>
-            <div class="row">
-                <!---------------Left tab from Layput-------------->
-                <%= render "/layouts/leftTab"%>
-                <!------------------End left tab------------------->
-
-                <div class="col-md-8 col-xs-8 photo-body">
-                    <!----------------------------------HEADER BUTTON----------------------------------------->
-                    <div class="row photo-body" >
-                        <div class="col">
-                            <button id="photo-button" href="#photo" type="button" role="tab" data-toggle="tab" class="btn btn-primary pull-right photo-button">PHOTO</button>
-                        </div>    
-                        <div class="col">
-                            <button id="album-button" href="#album" type="button" role="tab" data-toggle="tab" class="btn btn-primary pull-left album-button">AlBUM</button>
-                        </div>
+                      <!------User's Name------>
+                      <p class="header-text text-primary"><%= photo.User.firstName  %></p>
                     </div>
-                    <br>
-                    <!-------------------------------------PHOTO---------------------------------------------->
-                    <!----------------------Photo Tab--------------------->
-                    <div class="tab-content"  >
-                        <div role="tabpanel" class="tab-pane active" id="photo" >
-                            <div class="wrap photo-body">
-                                <!------------------------A photo----------------------------------->
-                                <div></div>
-                                <%for photo in @photos%>
-                                <div class="photo-container shadow-sm rounded " data-toggle="modal" data-target="#myModal<%=photo.id%>">
-                                    <div class="row">
-                                        <div class="col">
-                                            <img src="<%=photo.image.url%>" class="photo-review-image">
-                                        </div>
-                                        <div class="col">
-                                            <div class="review-header">
-                                            <!------Avatar------>
-                                                <img src="<%=photo.User.avatar%>" class="header-img">
-                                          
-                                            <!------User's Name------>
-                                                <p class="header-text text-primary"><%= photo.User.firstName  %></p>
-                                            </div>
-                                            <div class="review-body">
-                                                <p class="header-text"><%=photo.title%></p>
-                                                <p><%=photo.des%></p>
-                                            </div>
-                                            <div class="review-footer">
-                                                <i class="like fas fa-heart"> 123</i>             
-                                                <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>                          
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- The Modal -->
-                                <div class="modal fade " id="myModal<%=photo.id%>">
-                                    <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <!-----Image------>
-                                        <div class="row">
-                                        <div class="col-md-7"><img class="center" src="<%=photo.image.url%>" style="height: 700px;width: 100%;"></div>
-                                        <div class="col-md-5">
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <!------Avatar------>
-                                                <img src="<%=photo.User.avatar%>" style="width: 50px; height: 50px; border-radius: 50%;">
-                                          
-                                                <!------User's Name------>
-                                                <h4 class="header-text text-primary" style="padding-left: 20px;"><%= "  " + photo.User.firstName + " " + photo.User.lastName  %></h4>
-                                                <br/>
-                                                
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                        
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <h4 class="modal-title"><%=photo.title%></h4>
-                                                <%=photo.des%>
-                                            </div>
-                                        
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                            <!--Like button-->
-                                            <i user_id="<%=@user.id%>" photo_id='<%=photo.id%>' class="like fas fa-heart" style="color: blue"> 123</i>     
-                                            <button class="btn">Comment</button>  
-                                            <button class="btn">Share</button>        
-                                            <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
-                                            </div>
-                                            <!---Comment----->
-                                            <div class="row">
-                                       
-                                                <img class="ml-2" src="<%=photo.User.avatar%>" style="width: 45px; height: 45px; border-radius: 50%">
-                      
-                                                <div class="col-md-10">
-                                                    <form>
-                                                        <input style="border-radius: 10px; margin-right: 5px" class="form-control" placeholder="Enter your comment here">
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                
-                                
-        
-                                    </div>
-                                    </div>
-                                </div>
-                                <%end%>
-                                <!------------------------END PHOTO------------------------------------------>
-                               
-                         
-                            </div>
-                            
-                           
-                               
-                        </div>
-                        <!----------------------Album Tab--------------------->
-                        <div role="tabpanel" class="tab-pane" id="album">cc</div>
+                    <div class="review-body">
+                      <p class="header-text"><%=photo.title%></p>
+                      <p><%=photo.des%></p>
                     </div>
+                    <div class="review-footer">
+                      <i class="like fas fa-heart numOfLikes<%=photo.id%>" id="numOfLikes<%=photo.id%>">
+                        <%=photo.likes.size%></i>
+                      <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-2 col-xs-2">
-                    right
+              </div>
+
+              <!-- The Modal -->
+              <div class="modal fade " id="myModal<%=photo.id%>">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <!-----Image------>
+                    <div class="row">
+                      <div class="col-md-8"><img class="center" src="<%=photo.image.url%>"
+                          style="height: 700px;width: 100%;"></div>
+                      <div class="col-md-4">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <!------Avatar------>
+                          <img src="<%=photo.User.avatar%>" style="width: 50px; height: 50px; border-radius: 50%;">
+
+                          <!------User's Name------>
+                          <div>
+                            <h4 class="header-text text-primary" style="padding-left: 20px;">
+                              <%= "  " + photo.User.firstName + " " + photo.User.lastName  %></h4>
+                            <div style="padding-left: 20px;"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                          </div>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                          <h4 class="modal-title"><%=photo.title%></h4>
+                          <%=photo.des%>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                          <div class="row">
+                            <!--Like Icon-->
+                            <i class="like fas fa-heart numOfLikes<%=photo.id%>"><%=photo.likes.size%></i>
+                          </div>
+
+                        </div>
+                        <div class="row">
+                          <!--Like Button -->
+
+                          <%if @likes[photo.id] != true %>
+                          <button class="btn like" liked="false" user_id="<%=@user.id%>"
+                            numOflikes="<%=photo.likes.size%>" photo_id="<%=photo.id%>">Like</button>
+                          <%else%>
+
+                          <button class="btn like text-primary" liked="true" user_id="<%=@user.id%>"
+                            numOflikes="<%=photo.likes.size%>" photo_id="<%=photo.id%>">Like</button>
+                          <%end%>
+                          <button class="btn "><a href="#comment">Comment</a></button>
+                          <button class="btn ">Share</button>
+                        </div>
+                        <!---Comment----->
+                        <div id="comments<%=photo.id%>">
+                          <%for comment in photo.photo_comments%>
+                          <%=comment.content%> <br />
+                          <%end%>
+                        </div>
+                        <div class="row">
+
+                          <img class="ml-2" src="<%=photo.User.avatar%>"
+                            style="width: 45px; height: 45px; border-radius: 50%">
+
+                          <div class="col-md-10">
+
+                            <input style="border-radius: 10px; margin-right: 5px" class="form-control comment"
+                              placeholder="Enter your comment here" Photo_id="<%=photo.id%>">
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                  </div>
                 </div>
+              </div>
+              <%end%>
+              <!------------------------END PHOTO------------------------------------------>
+
+
             </div>
-        
-            
-        </main>
-    </body>
-     <!-- Java Script -->
+
+
+
+          </div>
+          <!----------------------Album Tab--------------------->
+          <div role="tabpanel" class="tab-pane" id="album">
+            <div class="wrap photo-body">
+              <!------------------------A photo----------------------------------->
+              <%for album in @albums%>
+              <!----------Get all album record--------------->
+              <%albumRecords = album.album_records%>
+             
+              <!-------------Get first image------------------>
+              <%firstPhoto = albumRecords.first.Photo%>
+              <div class="photo-container shadow-sm rounded " data-toggle="modal"
+                data-target="#myAlbumModal<%=album.id%>">
+                <div class="row">
+                  <div class="col albums-rotate">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
+                  </div>
+                  <div class="col">
+                    <div class="review-header">
+                      <!------Avatar------>
+                      <img src="<%=album.User.avatar%>" class="header-img">
+
+                      <!------User's Name------>
+                      <p class="header-text text-primary"><%= album.User.firstName  %></p>
+                    </div>
+                    <div class="review-body">
+                      <p class="header-text"><%=album.name%></p>
+                      <p><%=album.des%></p>
+                    </div>
+                    <div class="review-footer">
+                      <i class="like fas fa-heart numOfLikes<%=album.id%>" id="numOfLikes<%=album.id%>">
+                        <%=%></i>
+                      <div class="date ml-auto"><%=album.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- The Modal -->
+            <div class="modal fade " id="myAlbumModal<%=album.id%>">
+              <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <!--start-->
+
+
+
+
+
+              
+                <div id="demo<%=album.id%>" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+  <ul class="carousel-indicators">
     
+    <li data-target="#demo<%=album.id%>" data-slide-to="0" class="active"></li>
+    <%for i in (1..albumRecords.size - 1)%>
+    <li data-target="#demo<%=album.id%>" data-slide-to="<%=i%>"></li>
+    <%end%>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    
+    <%for albumRecord in albumRecords%>
+    <%photo = albumRecord.Photo%>
+  
+    <%if albumRecord == albumRecords.first%>
+    
+      <div class="carousel-item active">
+      <%=album.name%>
+      <img src="<%=photo.image.url%>" alt="Los Angeles" >
+      <p class="m-4"><%=photo.des%>xXZXxZX</p>
+    </div>
+    <%else%>
+    <div class="carousel-item">
+    <%=album.name%>
+      <img src="<%=photo.image.url%>" alt="Chicago">
+      <p class="m-4"><%=photo.des%>asdsadasdasdasdasdasdasdasdasd</p>
+    </div>
+    <%end%>
+    <%end%>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo<%=album.id%>" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo<%=album.id%>" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+</div>
+              <!--end-->
+            </div>
+          </div>
+          <%end%>
+          <!------------------------END ALBUM------------------------------------------>
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+    </div>
+    <div class="col-md-2 col-xs-2">
+      right
+    </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->
+
 </html>

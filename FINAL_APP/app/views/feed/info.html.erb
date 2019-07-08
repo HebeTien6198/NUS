@@ -1,144 +1,155 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Profile</title>
-        
-  
-    </head>
 
-    <body id="feed" >
-        <!---------------Header from Layput-------------->
-        <%= render "/layouts/header"%>
-        <!--------------------------------------------------------BODY------------------------------------------------------------------>
-        <main class="feed-body">
-            <hr>
-            <div class="row">
-             <!---------------Left tab from Layput-------------->
-                <%= render "/layouts/leftTab"%>
-                <!------------------End left tab------------------->
-                <div class="col-md-8 col-xs-8 photo-body">
-                    <div class="container">
-                    <br />
-                    <div class="row">
-                        <!--Avatar-->
-                        <div class="col-md-3">
-                            <img class="profile-avatar" 
-                                src="<%=@avatar%>">
-                        </div>
-                        <div class="col-mid-8">
-                        <!---Follow button--->
-                            <%if @isFollowed%>
-                                <button class="btn btn-primary">Following</button>
-                            <%else%>
-                                <button class="btn btn-outline-primary">Follow</button>
-                            <%end%>
-                            <h2 class="text-primary"><%= @fullNameDiscover %></h2>
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs">
-                                <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#photo"><%=@photos.count%> Photo</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#album">Album</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link " data-toggle="tab" href="#following"><%=@followingRecords.size%> Following</a>
-                                </li>
+<head>
+  <title>Profile</title>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#follower"><%=@followerRecords.size%> Followers</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Tab panes -->
-                    
-                    <br/>
-                    <div class="tab-content">
-                    <!--Photo--->
-                        <div class="tab-pane container active" id="photo">
-                            <div class="d-flex flex-wrap">
-                            <%for photo in @photos%>
-                                <div class="photo-title">
-                                    <div class="image" style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
-                                 
-                                    </div>
-                                    <div class="title text-center"><strong><%=photo.title%></strong></div>
-                                </div>
-                            <%end%>
-                            </div> 
-                        </div>
-                    <!--End Photo-->
-                        <div class="tab-pane container fade" id="album">
-                        Album
-                        </div>
-                    <!--Following-->
-                        <div class="tab-pane container fade" id="following">
-                            <div class="d-flex flex-wrap">
-                            <%for followingRecord in @followingRecords%>
-                                <%following = followingRecord.following%>
-                                <div class="photo-title bg-secondary mb-3" >
-                                    <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
-                                        <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%" src="<%=following.avatar%>">
-                                    </div>
-                                    <div class="d-flex justify-content-center mt-2"><h3><%=following.firstName%></h3></div>
-                                    <div class="mt-2" style="height: 80px;">
-                                        <div class="pull-left ml-4">
-                                            <h1><%=following.photos.count%></h1><h6 style="padding-top: px;">Photos</h6>
-                                        </div>
-                                        <div class="pull-right mr-4">
-                                            <h1><%=following.albums.count%></h1><h6>Albums</h6>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="d-flex justify-content-center mt-2">
-                                        <button class="btn btn-outline-primary">Follow</button>
-                                        </div>
-                                    
-                                </div>
-                                
-                            <%end%>
-                            </div> 
-                        </div>
-                    <!--Follower-->
-                        <div class="tab-pane container fade" id="follower">
-                        <div class="d-flex flex-wrap">
-                            <%for followerRecord in @followerRecords%>
-                                <%follower = followerRecord.follower%>
-                                <div class="photo-title shadow-sm  bg-white rounded mb-3 text-primary" >
-                                    <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
-                                        <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%" src="<%=follower.avatar%>">
-                                    </div>
-                                    <div class="d-flex justify-content-center mt-2"><h3><%=follower.firstName%></h3></div>
-                                    <div class="mt-2" style="height: 80px;">
-                                        <div class="pull-left ml-4">
-                                            <h1><%=follower.photos.count%></h1><h6 style="padding-top: px;">Photos</h6>
-                                        </div>
-                                        <div class="pull-right mr-4">
-                                            <h1><%=follower.albums.count%></h1><h6>Albums</h6>
-                                        </div>
-                                        
-                                    </div>
-                                    <div class="d-flex justify-content-center mt-2">
-                                        <button class="btn btn-outline-primary">Follow</button>
-                                        </div>
-                                    
-                                </div>
-                                
-                            <%end%>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-2 col-xs-2">
-                    right
-                </div>
+
+</head>
+
+<body id="feed">
+  <!---------------Header from Layput-------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/leftTab"%>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+          <div class="row">
+            <!--Avatar-->
+            <div class="col-md-3">
+              <img class="profile-avatar" src="<%=@avatar%>">
             </div>
-        
-            
-        </main>
-    </body>
-     <!-- Java Script -->
-    
+            <div class="col-mid-8">
+              <!---Follow button--->
+              <%if @isFollowed%>
+              <button class="btn btn-primary">Following</button>
+              <%else%>
+              <button class="btn btn-outline-primary">Follow</button>
+              <%end%>
+              <h2 class="text-primary"><%= @fullNameDiscover %></h2>
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#photo"><%=@photos.count%> Photo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#album">Album</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#following"><%=@followingRecords.size%> Following</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#follower"><%=@followerRecords.size%> Followers</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Tab panes -->
+
+          <br />
+          <div class="tab-content">
+            <!--Photo--->
+            <div class="tab-pane container active" id="photo">
+              <div class="d-flex flex-wrap">
+                <%for photo in @photos%>
+                <div class="photo-title">
+                  <div class="image"
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
+
+                  </div>
+                  <div class="title text-center"><strong><%=photo.title%></strong></div>
+                </div>
+                <%end%>
+              </div>
+            </div>
+            <!--End Photo-->
+            <div class="tab-pane container fade" id="album">
+              Album
+            </div>
+            <!--Following-->
+            <div class="tab-pane container fade" id="following">
+              <div class="d-flex flex-wrap">
+                <%for followingRecord in @followingRecords%>
+                <%following = followingRecord.following%>
+                <div class="photo-title bg-secondary mb-3">
+                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
+                    <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
+                      src="<%=following.avatar%>">
+                  </div>
+                  <div class="d-flex justify-content-center mt-2">
+                    <h3><%=following.firstName%></h3>
+                  </div>
+                  <div class="mt-2" style="height: 80px;">
+                    <div class="pull-left ml-4">
+                      <h1><%=following.photos.count%></h1>
+                      <h6 style="padding-top: px;">Photos</h6>
+                    </div>
+                    <div class="pull-right mr-4">
+                      <h1><%=following.albums.count%></h1>
+                      <h6>Albums</h6>
+                    </div>
+
+                  </div>
+                  <div class="d-flex justify-content-center mt-2">
+                    <button class="btn btn-outline-primary">Follow</button>
+                  </div>
+
+                </div>
+
+                <%end%>
+              </div>
+            </div>
+            <!--Follower-->
+            <div class="tab-pane container fade" id="follower">
+              <div class="d-flex flex-wrap">
+                <%for followerRecord in @followerRecords%>
+                <%follower = followerRecord.follower%>
+                <div class="photo-title shadow-sm  bg-white rounded mb-3 text-primary">
+                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
+                    <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
+                      src="<%=follower.avatar%>">
+                  </div>
+                  <div class="d-flex justify-content-center mt-2">
+                    <h3><%=follower.firstName%></h3>
+                  </div>
+                  <div class="mt-2" style="height: 80px;">
+                    <div class="pull-left ml-4">
+                      <h1><%=follower.photos.count%></h1>
+                      <h6 style="padding-top: px;">Photos</h6>
+                    </div>
+                    <div class="pull-right mr-4">
+                      <h1><%=follower.albums.count%></h1>
+                      <h6>Albums</h6>
+                    </div>
+
+                  </div>
+                  <div class="d-flex justify-content-center mt-2">
+                    <button class="btn btn-outline-primary">Follow</button>
+                  </div>
+
+                </div>
+
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->
+
 </html>

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get 'profile', to: "profile#profile"
   get 'editPhoto', to: "profile#editPhoto"
   get 'newPhoto', to: "profile#newPhoto"
-
+  get 'newAlbum', to: "profile#newAlbum"
   #--admin---
   get 'admin', to: "admin#admin"
   get 'admin/edit', to: "admin#edit"
@@ -38,13 +38,16 @@ Rails.application.routes.draw do
   post 'unfollow', to: "feed#unfollow"
   #-----------Like-Unlike------------#
   post 'like', to: "feed#like"
+  post 'unlike', to: "feed#unlike"
+  #---------------Comment------------#
+  post 'comment', to: "feed#CreatePhotoComments"
   #--------------Edit------------
   post 'editBasicProfile', to: "profile#editBasicProfile"
   post 'editPassword', to: "profile#editPassword"
   post 'updateProfile', to: "admin#updateProfile"
   post 'editPhotoServer', to: "profile#editPhotoServer"
   post 'uploadPhoto', to: "profile#uploadPhoto"
-
+  post 'uploadAlbum', to: "profile#uploadAlbum"
   #-------Delete-------#
   post 'deletePhoto', to: "profile#deletePhoto"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

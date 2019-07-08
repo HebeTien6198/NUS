@@ -21,6 +21,11 @@ class ProfileController < ApplicationController
     @image = "assets/default/img/default-img.gif"
 
   end
+
+  def newAlbum
+    @photo = Photo.new
+    @image = "assets/default/img/default-img.gif"
+  end
   #-------------------------POST--------------------------#
   #--------Log out-------------------#
   def logOut
@@ -111,6 +116,19 @@ class ProfileController < ApplicationController
     end
   end
 
+
+  #---------------Upload album------------------------#
+  def uploadAlbum
+    #---------Create a ablum for user--------#
+    album = Album.create(User: @user, name: params[:Album]["name"], des: params[:Album]["des"])
+    for image in params[:Album]["image"]
+      photo = Photo.create(image: image, User: @user)
+      albumRecord = AlbumRecord.create(Photo: photo, Album: album)
+    end
+    
+    puts params[:Album]["image"]
+    puts params[:Album]["image"].size
+  end
   #--------take login input data from user-------------
   #---Basic Profile---#
   def user_basic_params()

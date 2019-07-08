@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_095624) do
+ActiveRecord::Schema.define(version: 2019_07_08_013335) do
+
+  create_table "album_records", force: :cascade do |t|
+    t.integer "Photo_id"
+    t.integer "Album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["Album_id"], name: "index_album_records_on_Album_id"
+    t.index ["Photo_id"], name: "index_album_records_on_Photo_id"
+  end
 
   create_table "albums", force: :cascade do |t|
     t.string "name"
@@ -38,6 +47,16 @@ ActiveRecord::Schema.define(version: 2019_07_05_095624) do
     t.datetime "updated_at", null: false
     t.index ["Photo_id"], name: "index_likes_on_Photo_id"
     t.index ["User_id"], name: "index_likes_on_User_id"
+  end
+
+  create_table "photo_comments", force: :cascade do |t|
+    t.integer "Photo_id"
+    t.integer "User_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["Photo_id"], name: "index_photo_comments_on_Photo_id"
+    t.index ["User_id"], name: "index_photo_comments_on_User_id"
   end
 
   create_table "photos", force: :cascade do |t|

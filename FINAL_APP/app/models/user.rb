@@ -4,6 +4,7 @@ class User < ApplicationRecord
     has_many :follower, :class_name => 'Follow', :foreign_key => 'follower_id'
     has_many :following, :class_name => 'Follow', :foreign_key => 'following_id'
     has_many :likes
+    has_many :photo_comments
 
 #     validates :firstName,
 #             presence: true,

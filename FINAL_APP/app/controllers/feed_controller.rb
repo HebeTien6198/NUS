@@ -2,6 +2,7 @@ class FeedController < ApplicationController
   before_action :set_user
   before_action :set_discover_user, only: [:info]
   
+  
   #--------------------GET----------------#
   #-----feed------#
   def feed
@@ -23,6 +24,27 @@ class FeedController < ApplicationController
         @photos.push(p)
       end
     end
+
+    #get all Photo that user like
+    likeRecords = @user.likes
+    puts "--------Like Records-------------"
+    if (likeRecords.first != nil)
+
+      puts likeRecords.first.User_id
+    end
+    puts "------Like Records--------------"
+    @likes = Hash.new
+    for l in likeRecords
+      puts "-----Photo Records--------------"
+      puts l.Photo_id
+      @likes[l.Photo_id] = true
+    end
+
+
+
+    #--------------------Get all album-----------------------#
+    @albums = Album.all
+    
   end
 
   #------Discover----#
@@ -75,23 +97,24 @@ class FeedController < ApplicationController
 
 
   def follow
-    followRecord = Follow.new(set_follow_record)
-
+    followRecord = Follow.new
+    followRecord.follower_id = params[:follower_id]
+    followRecord.following_id = params[:following_id] 
     if followRecord.save
       puts "-------------------Successs-------------------"
-      redirect_to discover_url
     else
       puts "------ccccccccccccccccccccccc---------------"
     end
   end
 
   def unfollow
-    followRecord = Follow.where(following_id: params.require(:Follow)["following_id"]).where(follower_id: params.require(:Follow)["follower_id"]).first
+    followRecord = Follow.where(following_id: params["following_id"]).where(follower_id: params["follower_id"]).first
+    followRecord.follower_id = params[:follower_id]
+    followRecord.following_id = params[:following_id] 
     puts "---------------------------"
     puts followRecord
     if followRecord.delete
       puts "-------------------Successs-------------------"
-      redirect_to discover_url
     else
       puts "------ccccccccccccccccccccccc---------------"
     end
@@ -99,6 +122,34 @@ class FeedController < ApplicationController
 
   def like
     puts params
+    like = Like.new
+    like.User_id = params[:User_id]
+    like.Photo_id = params[:Photo_id]
+    if like.save
+      # redirect_to feed_url
+    end
+  end
+
+  def unlike
+    puts "-----------"
+    puts params
+     like = Like.where(User_id: params[:User_id]).where(Photo_id: params[:Photo_id]).first
+     if like.delete
+      #  redirect_to feed_url
+    end
+  end
+
+
+  def CreatePhotoComments
+    comment = PhotoComment.new
+    comment.User_id = @user.id
+    comment.Photo_id = params[:Photo_id]
+    comment.content = params[:content]
+    if (comment.save)
+
+    else
+      puts "-------------------------------------"
+    end
   end
   #-------------------BEFORE ACTION---------------------------#
   def set_user
@@ -120,5 +171,9 @@ class FeedController < ApplicationController
 
   def set_follow_record
     return params.require(:Follow).permit(:follower_id, :following_id) 
+  end
+
+  def set_like_params
+    return params.require(:Like).permit(:User_id, :Photo_id)
   end
 end
