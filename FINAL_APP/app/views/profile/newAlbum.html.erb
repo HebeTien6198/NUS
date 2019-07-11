@@ -1,77 +1,82 @@
+<body id="feed">
+  <!----------------Header from layout-------------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/leftTab"%>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+
+          <h6><strong>Edit Photo</strong></h6>
+          <hr>
+          <!-------------------------New Photo Form------------------------------------------->
+          <%= form_for @photo, url: {action: "uploadAlbum"}, html: { multipart: true } do |f| %>
 
 
-    <body id="feed" >
-        <!----------------Header from layout-------------------->
-        <%= render "/layouts/header"%>
-        <!--------------------------------------------------------BODY------------------------------------------------------------------>
-        <main class="feed-body">
-            <hr>
-            <div class="row">
-              <!---------------Left tab from Layput-------------->
-                <%= render "/layouts/leftTab"%>
-                <!------------------End left tab------------------->
-                <div class="col-md-8 col-xs-8 photo-body">
-                    <div class="container">
-                    <br />
-                   
-                        <h6><strong>Edit Photo</strong></h6>
-                        <hr>
-                    <!-------------------------New Photo Form------------------------------------------->
-                    <%= form_for @photo, url: {action: "uploadAlbum"}, html: { multipart: true } do |f| %>
-      
-                    
-            
-                    <div class="row">
-                    <!----------Title--------->
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="title"><strong>Title:</strong></label>
-                                <input type="text" value="Photo Title goes here" name="Album[title]" class="form-control" id="title">
-                            </div>
-                    <!-----------Mode---------->
-                            <div class="form-group">
-                                <label for="sharing-mode"><strong>Sharing mode:</strong></label>
-                                <select type="text" class="form-control" name="Photo[sharingMode]" id="sharing" >
-                                    <option name="Album[sharingMode]" value="isPrivate">Private</option>
-                                    <option name="Album[sharingMode]" value="isPublic">Public</option>
-                                </select>
-                            </div>
-                    <!-----------Image---------->
-                            <div class='' style="background: url('<%=@image%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px"></div>   
-                            <%= f.label "Image"%>
-                            <input type="file" name="Album[image][]" multiple>                              
-                        </div>
-                        <div class="col">
-                    <!------------Description---------->
-                        <div class="form-group">
-                                <label for="des"><strong>Description:</strong></label>
-                                <textarea rows="5" class="form-control" name="Album[des]" id="des">Description goes here</textarea>
-                            </div>
-                        </div>
-                    </div>  
-                    <br/>
-                    <br/>
-                    <div class="row">
-                    <!----------------Button-------------->
-                        <div class="col-md-3">
-                        <%= f.submit "Save", class: "btn btn-success pull-left"%>
-                            <%# <button value="submit" type="submit" class="btn btn-success pull-left">Save</button> %>
-                            <button class="btn btn-danger pull-right">Delete</button>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-                    
-                    <% end %> 
-                    </div>
-                </div>
-                <div class="col-md-2 col-xs-2">
-                    right
-                </div>
+
+          <div class="row">
+            <!----------Title--------->
+            <div class="col">
+              <div class="form-group">
+                <label for="title"><strong>Title:</strong></label>
+                <input type="text" value="Photo Title goes here" name="Album[title]" class="form-control" id="title">
+              </div>
+              <!-----------Mode---------->
+              <div class="form-group">
+                <label for="sharing-mode"><strong>Sharing mode:</strong></label>
+                <select type="text" class="form-control" name="Photo[sharingMode]" id="sharing">
+                  <option name="Album[sharingMode]" value="isPrivate">Private</option>
+                  <option name="Album[sharingMode]" value="isPublic">Public</option>
+                </select>
+              </div>
+              <!-----------Image---------->
+
+              
             </div>
-        
+            <div class="col">
+              <!------------Description---------->
+              <div class="form-group">
+                <label for="des"><strong>Description:</strong></label>
+                <textarea rows="5" class="form-control" name="Album[des]" id="des">Description goes here</textarea>
+              </div>
+            </div>
             
-        </main>
-    </body>
-     <!-- Java Script -->
-    
+          </div>
+          <!---------------------Upload Image------------------>
+          <div class="d-flex flex-wrap">
+          <div class="gallery"></div>
+              <input
+                style="background: url('<%=@image%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px"
+                type="file" name="Album[image][]" multiple id="gallery-photo-add">
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <!----------------Button-------------->
+            <div class="col-md-3">
+              <%= f.submit "Save", class: "btn btn-success pull-left"%>
+              <%# <button value="submit" type="submit" class="btn btn-success pull-left">Save</button> %>
+              <button class="btn btn-danger pull-right">Delete</button>
+            </div>
+            <div class="col"></div>
+          </div>
+
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->
+
 </html>

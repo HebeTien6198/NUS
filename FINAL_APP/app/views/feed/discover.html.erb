@@ -34,10 +34,10 @@
               <!------------------------A photo----------------------------------->
               <div></div>
               <%for photo in @photos%>
-              <div class="photo-container shadow-sm rounded">
+              <div class="photo-container shadow-sm rounded " >
                 <div class="row">
                   <div class="col">
-                    <img src="<%=photo.image.url%>" class="photo-review-image">
+                    <img src="<%=photo.image.url%>" class="photo-review-image" data-toggle="modal" data-target="#myModal<%=photo.id%>">
                   </div>
                   <div class="col">
                     <!--Follow Button-->
@@ -68,12 +68,61 @@
                   </div>
                 </div>
               </div>
+              <!--------Render Photo Model---------------------->
+            <%= render "/feed/photoModel", photo: photo%>
+            <!--------End Render Photo Model---------------------->
               <%end%>
               <!------------------------END PHOTO------------------------------------------>
             </div>
           </div>
-          <!----------------------Album Tab--------------------->
-          <div role="tabpanel" class="tab-pane" id="album">cc</div>
+           <!----------------------Album Tab--------------------->
+          <div role="tabpanel" class="tab-pane" id="album">
+            <div class="wrap photo-body">
+              <!------------------------A photo----------------------------------->
+              <%for album in @albums%>
+              <!----------Get all album record--------------->
+              <%albumRecords = album.album_records%>
+
+              <!-------------Get first image------------------>
+              <%firstPhoto = albumRecords.first.Photo%>
+              <div class="photo-container shadow-sm rounded " >
+                <div class="row" style="height: 100%;">
+                  <div class="col albums-rotate">
+                  
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate"  data-toggle="modal" 
+                    data-target="#myAlbumModal<%=album.id%>">
+                    <h2 class="position-absolute" style="top: 10%; left: 50%; color: white">
+                      <strong><%=albumRecords.size%></strong></h2>
+                  </div>
+                  <div class="col">
+                    <div class="review-header">
+                      <!------Avatar------>
+                      <img src="<%=album.User.avatar%>" class="header-img">
+
+                      <!------User's Name------>
+                      <p class="header-text text-primary"><%= album.User.firstName  %></p>
+                    </div>
+                    <div class="review-body">
+                      <p class="header-text"><%=album.name%></p>
+                      <p><%=album.des%></p>
+                    </div>
+                    <div class="review-footer">
+                      <i class="like fas fa-heart numOfLikes<%=album.id%>" id="numOfLikes<%=album.id%>">
+                        <%=%></i>
+                      <div class="date ml-auto"><%=album.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!------------------------Render Album Model---------------->
+            <%= render "/feed/albumModel", album: album, albumRecords: albumRecords%>
+            <!---------------------End Render Album Model---------------->
+            <%end%>
+            <!------------------------END ALBUM------------------------------------------>
+
         </div>
       </div>
       <div class="col-md-2 col-xs-2">

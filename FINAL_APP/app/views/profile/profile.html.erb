@@ -23,8 +23,12 @@
           <div class="row">
             <!--Avatar-->
             <div class="col-md-3">
-              <img class="profile-avatar" src="<%=@avatar%>">
+              <img class="profile-avatar" src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
             </div>
+            <!---End Avatar------>
+            <!----Render avatar model------->
+            <%= render "/profile/changeAvatarModel" %>
+            <!------End render--------------->
             <div class="col-mid-8">
               <!---Edit Profile Button--->
               <a href="profile/editProfile"><button class="btn btn-primary" id="edit-profile">Edit profile</button></a>
@@ -83,18 +87,20 @@
           <br />
           <br />
               <div class="d-flex flex-wrap">
-                <%for photo in @photos%>
+                <%for album in @albums%>
+                <%albumRecords = album.album_records%>
+                <%photo = albumRecords.first.Photo%>
                 <div class="photo-title">
                   <div class="image"
                     style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
                     <!---------------Private/Public-------------->
-                    <%if photo.isPrivate? %>
+                    <%if album.isPrivate? %>
                     <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
                         class="fas fa-lock"></i></button>
                     <%end%>
                     <!---------------Edit Photo Button----------->
                     <button
-                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editPhoto_url(photo.id) %></button>
+                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editAlbum_url(album.id) %></button>
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>

@@ -1,7 +1,7 @@
 class FeedController < ApplicationController
   before_action :set_user
   before_action :set_discover_user, only: [:info]
-  
+  before_action :getLikes, only: [:discover, :feed]
   
   #--------------------GET----------------#
   #-----feed------#
@@ -12,7 +12,7 @@ class FeedController < ApplicationController
     #---Define emmpty array for User followings and their photos
     @followings = []
     @photos = []
-
+    @albums = []
     #----Get all following people---#
     for following in @followingRecords
        @followings.push(following.following)
@@ -25,25 +25,13 @@ class FeedController < ApplicationController
       end
     end
 
-    #get all Photo that user like
-    likeRecords = @user.likes
-    puts "--------Like Records-------------"
-    if (likeRecords.first != nil)
-
-      puts likeRecords.first.User_id
-    end
-    puts "------Like Records--------------"
-    @likes = Hash.new
-    for l in likeRecords
-      puts "-----Photo Records--------------"
-      puts l.Photo_id
-      @likes[l.Photo_id] = true
+     #----Get all their albums----#
+     for following in @followings
+      for a in following.albums
+        @albums.push(a)
+      end
     end
 
-
-
-    #--------------------Get all album-----------------------#
-    @albums = Album.all
     
   end
 
@@ -63,6 +51,9 @@ class FeedController < ApplicationController
     end
     #---Find all records that the user is followed (following)--#
     @followerRecords = Follow.where(following: @user)
+
+    #--------------------Get all album-----------------------#
+    @albums = Album.all
   end
 
 
@@ -175,5 +166,22 @@ class FeedController < ApplicationController
 
   def set_like_params
     return params.require(:Like).permit(:User_id, :Photo_id)
+  end
+
+  def getLikes
+     #get all Photo that user like
+     likeRecords = @user.likes
+     puts "--------Like Records-------------"
+     if (likeRecords.first != nil)
+ 
+       puts likeRecords.first.User_id
+     end
+     puts "------Like Records--------------"
+     @likes = Hash.new
+     for l in likeRecords
+       puts "-----Photo Records--------------"
+       puts l.Photo_id
+       @likes[l.Photo_id] = true
+     end
   end
 end

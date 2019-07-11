@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_08_013335) do
+ActiveRecord::Schema.define(version: 2019_07_09_072056) do
 
   create_table "album_records", force: :cascade do |t|
     t.integer "Photo_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_07_08_013335) do
     t.integer "User_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sharingMode"
     t.index ["User_id"], name: "index_albums_on_User_id"
   end
 

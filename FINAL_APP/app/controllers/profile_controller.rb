@@ -109,11 +109,16 @@ class ProfileController < ApplicationController
 
   #------------Delete Photo-----------------------#
   def deletePhoto
-    puts "---------------deletePhoto #{@photo}------------------"
-    if @photo.delete
-      redirect_to profile_url
-    else
+    puts "---------------deletePhoto #{@photo.id}------------------"
+    #-Delete the photo its selt-#
+    begin
+      @photo.destroy
+    rescue => exception
+      puts "-----------------#{exception}-----------------"
     end
+    redirect_to profile_url
+   
+    
   end
 
 
@@ -135,6 +140,10 @@ class ProfileController < ApplicationController
     return params.require(:User).permit(:firstName, :lastName, :email)
   end
 
+  #----------------Edit Album------------------#
+  def editAlbum
+    @album = Album.find_by(id: params[:id])
+  end
   #---Password Profile---#
   def user_password
     return params.permit(:currentPassword, :newPassword)
@@ -151,6 +160,14 @@ class ProfileController < ApplicationController
     return params.require(:Photo).permit(:title, :sharingMode, :image, :des)
   end
 
+  #--------------Upload Avatar--------------------#
+  #--------From exiting photo---------#
+  def updateAvatarFromPhoto
+    @user.avatar = params["avatar"]
+    @user.save
+    redirect_to profile_url
+  end
+
   #-------------------------------Before Action-----------------------------------------#
   def set_user
     if session[:user]
@@ -159,15 +176,17 @@ class ProfileController < ApplicationController
       @fullName = "#{session[:user]["firstName"]} #{session[:user]["lastName"]}"
       @avatar = @user.avatar
       @photos = @user.photos
-      
+      @albums = @user.albums
     else
       redirect_to login_login_url
     end
     
   end
 
-  def set_photo
-    @photo = @photos.where(id: params[:format]).first
-
+  def set_photo 
+    @photo = @photos.where(id: params[:id]).first
+    if @photo == nil
+      puts "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+    end
   end
 end

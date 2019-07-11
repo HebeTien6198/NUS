@@ -1,5 +1,33 @@
 
+<script type='text/javascript'>
+function preview_image(event) 
+{
+ var reader = new FileReader();
+ reader.onload = function()
+ {
+  var output = document.getElementById('output_image');
+  output.src = reader.result;
+ }
+ reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+<style>
+body
+{
+ width:100%;
+ margin:0 auto;
+ padding:0px;
+ font-family:helvetica;
+ background-color:#0B3861;
+}
+#wrapper
+{
+ 
+ padding:0px;
+ 
+}
 
+</style>
     <body id="feed" >
         <!----------------Header from layout-------------------->
         <%= render "/layouts/header"%>
@@ -35,10 +63,11 @@
                                     <option name="Photo[sharingMode]" value="isPublic">Public</option>
                                 </select>
                             </div>
-                    <!-----------Image---------->
-                            <div class='' style="background: url('<%=@image%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px"></div>   
-                            <%= f.label "Image"%>
-                            <input type="file" name="Photo[image]">                              
+                  
+                    
+                       
+                
+                                                        
                         </div>
                         <div class="col">
                     <!------------Description---------->
@@ -48,6 +77,12 @@
                             </div>
                         </div>
                     </div>  
+                      <!-----------Image---------->
+                        <div id="wrapper">
+                         <img id="output_image"/>
+                      <input style="background: url('<%=@image%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px" class="btn" type="file" accept="image/*" name="Photo[image]" onchange="preview_image(event)">
+                     
+                    </div>
                     <br/>
                     <br/>
                     <div class="row">

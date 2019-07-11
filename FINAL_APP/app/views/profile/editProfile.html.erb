@@ -19,7 +19,10 @@
                         <div class="row">
                             <div class="col-md-5"></div>
                             <div class="col-md-7"><img class="edit-profile-photo m-auto"
-                        src="<%=@avatar%>">
+                        src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
+                        <!----Render avatar model------->
+            <%= render "/profile/changeAvatarModel" %>
+            <!------End render--------------->
                         </div></div>
                         <br />
                         <div class="row">

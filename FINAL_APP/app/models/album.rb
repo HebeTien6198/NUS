@@ -1,5 +1,6 @@
 class Album < ApplicationRecord
     belongs_to :User
+    enum sharingMode: [:isPrivate, :isPublic]
     # has_many :photos, as: :image
     has_many :album_records
     # validates :name,

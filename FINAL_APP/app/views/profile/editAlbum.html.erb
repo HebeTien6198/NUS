@@ -1,0 +1,83 @@
+
+
+    <body id="feed" >
+        <!----------------Header from layout-------------------->
+        <%= render "/layouts/header"%>
+        <!--------------------------------------------------------BODY------------------------------------------------------------------>
+        <main class="feed-body">
+            <hr>
+            <div class="row">
+                <!---------------Left tab from Layput-------------->
+                <%= render "/layouts/leftTab"%>
+                <!------------------End left tab------------------->
+                <div class="col-md-8 col-xs-8 photo-body">
+                    <div class="container">
+                    <br />
+                   
+                        <h6><strong>Edit Album</strong></h6>
+                        <hr>
+                    <!-------------------------Edit Photo Form------------------------------------------->
+                    <form method="POST" action="/editAlbumServer">
+                    <input name="utf8" type="hidden" value="&#x2713;" />
+                    <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />
+                    <!----------ID----------->
+                    <input type="hidden" name="Album[id]" value="<%=@album.id%>">
+                    <div class="row">
+                    <!----------Title--------->
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="title"><strong>Title:</strong></label>
+                                <input type="text" value="<%=@album.name%>" name="Album[name]" class="form-control" id="title">
+                            </div>
+                    <!-----------Mode---------->
+                            <div class="form-group">
+                                <label for="sharing-mode"><strong>Sharing mode:</strong></label>
+                                <select type="text" class="form-control" name="Album[sharingMode]" id="sharing" value="<%=@album.sharingMode%>">
+                                    <option name="Album[sharingMode]" value="isPrivate">Private</option>
+                                    <option name="Album[sharingMode]" value="isPublic">Public</option>
+                                </select>
+                            </div>
+                    <!-----------Image---------->
+                    <%albumRecords = @album.album_records%>
+                            <div class="d-flex flex-wrap">
+                              <%for albumRecord in albumRecords%>
+                                <div class='position-relative' style="background: url('<%=albumRecord.Photo.image.url%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px">
+                                <button class="position-absolute btn btn-outline-success" style="bottom: 1px; left: 1px"><%= link_to 'Edit', editPhoto_url(albumRecord.Photo_id) %></button>
+                                <button class="position-absolute btn btn-outline-danger" style="bottom: 1px; right: 1px"><%= link_to "Delete", deletePhoto_url(albumRecord.Photo_id), method: :post%></button>
+                                </div>
+                              <%end%>
+                            </div>
+                                    
+                        </div>
+                        <div class="col">
+                    <!------------Description---------->
+                        <div class="form-group">
+                                <label for="des"><strong>Description:</strong></label>
+                                <textarea rows="5" class="form-control" name="Album[des]" id="des"><%=@album.des%></textarea>
+                            </div>
+                        </div>
+                    </div>  
+                    <br/>
+                    <br/>
+                    <div class="row">
+                    <!----------------Button-------------->
+                        <div class="col-md-3">
+                            <button value="submit" type="submit" class="btn btn-success pull-left">Save</button>
+                            <button class="btn btn-danger pull-right"><%= link_to "Delete", deletePhoto_url(@album.id), method: :post%> </button>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="col-md-2 col-xs-2">
+                    right
+                </div>
+            </div>
+        
+            
+        </main>
+    </body>
+     <!-- Java Script -->
+    
+</html>

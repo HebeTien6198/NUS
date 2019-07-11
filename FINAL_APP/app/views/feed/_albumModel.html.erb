@@ -1,0 +1,50 @@
+<!-- The Modal -->
+            <div class="modal fade " id="myAlbumModal<%=album.id%>">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <!--start-->
+                  <div id="demo<%=album.id%>" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+
+                      <li data-target="#demo<%=album.id%>" data-slide-to="0" class="active"></li>
+                      <%for i in (1..albumRecords.size - 1)%>
+                      <li data-target="#demo<%=album.id%>" data-slide-to="<%=i%>"></li>
+                      <%end%>
+                    </ul>
+
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+
+                      <%for albumRecord in albumRecords%>
+                      <%photo = albumRecord.Photo%>
+
+                      <%if albumRecord == albumRecords.first%>
+
+                      <div class="carousel-item active">
+                        <%=album.name%>
+                        <img src="<%=photo.image.url%>" class="img-responsive">
+                        <p class="m-4"><%=photo.des%></p>
+                      </div>
+                      <%else%>
+                      <div class="carousel-item">
+                        <%=album.name%>
+                        <img src="<%=photo.image.url%>" alt="Chicago">
+                        <p class="m-4"><%=photo.des%></p>
+                      </div>
+                      <%end%>
+                      <%end%>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#demo<%=album.id%>" data-slide="prev">
+                      <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo<%=album.id%>" data-slide="next">
+                      <span class="carousel-control-next-icon"></span>
+                    </a>
+                  </div>
+                </div>
+                <!--end-->
+              </div>
+            </div>

@@ -18,9 +18,13 @@ Rails.application.routes.draw do
  
   #profile#
   get 'profile', to: "profile#profile"
-  get 'editPhoto', to: "profile#editPhoto"
+  get 'editPhoto/:id', to: "profile#editPhoto", as: 'editPhoto'
+  get 'editAlbum/:id', to: "profile#editAlbum", as: 'editAlbum'
   get 'newPhoto', to: "profile#newPhoto"
   get 'newAlbum', to: "profile#newAlbum"
+  
+  #avatar#
+
   #--admin---
   get 'admin', to: "admin#admin"
   get 'admin/edit', to: "admin#edit"
@@ -32,7 +36,9 @@ Rails.application.routes.draw do
   post 'feed/logOut', to: "feed#logOut"
   post 'profile/logOut', to: "profile#logOut"
   post 'logOut', to: "feed#logOut"
-
+  
+  #---Avatar----#
+  post 'updateAvatarFromPhoto', to: "profile#updateAvatarFromPhoto"
   #-----------Follow-Unfollow---------#
   post 'follow', to: "feed#follow"
   post 'unfollow', to: "feed#unfollow"
@@ -49,6 +55,6 @@ Rails.application.routes.draw do
   post 'uploadPhoto', to: "profile#uploadPhoto"
   post 'uploadAlbum', to: "profile#uploadAlbum"
   #-------Delete-------#
-  post 'deletePhoto', to: "profile#deletePhoto"
+  post 'deletePhoto/:id', to: "profile#deletePhoto", as: 'deletePhoto'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
