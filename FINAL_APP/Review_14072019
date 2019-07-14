@@ -1,0 +1,33 @@
+
+Reviewer: VinhP / Trainee: ManhTDS
+-----
+
+### Jul 14, 2019
+
+
+ - application.js
+`//= require_tree .` nên đưa xuống cuối cùng
+
+ - Controllers:
+	+ Khoảng cách giữa các method khá nhiều, tốt nhất là nên 1 line (admin_controller.rb)
+	+ Tên class nên đặt theo số nhiều (FeedController --> FeedsController)
+	+ Tên instance variable không đúng (@followingRecords --> @following_records)
+	+ Tên class method không đúng
+	+ Loop trong ruby, nên dùng `each`
+	
+				for following in @followingRecords
+
+					@followings.push(following.following)
+
+				end
+	 + 
+ - Models:
+	 + `enum sharingMode` --> tên không đúng convention
+	 + `belongs_to :Photo` --> khai báo tên association không đúng convention
+	 
+- Views:
+	+ `managePhoto.html.erb` --> tên file không đúng convention
+	+ `<%albumRecords = album.album_records%>` tên variable không đúng convention
+	+ Chú ý về line giữ các block code html (không nên có line dư thừa)
+	+ Tên file `cc.html` wth?
+	
