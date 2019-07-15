@@ -32,34 +32,40 @@
             <div class="col-mid-8">
               <!---Edit Profile Button--->
               <a href="profile/editProfile"><button class="btn btn-primary" id="edit-profile">Edit profile</button></a>
-              <h2 class="text-primary"><%= @fullName %></h2>
+              <h2 class="text-primary">
+                <%= @fullName %>
+              </h2>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#photo"><%=@photos.count%> Photo</a>
+                  <a class="nav-link active" data-toggle="tab" href="#photo">
+                    <%=@photos.count%> Photo</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#album">Album</a>
+                  <a class="nav-link" data-toggle="tab" href="#album">
+                    <%=@albums.count%> Album</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link " data-toggle="tab" href="#following"><%=@followingRecords.size%> Following</a>
+                  <a class="nav-link " data-toggle="tab" href="#following">
+                    <%=@followingRecords.size%> Following</a>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#follower"><%=@followerRecords.size%> Followers</a>
+                  <a class="nav-link" data-toggle="tab" href="#follower">
+                    <%=@followerRecords.size%> Followers</a>
                 </li>
               </ul>
             </div>
           </div>
           <!-- Tab panes -->
-          
+
           <div class="tab-content">
             <!--Photo-->
             <div class="tab-pane container active" id="photo">
-            <!--Add Photo Button-->
-          <button class="btn btn-success pull-right"><%= link_to 'Add Photo', newPhoto_url %></button>
-          <br />
-          <br />
+              <!--Add Photo Button-->
+              <button class="btn btn-success pull-right"><%= link_to 'Add Photo', newPhoto_url, :"data-turbolinks" => false %></button>
+              <br />
+              <br />
               <div class="d-flex flex-wrap">
                 <%for photo in @photos%>
                 <div class="photo-title">
@@ -72,7 +78,8 @@
                     <%end%>
                     <!---------------Edit Photo Button----------->
                     <button
-                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editPhoto_url(photo.id) %></button>
+                    
+                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editPhoto_url(photo.id), :"data-turbolinks" => false %></button>
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
@@ -82,14 +89,19 @@
             <!--End Photo-->
             <!--Album-->
             <div class="tab-pane container" id="album">
-            <!--Add Album Button-->
-          <button class="btn btn-success pull-right"><%= link_to 'Add Album', newAlbum_url %></button>
-          <br />
-          <br />
+              <!--Add Album Button-->
+              <button class="btn btn-success pull-right"><%= link_to 'Add Album', newAlbum_url,  :"data-turbolinks" => false %></button>
+              <br />
+              <br />
               <div class="d-flex flex-wrap">
                 <%for album in @albums%>
+                <!--Get first photo-->
                 <%albumRecords = album.album_records%>
+                <%if albumRecords.first != nil%>
                 <%photo = albumRecords.first.Photo%>
+                <%else%>
+                <%photo = Photo.first%>
+                <%end%>
                 <div class="photo-title">
                   <div class="image"
                     style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
@@ -100,10 +112,11 @@
                     <%end%>
                     <!---------------Edit Photo Button----------->
                     <button
-                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editAlbum_url(album.id) %></button>
+                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editAlbum_url(album.id), :"data-turbolinks" => false %></button>
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
+
                 <%end%>
               </div>
             </div>
@@ -113,27 +126,36 @@
               <div class="d-flex flex-wrap">
                 <%for followingRecord in @followingRecords%>
                 <%following = followingRecord.following%>
-                <div class="photo-title bg-secondary mb-3">
-                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
+                <div class="photo-title mb-3">
+                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height: 40%; background: white;">
                     <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
                       src="<%=following.avatar%>">
                   </div>
                   <div class="d-flex justify-content-center mt-2">
-                    <h3><%=following.firstName%></h3>
+                    <h3>
+                      <%=following.firstName%>
+                    </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
                     <div class="pull-left ml-4">
-                      <h1><%=following.photos.count%></h1>
+                      <h1>
+                        <%=following.photos.count%>
+                      </h1>
                       <h6 style="padding-top: px;">Photos</h6>
                     </div>
                     <div class="pull-right mr-4">
-                      <h1><%=following.albums.count%></h1>
+                      <h1>
+                        <%=following.albums.count%>
+                      </h1>
                       <h6>Albums</h6>
                     </div>
 
                   </div>
                   <div class="d-flex justify-content-center mt-2">
-                    <button class="btn btn-outline-primary">Follow</button>
+
+                    <button class="btn btn-primary follow" followed="true" follower_id="<%=@user.id%>" ,
+                      following_id="<%=following.id%>">following</button>
+
                   </div>
 
                 </div>
@@ -147,26 +169,38 @@
                 <%for followerRecord in @followerRecords%>
                 <%follower = followerRecord.follower%>
                 <div class="photo-title shadow-sm  bg-white rounded mb-3 text-primary">
-                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
+                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height: 40%; backgrround:white;">
                     <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
                       src="<%=follower.avatar%>">
                   </div>
                   <div class="d-flex justify-content-center mt-2">
-                    <h3><%=follower.firstName%></h3>
+                    <h3>
+                      <%=follower.firstName%>
+                    </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
                     <div class="pull-left ml-4">
-                      <h1><%=follower.photos.count%></h1>
+                      <h1>
+                        <%=follower.photos.count%>
+                      </h1>
                       <h6 style="padding-top: px;">Photos</h6>
                     </div>
                     <div class="pull-right mr-4">
-                      <h1><%=follower.albums.count%></h1>
+                      <h1>
+                        <%=follower.albums.count%>
+                      </h1>
                       <h6>Albums</h6>
                     </div>
 
                   </div>
                   <div class="d-flex justify-content-center mt-2">
-                    <button class="btn btn-outline-primary">Follow</button>
+                    <%if @followingList.where(following: follower).first == nil%>
+                    <button class="btn btn-outline-primary follow" followed="false" follower_id="<%=@user.id%>" ,
+                      following_id="<%=follower.id%>">Follow</button>
+                    <%else%>
+                    <button class="btn btn-primary follow" followed="true" follower_id="<%=@user.id%>" ,
+                      following_id="<%=follower.id%>">Following</button>
+                    <%end%>
                   </div>
 
                 </div>

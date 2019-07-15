@@ -7,35 +7,35 @@ class ProfileController < ApplicationController
     @followingRecords = Follow.where(follower: @user)
     #---Find all records that the user is followed (following)--#
     @followerRecords = Follow.where(following: @user)
-   
+    #----get following list of current user--------------#
+    @followingList = Follow.where(follower: @user)
   end
 
   def editProfile
   end
-  
+
   def editPhoto
   end
 
   def newPhoto
     @photo = Photo.new
     @image = "assets/default/img/default-img.gif"
-
   end
 
   def newAlbum
     @photo = Photo.new
     @image = "assets/default/img/default-img.gif"
   end
+
   #-------------------------POST--------------------------#
   #--------Log out-------------------#
   def logOut
     redirect_to login_login_url
   end
 
-
   #-------edit Basic profile---------#
   def editBasicProfile
-    edit = User.new(user_basic_params);
+    edit = User.new(user_basic_params)
     user = User.where(email: session[:user]["email"]).first
     puts "--------------------------#{user.email}-----------------------------"
     user.firstName = edit.firstName
@@ -48,9 +48,7 @@ class ProfileController < ApplicationController
     else
       @message = user.errors.messages
     end
-
   end
-
 
   #-------------CHange Password------------#
   def editPassword
@@ -71,10 +69,8 @@ class ProfileController < ApplicationController
         redirect_to editProfile_url
       end
     end
-
   end
 
-  
   #----------------------Edit Photo----------------------------#
   def editPhotoServer
     photo = Photo.new(photo_params)
@@ -106,7 +102,6 @@ class ProfileController < ApplicationController
     end
   end
 
-
   #------------Delete Photo-----------------------#
   def deletePhoto
     puts "---------------deletePhoto #{@photo.id}------------------"
@@ -117,10 +112,7 @@ class ProfileController < ApplicationController
       puts "-----------------#{exception}-----------------"
     end
     redirect_to profile_url
-   
-    
   end
-
 
   #---------------Upload album------------------------#
   def uploadAlbum
@@ -130,10 +122,11 @@ class ProfileController < ApplicationController
       photo = Photo.create(image: image, User: @user)
       albumRecord = AlbumRecord.create(Photo: photo, Album: album)
     end
-    
+
     puts params[:Album]["image"]
     puts params[:Album]["image"].size
   end
+
   #--------take login input data from user-------------
   #---Basic Profile---#
   def user_basic_params()
@@ -142,11 +135,52 @@ class ProfileController < ApplicationController
 
   #----------------Edit Album------------------#
   def editAlbum
+    @cc = Photo.new
+    @image = "assets/default/img/default-img.gif"
     @album = Album.find_by(id: params[:id])
   end
+
   #---Password Profile---#
   def user_password
     return params.permit(:currentPassword, :newPassword)
+  end
+
+  #------------Remove Photo From Album----------------#
+  def removePhoto
+    albumRecord = AlbumRecord.where(id: params[:id]).first
+    albumRecord.delete
+
+    redirect_to request.referrer, notice: "Remove successfull"
+  end
+
+  #----------------EditAlbumServer------------------#
+  def editAlbumServer
+    puts "-------------------------------------"
+    puts params
+    album = Album.find(params["Album"]["id"])
+    album.name = params["Album"]["name"]
+    album.des = params["Album"]["des"]
+    album.sharingMode = params["Album"]["sharingMode"]
+    album.save
+    if params["Photo_id"] != nil
+      for photo_id in params["Photo_id"]
+        albumRecord = AlbumRecord.create(Photo_id: photo_id, Album_id: params["Album"]["id"])
+      end
+    end
+    if params[:Album]["image"] != nil
+      for image in params[:Album]["image"]
+        photo = Photo.create(image: image, User: @user)
+        albumRecord = AlbumRecord.create(Photo: photo, Album: album)
+      end
+    end
+
+    redirect_to request.referrer, notice: "Update successfull"
+  end
+
+  #------------Delete Album-------------------#
+  def deleteAlbum
+    @album = Album.find_by(id: params[:id])
+    @album.delete
   end
 
   #----Photo Info-----#
@@ -180,11 +214,10 @@ class ProfileController < ApplicationController
     else
       redirect_to login_login_url
     end
-    
   end
 
-  def set_photo 
-    @photo = @photos.where(id: params[:id]).first
+  def set_photo
+    @photo = Photo.where(id: params[:id]).first
     if @photo == nil
       puts "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
     end

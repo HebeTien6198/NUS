@@ -1,0 +1,29 @@
+<!-- Modal -->
+<div id="addPhotoModel" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+      <h4 class="modal-title">Add more Photos</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+      </div>
+      <div class="modal-body">
+      <div class="choosenPhotos"></div>
+      <h6>Choose from your photo</h6>
+      <div class="photoList d-flex flex-wrap">
+        <%for photo in @photos%>      
+            <%if photos.include?(photo.id) == false%>    
+              <img id="<%=photo.id%>" class="chooseAvatar choosePhotosToAlbum" style="height: 200px; width: auto" src="<%=photo.image.url%>">
+            <%end%>
+        <%end%>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+      </div>
+    </div>
+
+  </div>
+</div>

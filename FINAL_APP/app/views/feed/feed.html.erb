@@ -52,11 +52,11 @@
                     </div>
                     <div class="review-footer">
                     <%if @likes[photo.id] != true %>
-                      <i class="like fas fa-heart like" style="color: red" liked="true" user_id="<%=@user.id%>"
+                      <i class="fas fa-heart likePhotoIcon" style="color: blue" liked="false" user_id="<%=@user.id%>"
                       numOflikes="<%=photo.likes.size%>" photo_id="<%=photo.id%>">
                         <%=photo.likes.size%></i>
                     <%else%>
-                    <i class="like fas fa-heart like" style="color: blue" liked="false" user_id="<%=@user.id%>"
+                    <i class="fas fa-heart likePhotoIcon" style="color: red" liked="true" user_id="<%=@user.id%>"
                       numOflikes="<%=photo.likes.size%>" photo_id="<%=photo.id%>">
                         <%=photo.likes.size%></i>
                     <%end%>
@@ -88,13 +88,14 @@
               <%albumRecords = album.album_records%>
 
               <!-------------Get first image------------------>
+              <%if albumRecords.first != nil%>
               <%firstPhoto = albumRecords.first.Photo%>
               <div class="photo-container shadow-sm rounded " >
                 <div class="row" style="height: 100%;" >
                   <div class="col albums-rotate">
-                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
-                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
-                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate" data-toggle="modal"
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate img-thumbnail">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate img-thumbnail">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate img-thumbnail" data-toggle="modal"
                 data-target="#myAlbumModal<%=album.id%>">
                     <h2 class="position-absolute" style="top: 10%; left: 50%; color: white">
                       <strong><%=albumRecords.size%></strong></h2>
@@ -118,6 +119,7 @@
                   </div>
                 </div>
               </div>
+              <%end%>
             </div>
 
             <!------------------------Render Album Model---------------->

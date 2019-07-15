@@ -15,4 +15,4 @@ class RegisterController < ApplicationController
     params.require(:User).permit(:firstName, :lastName, :email, :password)
   end
 
-
+end

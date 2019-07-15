@@ -1,7 +1,8 @@
 <div class="col-md-2 col-xs-2">
     <div class="container">
-        <a href="/discover" class="link" data-turbolink='true'>Discover</a>
+        <%= link_to 'Discover', discover_url, class: "link", :"data-turbolinks" => false %>
+     
         <br>
-        <a href="/feed" class="link" data-turbolink='true'>Feeds</a>
+        <%= link_to 'Feed', feed_url, class: "link", :"data-turbolinks" => false %>
     </div>
 </div>

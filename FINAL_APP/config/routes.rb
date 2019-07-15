@@ -52,9 +52,12 @@ Rails.application.routes.draw do
   post 'editPassword', to: "profile#editPassword"
   post 'updateProfile', to: "admin#updateProfile"
   post 'editPhotoServer', to: "profile#editPhotoServer"
+  post 'editAlbumServer', to: "profile#editAlbumServer"
   post 'uploadPhoto', to: "profile#uploadPhoto"
   post 'uploadAlbum', to: "profile#uploadAlbum"
   #-------Delete-------#
   post 'deletePhoto/:id', to: "profile#deletePhoto", as: 'deletePhoto'
+  post 'deleteAlbum/:id', to: "profile#deleteAlbum", as: 'deleteAlbum'
+  post 'removePhoto/:id', to: "profile#removePhoto", as: 'removePhoto'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

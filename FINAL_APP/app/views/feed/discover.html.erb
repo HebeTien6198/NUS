@@ -42,17 +42,17 @@
                   <div class="col">
                     <!--Follow Button-->
                     <%if @followings[photo.User.id] == true%>
-                      <button class="btn btn-warning follow" followed="true" follower_id="<%=@user.id%>", following_id="<%=photo.User.id%>"
+                      <button class="btn btn-primary follow" followed="true" follower_id="<%=@user.id%>", following_id="<%=photo.User.id%>"
                         style="border-radius: 50%; position: absolute; top:0; right:15px;">following</button>
                     <%else%>
-                      <button class="btn btn-outline-warning follow" followed="false" follower_id="<%=@user.id%>", following_id="<%=photo.User.id%>"
+                      <button class="btn btn-outline-primary follow" followed="false" follower_id="<%=@user.id%>", following_id="<%=photo.User.id%>"
                         style="border-radius: 50%; position: absolute; top:0; right:15px;">follow</button>
                     <%end%>
                     <div class="review-header">
                       <!------Avatar------>
                       <img src="<%=photo.User.avatar%>" class="header-img">
                       <!------User's Name------>
-                      <%= link_to photo.User.firstName,  info_url(photo.User.id) %>
+                      <%= link_to photo.User.firstName,  info_url(photo.User.id) , :"data-turbolinks" => false%>
 
 
                     </div>
@@ -61,7 +61,15 @@
                       <p><%=photo.des%></p>
                     </div>
                     <div class="review-footer">
-                      <i class="fas fa-heart"><%=photo.likes.size%></i>
+                      <%if @likes[photo.id] != true %>
+                      <i class="fas fa-heart likePhotoIcon" style="color: blue" liked="false" user_id="<%=@user.id%>"
+                      numOflikes="<%=photo.likes.size%>" photo_id="<%=photo.id%>">
+                        <%=photo.likes.size%></i>
+                    <%else%>
+                    <i class="fas fa-heart likePhotoIcon" style="color: red" liked="true" user_id="<%=@user.id%>"
+                      numOflikes="<%=photo.likes.size%>" photo_id="<%=photo.id%>">
+                        <%=photo.likes.size%></i>
+                    <%end%>
                       <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%>
                       </div>
                     </div>
@@ -84,14 +92,15 @@
               <%albumRecords = album.album_records%>
 
               <!-------------Get first image------------------>
+              <%if albumRecords.first != nil%>
               <%firstPhoto = albumRecords.first.Photo%>
               <div class="photo-container shadow-sm rounded " >
                 <div class="row" style="height: 100%;">
                   <div class="col albums-rotate">
                   
-                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
-                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate">
-                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate"  data-toggle="modal" 
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate img-thumbnail">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate img-thumbnail">
+                    <img src="<%=firstPhoto.image.url%>" class="photo-review-image album-rotate img-thumbnail"  data-toggle="modal" 
                     data-target="#myAlbumModal<%=album.id%>">
                     <h2 class="position-absolute" style="top: 10%; left: 50%; color: white">
                       <strong><%=albumRecords.size%></strong></h2>
@@ -102,7 +111,7 @@
                       <img src="<%=album.User.avatar%>" class="header-img">
 
                       <!------User's Name------>
-                      <p class="header-text text-primary"><%= album.User.firstName  %></p>
+                      <%= link_to photo.User.firstName,  info_url(photo.User.id) , :"data-turbolinks" => false%>
                     </div>
                     <div class="review-body">
                       <p class="header-text"><%=album.name%></p>
@@ -115,6 +124,7 @@
                   </div>
                 </div>
               </div>
+              <%end%>
             </div>
 
             <!------------------------Render Album Model---------------->

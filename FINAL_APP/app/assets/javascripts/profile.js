@@ -161,7 +161,6 @@ $("#document").ready(function () {
   $(function () {
     // Multiple images preview in browser
     var imagesPreview = function (input, placeToInsertImagePreview) {
-
       if (input.files) {
         var filesAmount = input.files.length;
 
@@ -181,5 +180,24 @@ $("#document").ready(function () {
     $('#gallery-photo-add').on('change', function () {
       imagesPreview(this, 'div.gallery');
     });
+  });
+
+  //-----------------Choosing photos-------------------------//
+
+  $(document).on('click','.choosePhotosToAlbum',function(){
+      url = $(this).attr('src');
+      ID = $(this).attr('id');
+      $(this).remove();
+      $('.choosenPhotos').append("<img style='height: 200px; width: auto;' src='url' class='chooseAvatar  removePhotos' id='ID'></img>".
+        replace('url', url).replace('ID', ID));
+      $('.editAlbumForm').append($("<input type='hidden'>").attr({name: "Photo_id[]", value: ID, class: ID}));
+  });
+  $(document).on('click','.removePhotos',function(){
+      url = $(this).attr('src');
+      ID = $(this).attr('id');
+      alert(ID);
+      $(this).remove();
+      $('.ID'.replace('ID', ID)).remove();
+      $('.photoList').append("<img id='ID' style='height: 200px; width: auto;' src='url' class='chooseAvatar choosePhotosToAlbum'></img>".replace('url', url).replace('ID', ID));
   });
 });
