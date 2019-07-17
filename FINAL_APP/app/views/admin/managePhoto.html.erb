@@ -4,22 +4,26 @@
 <main class="feed-body">
     <hr>
     <div class="row">
-        <div class="col-md-2 col-xs-2">
-            <div class="container">
-                <a href="/admin/managePhoto" class="link">Manage Photos</a>
-                <br>
-                <a href="#" class="link">Manage Album</a>
-                <br>
-                <a href="#" class="link active">Manage User</a>
-            </div>
-        </div>
+        <!---------Render left tab from admin------->
+        <%= render '/admin/leftTab' %>
+        <!-------------End Render--------------->
+        
         <div class="col-md-8 col-xs-8 photo-body">
             <div class="container">
             <br />
+            <div class="d-flex flex-wrap">
                 <%for photo in @photos%>
-                    <img src="<%=photo.image.url%>" style="width: 250px; height: 250px; margin: 10px 10px 10px 10px;">
+               
+                    <div class="m-2"
+                    style="position: relative; width: 250px; height: 250px; background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+                    data-toggle="modal" data-target="#myModal<%=photo.id%>">
+                    <!---------------Edit Photo Button----------->
+                    <button class="btn btn-outline-success pull-down"><%= link_to 'Edit', admin_editPhoto_url(photo.id), :"data-turbolinks" => false %></button>
+                  
+                  <div class="title text-center"><strong><%=photo.title%></strong></div>
+                </div>
                 <%end%>
-                
+                </div>
             </div>
         </div>            
         <div class="col-md-2 col-xs-2">

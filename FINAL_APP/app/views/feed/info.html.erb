@@ -68,18 +68,59 @@
                 <%for photo in @photos%>
                 <div class="photo-title">
                   <div class="image"
-                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+                    data-toggle="modal" data-target="#myModal<%=photo.id%>">
 
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
+                <!--------Render Photo Model---------------------->
+            <%= render "/feed/photoModel", photo: photo%>
+            <!--------End Render Photo Model---------------------->
                 <%end%>
               </div>
             </div>
             <!--End Photo-->
-            <div class="tab-pane container fade" id="album">
-              Album
+            <!--Album-->
+            <div class="tab-pane container" id="album">
+              <!--Add Album Button-->
+              <button class="btn btn-success pull-right"><%= link_to 'Add Album', newAlbum_url,  :"data-turbolinks" => false %></button>
+              <br />
+              <br />
+              
+              <div class="d-flex flex-wrap">
+                <%for album in @albums%>
+                <!--Get first photo-->
+                <%albumRecords = album.album_records%>
+                <%if albumRecords.first != nil%>
+                <%photo = albumRecords.first.Photo%>
+                <%else%>
+                <%photo = Photo.first%>
+                <%end%>
+                <div class="photo-title">
+                  <div class="image"
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+                    data-toggle="modal" data-target="#myAlbumModal<%=album.id%>">
+                    <!---------------Private/Public-------------->
+                    <%if album.isPrivate? %>
+                    <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
+                        class="fas fa-lock"></i></button>
+                    <%end%>
+                    <!---------------Edit Photo Button----------->
+                    <button
+                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editAlbum_url(album.id), :"data-turbolinks" => false %></button>
+                  </div>
+                  <div class="title text-center"><strong><%=photo.title%></strong></div>
+                </div>
+    <!------------------------Render Album Model---------------->
+            <%= render "/feed/albumModel", album: album, albumRecords: albumRecords%>
+            <!---------------------End Render Album Model---------------->
+                <%end%>
+            
+             
+              </div>
             </div>
+            <!--End Album-->
             <!--Following-->
             <div class="tab-pane container fade" id="following">
               <div class="d-flex flex-wrap">
@@ -92,7 +133,7 @@
                   </div>
                   <div class="d-flex justify-content-center mt-2">
                     <h3>
-                      <%=following.firstName%>
+                      <%= link_to following.firstName,  info_url(following.id) , :"data-turbolinks" => false%>
                     </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
@@ -137,7 +178,7 @@
                   </div>
                   <div class="d-flex justify-content-center mt-2">
                     <h3>
-                      <%=follower.firstName%>
+                      <%= link_to follower.firstName,  info_url(follower.id) , :"data-turbolinks" => false%>
                     </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">

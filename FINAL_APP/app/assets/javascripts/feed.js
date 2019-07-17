@@ -121,7 +121,7 @@ $("#document").ready(function() {
 
     // Follow and Unfollow
     $(".follow").click(function() {
-
+        alert("cc");
         follower_id = $(this).attr('follower_id');
         following_id = $(this).attr('following_id');
         follow = this;
@@ -172,7 +172,7 @@ $("#document").ready(function() {
     });
 
 
-    //--------------Comments
+    //--------------Comments---------------------
     $(".comment").keyup(function(e) {
         comment = this;
         content = $(this).val();
@@ -200,6 +200,8 @@ $("#document").ready(function() {
             });
         }
     });
+
+
     //----------------------Log out--------------------------------
     // $("#log-out").click(function(){
     //     var form = $('<form method="post" id="logOut"></form>')

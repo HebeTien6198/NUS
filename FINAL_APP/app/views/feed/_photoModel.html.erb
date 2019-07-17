@@ -51,13 +51,21 @@
                         </div>
                         <!---Comment----->
                         <div id="comments<%=photo.id%>">
+                        
                           <%for comment in photo.photo_comments%>
-                          <%=comment.content%> <br />
+                          <div class="d-flex flex-wrap m-1">
+                            <img src="<%=comment.User.avatar%>" style="width: 30px; height: 30px; border-radius: 50%"
+                             class="mr-2">
+                            
+                            <strong class="text-primary mr-2"><%=comment.User.firstName%>:</strong>
+                            <p><%=comment.content%></p> 
+                            </div>
                           <%end%>
+                        
                         </div>
                         <div class="row">
 
-                          <img class="ml-2" src="<%=photo.User.avatar%>"
+                          <img class="ml-2" src="<%=@user.avatar%>"
                             style="width: 45px; height: 45px; border-radius: 50%">
 
                           <div class="col-md-10">

@@ -21,7 +21,9 @@
                             <div class="col-md-7"><img class="edit-profile-photo m-auto"
                         src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
                         <!----Render avatar model------->
-            <%= render "/profile/changeAvatarModel" %>
+                        <%action =  "/updateAvatarFromPhoto"%>
+            <%= render "/profile/changeAvatarModel"%>
+            
             <!------End render--------------->
                         </div></div>
                         <br />

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   #feed#
   get 'feed', to: "feed#feed"
   get 'discover', to: "feed#discover"
-  get 'info', to: "feed#info"
+  get 'info/:id', to: "feed#info", as: 'info'
   #login-out#
   get 'register', to: "register#register"
   get 'login', to: "login#login"
@@ -23,13 +23,23 @@ Rails.application.routes.draw do
   get 'newPhoto', to: "profile#newPhoto"
   get 'newAlbum', to: "profile#newAlbum"
   
-  #avatar#
 
-  #--admin---
+  #-----------------------ADMIN---------------------------#
+  #---Get----#
   get 'admin', to: "admin#admin"
-  get 'admin/edit', to: "admin#edit"
+  get 'admin/edit/:id', to: "admin#edit", as: 'admin/edit'
   get 'admin/managePhoto', to: "admin#managePhoto"
-  
+  get 'admin/manageAlbum', to: "admin#manageAlbum"
+  get 'admin/editPhoto/:id', to: "admin#editPhoto", as: "admin/editPhoto"
+  get 'admin/editAlbum/:id', to: "admin#editAlbum", as: "admin/editAlbum"
+  #---Post----#
+  post 'updateProfile', to: "admin#updateProfile"
+  post 'admin/updateAvatar', to: "admin#updateAvatar"
+  post 'admin/updatePhoto', to: "admin#updatePhoto"
+  post 'admin/deletePhoto/:id', to: "admin#deletePhoto", as: "admin/deletePhoto"
+  post 'admin/updateAlbum', to: "admin#updateAlbum"
+  post 'admin/deleteAlbum/:id', to: "admin#deleteAlbum", as: "admin/deleteAlbum"
+  post 'admin/removePhoto/:id', to: "admin#removePhotoFromAlbum", as: "admin/removePhoto"
   #------------------------POST------------------------------
   post 'register', to: "register#create"
   post 'login', to: "login#validateLogin"
@@ -50,7 +60,6 @@ Rails.application.routes.draw do
   #--------------Edit------------
   post 'editBasicProfile', to: "profile#editBasicProfile"
   post 'editPassword', to: "profile#editPassword"
-  post 'updateProfile', to: "admin#updateProfile"
   post 'editPhotoServer', to: "profile#editPhotoServer"
   post 'editAlbumServer', to: "profile#editAlbumServer"
   post 'uploadPhoto', to: "profile#uploadPhoto"
@@ -59,5 +68,7 @@ Rails.application.routes.draw do
   post 'deletePhoto/:id', to: "profile#deletePhoto", as: 'deletePhoto'
   post 'deleteAlbum/:id', to: "profile#deleteAlbum", as: 'deleteAlbum'
   post 'removePhoto/:id', to: "profile#removePhoto", as: 'removePhoto'
+  #-----------Search--------------------#
+  post 'discover', to: "feed#discover"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

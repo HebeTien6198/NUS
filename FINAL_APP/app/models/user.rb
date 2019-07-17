@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-    has_many :photos
-    has_many :albums
+    has_many :photos, dependent: :destroy
+    has_many :albums, dependent: :destroy
     has_many :follower, :class_name => 'Follow', :foreign_key => 'follower_id'
     has_many :following, :class_name => 'Follow', :foreign_key => 'following_id'
-    has_many :likes
-    has_many :photo_comments
+    has_many :likes, dependent: :destroy
+    has_many :photo_comments, dependent: :destroy
 
 #     validates :firstName,
 #             presence: true,

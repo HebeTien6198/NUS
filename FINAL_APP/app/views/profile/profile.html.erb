@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-  <title>Profile</title>
-
-
-</head>
 
 <body id="feed">
   <!---------------Header from Layput-------------->
@@ -20,18 +13,18 @@
       <div class="col-md-8 col-xs-8 photo-body">
         <div class="container">
           <br />
-          <div class="row">
+          <div class="row justify-content-center">
             <!--Avatar-->
-            <div class="col-md-3">
+            <div class="col-md-3 text-center text-md-left">
               <img class="profile-avatar" src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
             </div>
             <!---End Avatar------>
             <!----Render avatar model------->
             <%= render "/profile/changeAvatarModel" %>
             <!------End render--------------->
-            <div class="col-mid-8">
+            <div class="col-md-8 text-center text-lg-left">
               <!---Edit Profile Button--->
-              <a href="profile/editProfile"><button class="btn btn-primary" id="edit-profile">Edit profile</button></a>
+              <%= link_to 'Edit profile', profile_editProfile_url, class: "btn btn-primary", id: "edit-profile", :"data-turbolinks" => false %>
               <h2 class="text-primary">
                 <%= @fullName %>
               </h2>
@@ -66,11 +59,14 @@
               <button class="btn btn-success pull-right"><%= link_to 'Add Photo', newPhoto_url, :"data-turbolinks" => false %></button>
               <br />
               <br />
+              <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="photo">
               <div class="d-flex flex-wrap">
                 <%for photo in @photos%>
                 <div class="photo-title">
                   <div class="image"
-                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+                    data-toggle="modal" data-target="#myModal<%=photo.id%>">
                     <!---------------Private/Public-------------->
                     <%if photo.isPrivate? %>
                     <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
@@ -83,8 +79,14 @@
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
+                <!--------Render Photo Model---------------------->
+            <%= render "/feed/photoModel", photo: photo%>
+            <!--------End Render Photo Model---------------------->
                 <%end%>
               </div>
+              </div>
+              </div>
+
             </div>
             <!--End Photo-->
             <!--Album-->
@@ -93,6 +95,7 @@
               <button class="btn btn-success pull-right"><%= link_to 'Add Album', newAlbum_url,  :"data-turbolinks" => false %></button>
               <br />
               <br />
+              
               <div class="d-flex flex-wrap">
                 <%for album in @albums%>
                 <!--Get first photo-->
@@ -104,7 +107,8 @@
                 <%end%>
                 <div class="photo-title">
                   <div class="image"
-                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;">
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+                    data-toggle="modal" data-target="#myAlbumModal<%=album.id%>">
                     <!---------------Private/Public-------------->
                     <%if album.isPrivate? %>
                     <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
@@ -116,8 +120,12 @@
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
-
+    <!------------------------Render Album Model---------------->
+            <%= render "/feed/albumModel", album: album, albumRecords: albumRecords%>
+            <!---------------------End Render Album Model---------------->
                 <%end%>
+            
+             
               </div>
             </div>
             <!--End Album-->
@@ -133,7 +141,7 @@
                   </div>
                   <div class="d-flex justify-content-center mt-2">
                     <h3>
-                      <%=following.firstName%>
+                    <%= link_to following.firstName,  info_url(following.id) , :"data-turbolinks" => false%>
                     </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
@@ -175,7 +183,7 @@
                   </div>
                   <div class="d-flex justify-content-center mt-2">
                     <h3>
-                      <%=follower.firstName%>
+                      <%= link_to follower.firstName,  info_url(follower.id) , :"data-turbolinks" => false%>
                     </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
@@ -220,5 +228,3 @@
   </main>
 </body>
 <!-- Java Script -->
-
-</html>

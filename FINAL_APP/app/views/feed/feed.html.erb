@@ -44,7 +44,7 @@
                       <img src="<%=photo.User.avatar%>" class="header-img">
 
                       <!------User's Name------>
-                      <p class="header-text text-primary"><%= photo.User.firstName  %></p>
+                      <%= link_to photo.User.firstName,  info_url(photo.User.id) , :"data-turbolinks" => false%>
                     </div>
                     <div class="review-body">
                       <p class="header-text"><%=photo.title%></p>
@@ -82,7 +82,7 @@
           <!----------------------Album Tab--------------------->
           <div role="tabpanel" class="tab-pane" id="album">
             <div class="wrap photo-body">
-              <!------------------------A photo----------------------------------->
+              <!------------------------A Album----------------------------------->
               <%for album in @albums%>
               <!----------Get all album record--------------->
               <%albumRecords = album.album_records%>
@@ -106,7 +106,8 @@
                       <img src="<%=album.User.avatar%>" class="header-img">
 
                       <!------User's Name------>
-                      <p class="header-text text-primary"><%= album.User.firstName  %></p>
+                    
+                      <%= link_to photo.User.firstName,  info_url(photo.User.id) , :"data-turbolinks" => false%>
                     </div>
                     <div class="review-body">
                       <p class="header-text"><%=album.name%></p>

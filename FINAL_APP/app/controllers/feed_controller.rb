@@ -1,7 +1,7 @@
 class FeedController < ApplicationController
   before_action :set_user
   before_action :set_discover_user, only: [:info]
-  before_action :getLikes, only: [:discover, :feed]
+  before_action :getLikes, only: [:info, :discover, :feed]
 
   #--------------------GET----------------#
   #-----feed------#
@@ -35,8 +35,20 @@ class FeedController < ApplicationController
 
   #------Discover----#
   def discover
-    @people = User.all
-    @photos = Photo.where(sharingMode: "isPublic")
+    puts "------------------------------------------------------"
+    puts params
+    if params["people"] != nil
+      @people = User.where("firstName like ?", "%#{params["people"]}%")
+      puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    else
+      @people = User.all
+      puts "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    end
+    # @photos = Array.new
+    # for p in @people
+    #   @photos.push(p.photos.where(sharingMode: "isPublic"))
+    # end
+    @photos = Photo.where(sharingMode: "isPublic").where("title like ?", "%#{params["title"]}%")
     puts "--------------#{@photos}------------------"
 
     #---Find all records that the user is the one that follow other (follower)--#
@@ -68,15 +80,18 @@ class FeedController < ApplicationController
     #----get following list of current user--------------#
     @followingList = Follow.where(follower: @user)
 
+    #get Photo and Album
     if (@isFollowed)
-      #get all photo
-      puts "scscscscscscscscsc----#{@isFollowed}--------------------------------------------------------"
+      #get all photo and album
       @photos = @discoverUser.photos
+      @albums = @discoverUser.albums
     else
       #just get public photo
-      puts "--------------------#{@isFollowed}--------------------------------------------------"
       @photos = @discoverUser.photos.isPublic
+      @albums = @discoverUser.albums.isPublic
     end
+
+    
   end
 
   def logOut
@@ -154,7 +169,7 @@ class FeedController < ApplicationController
   end
 
   def set_discover_user
-    @discoverUser = User.where(id: params[:format]).first
+    @discoverUser = User.where(id: params[:id]).first
   end
 
   def set_follow_record

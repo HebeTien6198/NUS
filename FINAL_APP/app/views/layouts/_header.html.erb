@@ -8,9 +8,9 @@
                 
 
                 <!----------------------------Search Bar------------------------------------->
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
-                  </form>
+                <%= form_tag('/discover', method: :post, class: "form-inline my-2 my-lg-0") do -%>
+                    <input name="title" class="form-control mr-sm-2" type="search" placeholder="Search">
+                <%end%>
                   <!--------------------------------Info------------------------------------------->
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
@@ -18,7 +18,7 @@
                       <a class="nav-link" href="#"> <img class="avatar-image" src="<%=@avatar%>"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/profile"><%=@name%></a> <span class="sr-only">(current)</span>
+                        <%= link_to @name, profile_url, class: "nav-link", :"data-turbolinks" => false %>
                     </li>
                     <li class="nav-item">
                         <%= link_to "Log Out", logOut_url, class: "nav-link",method: :post %>

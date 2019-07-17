@@ -9,6 +9,8 @@ class ProfileController < ApplicationController
     @followerRecords = Follow.where(following: @user)
     #----get following list of current user--------------#
     @followingList = Follow.where(follower: @user)
+    #-------------------get all likes------------------#
+    @likes = Like.where(User: @user)
   end
 
   def editProfile
@@ -74,7 +76,7 @@ class ProfileController < ApplicationController
   #----------------------Edit Photo----------------------------#
   def editPhotoServer
     photo = Photo.new(photo_params)
-    databasePhoto = Photo.where(id: photo.id).first
+    databasePhoto = @photos.where(id: photo.id).first
     databasePhoto.title = photo.title
     puts "ccccccccccccccccccccccccccccccccccccccccccccccccccc"
     puts "-------------------#{photo.sharingMode}---------------"
@@ -211,15 +213,17 @@ class ProfileController < ApplicationController
       @avatar = @user.avatar
       @photos = @user.photos
       @albums = @user.albums
+      @editAvatarAction = "/updateAvatarFromPhoto";
     else
       redirect_to login_login_url
     end
   end
 
   def set_photo
-    @photo = Photo.where(id: params[:id]).first
+    @photo = @photos.where(id: params[:id]).first
     if @photo == nil
       puts "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC"
+      redirect_to profile_url
     end
   end
 end
