@@ -31,3 +31,58 @@
 
 en:
   hello: "Hello world"
+  album: "Album"
+  photo: "Photo"
+
+  #------------Navbar----------#
+  login: "Login"
+  logout: "Logout"
+  search: "Search"
+
+  #-----------Left tab-------------#
+  discover: "Discover"
+  feed: "Feed"
+  admin: "Admin"
+
+  managePhotos: "Manage Photos"
+  manageAlbums: "Manage Albums"
+  manageUsers: "Manage Users"
+
+  #----------Profile----------------#
+  editProfile: "EditProfile"
+  edit: "Edit"
+  following: "Following"
+  follower: "Follower"
+  addPhoto: "Add Photo"
+  addAlbum: "Add Album"
+
+
+   #-----------Photo-Album------------#
+  title: "Tittle"
+  sharingMode: "Sharing Mode"
+  description: "Description"
+  public: "Public"
+  private: "Private"
+  newPhoto: "New Photo"
+  newAlbum: "New Album"
+  editPhoto: "Edit Photo"
+  editAlbum: "Edit Album"
+
+  #-------------Admin-User---------------#
+  firstName: "First Name"
+  lastName: "Last Name"
+  email: "Email"
+  lastLogin: "Last Login"
+  editInformation: "Edit Infomation"
+  basicInformation: "Basic Information"
+  password: "Password"
+  newPassword: "New Password"
+  currentPassword: "Current Password"
+  confirmPassword: "Confirm Password"
+
+  #-------------Button--------------#
+  save: "Save"
+  delete: "Delete"
+  remove: "Remove"
+  cancel: "Cancel"
+  exit: "Exit"

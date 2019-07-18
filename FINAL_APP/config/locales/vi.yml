@@ -1,0 +1,55 @@
+vi:
+  hello: "Hello world"
+  album: "Bộ sưu tập"
+  photo: "Ảnh"
+
+  #------------Navbar----------#
+  login: "Đăng nhập"
+  logout: "Đăng xuất"
+  search: "Tìm kiếm"
+
+  #-----------Left tab-------------#
+  discover: "Khám phá"
+  feed: "Bảng tin"
+  admin: "Admin"
+
+  managePhotos: "Quản lý ảnh"
+  manageAlbums: "Quản lý bộ sưu tập"
+  manageUsers: "Quản lý người dùng"
+
+  #----------Profile----------------#
+  editProfile: "Thay đổi thông tin"
+  edit: "Chỉnh sửa"
+  following: "Theo dõi"
+  follower: "Ngừơi theo dõi"
+  addPhoto: "Thêm ảnh"
+  addAlbum: "Thêm bộ sưu tập"
+
+  #-----------Photo-Album------------#
+  title: "Tiêu đề "
+  sharingMode: "Chế độ chia sẻ"
+  description: "Mô tả"
+  public: "Công khai"
+  private: "Riêng tư"
+  newPhoto: "Thêm ảnh"
+  newAlbum: "Thêm bộ sưu tập"
+  editPhoto: "Chỉnh sửa ảnh"
+  editAlbum: "Chỉnh sửa bộ sưu tập"
+  #-------------Admin-User--------------#
+  firstName: "Họ"
+  lastName: "Tên"
+  email: "Email"
+  lastLogin: "Lần đăng nhập cuối"
+  editInformation: "Chỉnh sửa thông tin cá nhân"
+  basicInformation: "Thông tin cơ bản"
+  password: "Mật khẩu"
+  newPassword: "Mật khẩu mới"
+  currentPassword: "Mật khẩu hiện tại"
+  confirmPassword: "Nhập lại mật khẩu"
+
+  #-------------Button--------------#
+  save: "Lưu"
+  delete: "Xóa"
+  remove: "Gỡ"
+  cancel: "Hủy"
+  exit: "Thoát"

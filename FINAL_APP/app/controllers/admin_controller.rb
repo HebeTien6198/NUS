@@ -34,10 +34,18 @@ class AdminController < ApplicationController
         if (user.save)
           redirect_to request.referrer, notice: "You're being redirected"
         end
+   end
 
-        
+  #---------Delete user------------#
+  def deleteUser
+    deleteUser = User.find(params[:id])
+    begin
+      deleteUser.destroy
+      redirect_to request.referrer, notice: "You're being redirected"
+    rescue => exception
+      puts exception
     end
-
+  end
     #----Edit Avatar----
 
     def  updateAvatar
@@ -59,7 +67,7 @@ class AdminController < ApplicationController
       @photo = Photo.find(params[:id])
     end
     #-----Edit Photo-----------#
-    def uploadPhoto
+    def updatePhoto
       editPhoto = Photo.find(params["Photo"]["id"])
       editPhoto.title = params["Photo"]["title"]
       editPhoto.des = params["Photo"]["des"]

@@ -3,8 +3,6 @@
 
 <head>
   <title>Profile</title>
-
-
 </head>
 
 <body id="feed">
@@ -41,19 +39,19 @@
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#photo">
-                    <%=@photos.count%> Photo</a>
+                    <%=@photos.count%> <%=t('photo')%></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#album">Album</a>
+                  <a class="nav-link" data-toggle="tab" href="#album"><%=@albums.count%> <%=t('album')%></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " data-toggle="tab" href="#following">
-                    <%=@followingRecords.size%> Following</a>
+                    <%=@followingRecords.size%> <%=t('following')%></a>
                 </li>
 
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#follower">
-                    <%=@followerRecords.size%> Followers</a>
+                    <%=@followerRecords.size%> <%=t('follower')%></a>
                 </li>
               </ul>
             </div>
@@ -141,13 +139,13 @@
                       <h1>
                         <%=following.photos.count%>
                       </h1>
-                      <h6 style="padding-top: px;">Photos</h6>
+                      <h6 style="padding-top: px;"><%=t('photo')%></h6>
                     </div>
                     <div class="pull-right mr-4">
                       <h1>
                         <%=following.albums.count%>
                       </h1>
-                      <h6>Albums</h6>
+                      <h6><%=t('album')%></h6>
                     </div>
 
                   </div>
@@ -186,13 +184,13 @@
                       <h1>
                         <%=follower.photos.count%>
                       </h1>
-                      <h6 style="padding-top: px;">Photos</h6>
+                      <h6 style="padding-top: px;"><%=t('photo')%></h6>
                     </div>
                     <div class="pull-right mr-4">
                       <h1>
                         <%=follower.albums.count%>
                       </h1>
-                      <h6>Albums</h6>
+                      <h6><%=t('album')%></h6>
                     </div>
 
                   </div>

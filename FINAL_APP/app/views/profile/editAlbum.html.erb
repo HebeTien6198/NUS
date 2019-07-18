@@ -13,7 +13,7 @@
         <div class="container">
           <br />
 
-          <h6><strong>Edit Album</strong></h6>
+          <h6><strong><%=t('editAlbum') %></strong></h6>
           <hr>
           <!-------------------------Edit Album Form------------------------------------------->
           <%= form_tag('/editAlbumServer', method: :post, multipart: true, class: "editAlbumForm") do -%>
@@ -24,16 +24,16 @@
             <!----------Title--------->
             <div class="col">
               <div class="form-group">
-                <label for="title"><strong>Title:</strong></label>
+                <label for="title"><strong><%=t('title') %>:</strong></label>
                 <input type="text" value="<%=@album.name%>" name="Album[name]" class="form-control" id="title">
               </div>
               <!-----------Mode---------->
               <div class="form-group">
-                <label for="sharing-mode"><strong>Sharing mode:</strong></label>
+                <label for="sharing-mode"><strong><%=t('sharingMode') %>:</strong></label>
                 <select type="text" class="form-control" name="Album[sharingMode]" id="sharing"
                   value="<%=@album.sharingMode%>">
-                  <option name="Album[sharingMode]" value="isPrivate">Private</option>
-                  <option name="Album[sharingMode]" value="isPublic">Public</option>
+                  <option name="Album[sharingMode]" value="isPrivate"><%=t('private') %></option>
+                  <option name="Album[sharingMode]" value="isPublic"><%=t('public') %></option>
                 </select>
               </div>
 
@@ -42,7 +42,7 @@
             <div class="col">
               <!------------Description---------->
               <div class="form-group">
-                <label for="des"><strong>Description:</strong></label>
+                <label for="des"><strong><%=t('description') %>:</strong></label>
                 <textarea rows="5" class="form-control" name="Album[des]" id="des"><%=@album.des%></textarea>
               </div>
             </div>
@@ -72,8 +72,8 @@
         <div class="row">
           <!----------------Button-------------->
           <div class="col-md-3">
-            <button value="submit" type="submit" class="btn btn-success pull-left">Save</button>
-            <button class="btn btn-danger pull-right"><%= link_to "Delete", deleteAlbum_url(@album.id), method: :post%>
+            <button value="submit" type="submit" class="btn btn-success pull-left"><%=t('save') %></button>
+            <button class="btn btn-danger pull-right"><%= link_to t('delete'), deleteAlbum_url(@album.id), method: :post%>
             </button>
 
           </div>

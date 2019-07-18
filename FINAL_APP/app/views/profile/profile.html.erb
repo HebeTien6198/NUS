@@ -24,7 +24,7 @@
             <!------End render--------------->
             <div class="col-md-8 text-center text-lg-left">
               <!---Edit Profile Button--->
-              <%= link_to 'Edit profile', profile_editProfile_url, class: "btn btn-primary", id: "edit-profile", :"data-turbolinks" => false %>
+              <%= link_to t("editProfile"), profile_editProfile_url, class: "btn btn-primary", id: "edit-profile", :"data-turbolinks" => false %>
               <h2 class="text-primary">
                 <%= @fullName %>
               </h2>
@@ -32,20 +32,20 @@
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#photo">
-                    <%=@photos.count%> Photo</a>
+                    <%=@photos.count%> <%=t('photo')%></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#album">
-                    <%=@albums.count%> Album</a>
+                    <%=@albums.count%> <%=t('album')%></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " data-toggle="tab" href="#following">
-                    <%=@followingRecords.size%> Following</a>
+                    <%=@followingRecords.size%> <%=t('following')%></a>
                 </li>
 
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#follower">
-                    <%=@followerRecords.size%> Followers</a>
+                    <%=@followerRecords.size%> <%=t('follower')%></a>
                 </li>
               </ul>
             </div>
@@ -56,7 +56,7 @@
             <!--Photo-->
             <div class="tab-pane container active" id="photo">
               <!--Add Photo Button-->
-              <button class="btn btn-success pull-right"><%= link_to 'Add Photo', newPhoto_url, :"data-turbolinks" => false %></button>
+              <button class="btn btn-success pull-right"><%= link_to t('addPhoto'), newPhoto_url, :"data-turbolinks" => false %></button>
               <br />
               <br />
               <div class="tab-content">
@@ -75,7 +75,7 @@
                     <!---------------Edit Photo Button----------->
                     <button
                     
-                      class="btn btn-outline-success pull-down"><%= link_to 'Edit', editPhoto_url(photo.id), :"data-turbolinks" => false %></button>
+                      class="btn btn-outline-success pull-down"><%= link_to t('edit'), editPhoto_url(photo.id), :"data-turbolinks" => false %></button>
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
@@ -92,7 +92,7 @@
             <!--Album-->
             <div class="tab-pane container" id="album">
               <!--Add Album Button-->
-              <button class="btn btn-success pull-right"><%= link_to 'Add Album', newAlbum_url,  :"data-turbolinks" => false %></button>
+              <button class="btn btn-success pull-right"><%= link_to t('addAlbum'), newAlbum_url,  :"data-turbolinks" => false %></button>
               <br />
               <br />
               

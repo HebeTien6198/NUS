@@ -18,11 +18,11 @@
         <div class="row photo-body">
           <div class="col">
             <button id="photo-button" href="#photo" type="button" role="tab" data-toggle="tab"
-              class="btn btn-primary pull-right photo-button">PHOTO</button>
+              class="btn btn-primary pull-right photo-button"><%=t('photo').upcase%></button>
           </div>
           <div class="col">
             <button id="album-button" href="#album" type="button" role="tab" data-toggle="tab"
-              class="btn btn-primary pull-left album-button">AlBUM</button>
+              class="btn btn-primary pull-left album-button"><%=t('album').upcase%></button>
           </div>
         </div>
         <br>
@@ -111,7 +111,7 @@
                       <img src="<%=album.User.avatar%>" class="header-img">
 
                       <!------User's Name------>
-                      <%= link_to photo.User.firstName,  info_url(photo.User.id) , :"data-turbolinks" => false%>
+                      <%= link_to album.User.firstName,  info_url(album.User.id) , :"data-turbolinks" => false%>
                     </div>
                     <div class="review-body">
                       <p class="header-text"><%=album.name%></p>

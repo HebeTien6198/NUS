@@ -35,21 +35,10 @@ class FeedController < ApplicationController
 
   #------Discover----#
   def discover
-    puts "------------------------------------------------------"
-    puts params
-    if params["people"] != nil
-      @people = User.where("firstName like ?", "%#{params["people"]}%")
-      puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    else
-      @people = User.all
-      puts "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
-    end
-    # @photos = Array.new
-    # for p in @people
-    #   @photos.push(p.photos.where(sharingMode: "isPublic"))
-    # end
+    puts "cccccccccccccccccccccccccccccccccc"
+    puts params["title"]
     @photos = Photo.where(sharingMode: "isPublic").where("title like ?", "%#{params["title"]}%")
-    puts "--------------#{@photos}------------------"
+    puts "--------------#{@photos.count}------------------"
 
     #---Find all records that the user is the one that follow other (follower)--#
     @followingRecords = Follow.where(follower: @user)

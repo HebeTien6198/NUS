@@ -182,7 +182,7 @@ class ProfileController < ApplicationController
   #------------Delete Album-------------------#
   def deleteAlbum
     @album = Album.find_by(id: params[:id])
-    @album.delete
+    @album.destroy
   end
 
   #----Photo Info-----#

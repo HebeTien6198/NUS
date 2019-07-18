@@ -12,7 +12,7 @@
         <div class="container">
           <br />
 
-          <h6><strong>Edit Photo</strong></h6>
+          <h6><strong><%=t('edit')%> <%=t('album')%></strong></h6>
           <hr>
           <!-------------------------Edit Album Form------------------------------------------->
           <%= form_tag('/admin/updateAlbum', multipart: true) do -%>
@@ -23,12 +23,12 @@
               <!----------Title--------->
               <div class="col">
                 <div class="form-group">
-                  <label for="title"><strong>Title:</strong></label>
+                  <label for="title"><strong><%=t('title')%>:</strong></label>
                   <input type="text" value="<%=@album.name%>" name="Album[name]" class="form-control" id="title">
                 </div>
                 <!-----------Mode---------->
                 <div class="form-group">
-                  <label for="sharing-mode"><strong>Sharing mode:</strong></label>
+                  <label for="sharing-mode"><strong><%=t('sharingMode')%>:</strong></label>
                   <select type="text" class="form-control" name="Album[sharingMode]" id="sharing"
                     value="<%=@album.sharingMode%>">
                     <option name="Album[sharingMode]" value="isPrivate">Private</option>
@@ -43,7 +43,7 @@
               <div class="col">
                 <!------------Description---------->
                 <div class="form-group">
-                  <label for="des"><strong>Description:</strong></label>
+                  <label for="des"><strong><%=t('desctiption')%>:</strong></label>
                   <textarea rows="5" class="form-control" name="Album[des]" id="des"><%=@album.des%></textarea>
                 </div>
               </div>
@@ -60,9 +60,9 @@
                 style="background: url('<%=albumRecord.Photo.image.url%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px">
                 <!------------Edit Photo-------------->
                 <button class="position-absolute btn btn-outline-success"
-                  style="bottom: 1px; left: 1px"><%= link_to 'Edit', admin_editPhoto_url(albumRecord.Photo_id) %></button>
+                  style="bottom: 1px; left: 1px"><%= link_to t('edit'), admin_editPhoto_url(albumRecord.Photo_id) %></button>
                 <button class="position-absolute btn btn-outline-danger"
-                  style="bottom: 1px; right: 1px"><%= link_to "Remove", admin_removePhoto_url(albumRecord.id), method: :post %></button>
+                  style="bottom: 1px; right: 1px"><%= link_to t('remove'), admin_removePhoto_url(albumRecord.id), method: :post %></button>
               </div>
               <%end%>
               <div class="gallery"></div>
@@ -78,9 +78,9 @@
           <div class="row">
             <!----------------Button-------------->
             <div class="col-md-3">
-              <button value="submit" type="submit" class="btn btn-success pull-left">Save</button>
+              <button value="submit" type="submit" class="btn btn-success pull-left"><%=t('save')%></button>
               <button
-                class="btn btn-danger pull-right"><%= link_to "Delete", admin_deleteAlbum_url(@album.id), method: :post%>
+                class="btn btn-danger pull-right"><i class="fa fa-trash"> <%= link_to t('delete'), admin_deleteAlbum_url(@album.id), method: :post%></i>
               </button>
             </div>
             <div class="col"></div>

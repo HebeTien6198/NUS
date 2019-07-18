@@ -1,9 +1,11 @@
 <div class="col-md-2 col-xs-2">
-            <div class="container">
-                <a href="/admin/managePhoto" class="link">Manage Photos</a>
-                <br>
-                <a href="/admin/manageAlbum" class="link">Manage Album</a>
-                <br>
-                <a href="/admin" class="link active">Manage User</a>
-            </div>
-        </div>
+  <div class="container">
+    <%= link_to t('managePhotos'), admin_managePhoto_url, class: "link", id: "", :"data-turbolinks" => false %>
+    <br>
+    <%= link_to t('manageAlbums'), admin_manageAlbum_url, class: "link", id: "", :"data-turbolinks" => false %>
+    <%if session[:admin]%>
+      <br>
+      <%= link_to t('admin'), admin_url, class: "link", id: "admin", :"data-turbolinks" => false %>
+    <%end%>
+  </div>
+</div>

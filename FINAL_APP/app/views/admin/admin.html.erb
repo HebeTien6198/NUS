@@ -12,16 +12,16 @@
             <br />
                 <div class="row">
                     <div class="col-md-2">
-                        <h6><strong>First Name</strong></h6>
+                        <h6><strong><%=t('firstName')%></strong></h6>
                     </div>
                     <div class="col-md-2">
-                        <h6><strong>Last Name</strong></h6>
+                        <h6><strong><%=t('lastName')%></strong></h6>
                     </div>
                     <div class="col-md-4">
-                        <h6><strong>Email</strong></h6>
+                        <h6><strong><%=t('email')%></strong></h6>
                     </div>
                     <div class="col-md-2">
-                        <h6><strong>Last Login</strong></h6>
+                        <h6><strong><%=t('lastLogin')%></strong></h6>
                     </div>
                     <div class="col-md-2">
                         <h6><strong>cc</strong></h6>
@@ -44,8 +44,8 @@
                     </div>
                     <div class="col-md-2">
                         <div class="row">
-                            <button class="btn btn-success"><%= link_to 'Edit', admin_edit_url(user.id) %></button>
-                            <button class="btn btn-danger">Delete</button>
+                            <%= link_to t('edit'), admin_edit_url(user.id), class: "btn btn-success", :"data-turbolinks" => false %>
+                            <%= link_to t('delete'), admin_deleteUser_url(user.id), class: "btn btn-danger", method: :post, :"data-turbolinks" => false %>
                         </div>
                     </div>
                 </div>

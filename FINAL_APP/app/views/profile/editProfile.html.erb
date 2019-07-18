@@ -14,7 +14,7 @@
                     <div class="container">
                     <br />
                    
-                        <h6><strong>Edit User's Profile</strong></h6>
+                        <h6><strong><%=t('editInformation')%></strong></h6>
                         <hr>
                         <div class="row">
                             <div class="col-md-5"></div>
@@ -29,7 +29,7 @@
                         <br />
                         <div class="row">
                             <div class="col-md-5"></div>
-                            <div class="col-md-7"><h6 class="text text-primary"><strong>Basic Information</strong></h6></div>
+                            <div class="col-md-7"><h6 class="text text-primary"><strong><%=t('basicInformation')%></strong></h6></div>
                         </div>
                         <!-------------------------------Basic Information------------------------------>
                         <form method="POST" action="/editBasicProfile" onsubmit="return validation()">
@@ -39,7 +39,7 @@
                             <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label class="col-form-label d-flex justify-content-end" for="User[firstName]"><strong>First Name</strong></label>
+                                    <label class="col-form-label d-flex justify-content-end" for="User[firstName]"><strong><%=t('firstName')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" value='<%=@user.firstName%>' id="first-name" name="User[firstName]" aria-describedby="emailHelp" placeholder="Your First Name">
@@ -51,7 +51,7 @@
                             <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label class="col-form-label d-flex justify-content-end"><strong>Last Name</strong></label>
+                                    <label class="col-form-label d-flex justify-content-end"><strong><%=t('lastName')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" value='<%=@user.lastName%>' id="last-name" name="User[lastName]" aria-describedby="emailHelp" placeholder="Your Last Name">
@@ -63,7 +63,7 @@
                             <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label class="col-form-label d-flex justify-content-end"><strong>Email</strong></label>
+                                    <label class="col-form-label d-flex justify-content-end"><strong><%=t('email')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" class="form-control" value='<%=@user.email%>' id="email" name="User[email]" aria-describedby="emailHelp" placeholder="someone@example.com">
@@ -74,7 +74,7 @@
                             <div class="row">
                                 <div class="col-md-5"></div>
                                 <div class="col-md-7">
-                                    <button type="submit" value="submit" class="btn btn-success" >Save</button>
+                                    <button type="submit" value="submit" class="btn btn-success" ><%=t('save')%></button>
                                 </div>
                             </div>
                        
@@ -86,7 +86,7 @@
 
                         <div class="row">
                                 <div class="col-md-5"></div>
-                                <div class="col-md-7"><h6 class="text text-primary"><strong>Password</strong></h6></div>
+                                <div class="col-md-7"><h6 class="text text-primary"><strong><%=t('password')%></strong></h6></div>
                             </div>
                          <!-------------------------------Password------------------------------>
                         <form method="POST" action="/editPassword" onsubmit="return validation()">
@@ -96,7 +96,7 @@
                             <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label class="col-form-label d-flex justify-content-end" for="current-password"><strong>Current password</strong></label>
+                                    <label class="col-form-label d-flex justify-content-end" for="current-password"><strong><%=t('currentPassword')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="password" class="form-control" id="current-password" name="currentPassword" aria-describedby="emailHelp" placeholder="12345678">
@@ -108,7 +108,7 @@
                             <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label class="col-form-label d-flex justify-content-end"><strong>New Password</strong></label>
+                                    <label class="col-form-label d-flex justify-content-end"><strong><%=t('newPassword')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="password" class="form-control" id="new-password" name="newPassword" aria-describedby="emailHelp" placeholder="12345678">
@@ -120,7 +120,7 @@
                             <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label class="col-form-label d-flex justify-content-end"><strong>Confirm Password</strong></label>
+                                    <label class="col-form-label d-flex justify-content-end"><strong><%=t('confirmPassword')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="password" class="form-control" id="confirm-password" name="confirmPassword" aria-describedby="emailHelp" placeholder="12345678">
@@ -132,7 +132,7 @@
                             <div class="row">
                                 <div class="col-md-5"></div>
                                 <div class="col-md-7">
-                                    <button type="submit" value="submit" class="btn btn-success" >Save</button>
+                                    <button type="submit" value="submit" class="btn btn-success" ><%=t('save')%></button>
                                 </div>
                             </div>
                        

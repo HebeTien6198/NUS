@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  
-  get 'profile/profile'
+  scope "(:locale)", locale: /en|vi/ do
+    get 'profile/profile'
   get 'profile/editProfile'
   #------------------------GET-----------------------------
   get 'feed/feed'
@@ -36,10 +36,14 @@ Rails.application.routes.draw do
   post 'updateProfile', to: "admin#updateProfile"
   post 'admin/updateAvatar', to: "admin#updateAvatar"
   post 'admin/updatePhoto', to: "admin#updatePhoto"
-  post 'admin/deletePhoto/:id', to: "admin#deletePhoto", as: "admin/deletePhoto"
   post 'admin/updateAlbum', to: "admin#updateAlbum"
+  #----Delete---#
+  post 'admin/deletePhoto/:id', to: "admin#deletePhoto", as: "admin/deletePhoto"
   post 'admin/deleteAlbum/:id', to: "admin#deleteAlbum", as: "admin/deleteAlbum"
   post 'admin/removePhoto/:id', to: "admin#removePhotoFromAlbum", as: "admin/removePhoto"
+  post 'admin/deleteUser/:id', to: "admin#deleteUser", as: "admin/deleteUser"
+
+  
   #------------------------POST------------------------------
   post 'register', to: "register#create"
   post 'login', to: "login#validateLogin"
@@ -71,4 +75,9 @@ Rails.application.routes.draw do
   #-----------Search--------------------#
   post 'discover', to: "feed#discover"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    end
+
+
+  
+  
 end

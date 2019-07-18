@@ -1,11 +1,11 @@
 <div class="col-md-2 col-xs-2">
-    <div class="container">
-        <%= link_to 'Discover', discover_url, class: "link", id: "discover", :"data-turbolinks" => false %>     
+  <div class="container">
+      <%= link_to t("discover"), discover_url, class: "link", id: "discover", :"data-turbolinks" => false %>     
+      <br>
+      <%= link_to t("feed"), feed_url, class: "link", id: "feed", :"data-turbolinks" => false %>
+      <%if session[:admin]%>
         <br>
-        <%= link_to 'Feed', feed_url, class: "link", id: "feed", :"data-turbolinks" => false %>
-        <%if session[:admin]%>
-          <br>
-          <%= link_to 'Admin', admin_url, class: "link", id: "admin", :"data-turbolinks" => false %>
-        <%end%>  
-    </div>
+        <%= link_to t("admin"), admin_url, class: "link", id: "admin", :"data-turbolinks" => false %>
+      <%end%>  
+  </div>
 </div>
