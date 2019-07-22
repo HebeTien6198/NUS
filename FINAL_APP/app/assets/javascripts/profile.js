@@ -118,7 +118,7 @@ $("#document").ready(function () {
 
   //----------------Password Check-----------------------------------
   resetPasswordValidation = function () {
-    let password = $("#new-password").val();
+    let password = $("#password").val();
     let confirmPassword = $("#confirm-password").val();
     console.log("Password: " + password);
     console.log("Confirm password " + confirmPassword);

@@ -13,7 +13,10 @@
         <div class="container">
           <br />
 
-          <h6><strong><%=t('editAlbum') %></strong></h6>
+          <div class="row">
+          <div class="col-md-10"><h6><strong><%=t('editAlbum')%></strong></h6></div>
+          <div class="col-md-2"><%= link_to  t("back"), profile_url, class: "btn btn-danger pull-right", :"data-turbolinks" => false %></div>
+          </div>
           <hr>
           <!-------------------------Edit Album Form------------------------------------------->
           <%= form_tag('/editAlbumServer', method: :post, multipart: true, class: "editAlbumForm") do -%>

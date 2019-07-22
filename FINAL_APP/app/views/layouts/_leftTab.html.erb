@@ -1,8 +1,8 @@
 <div class="col-md-2 col-xs-2">
   <div class="container">
-      <%= link_to t("discover"), discover_url, class: "link", id: "discover", :"data-turbolinks" => false %>     
+      <%= link_to t("discover"), discover_url, class: "link", id: "discover_link", :"data-turbolinks" => false %>     
       <br>
-      <%= link_to t("feed"), feed_url, class: "link", id: "feed", :"data-turbolinks" => false %>
+      <%= link_to t("feed"), feed_url, class: "link", id: "feed_link", :"data-turbolinks" => false %>
       <%if session[:admin]%>
         <br>
         <%= link_to t("admin"), admin_url, class: "link", id: "admin", :"data-turbolinks" => false %>

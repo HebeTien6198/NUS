@@ -14,13 +14,16 @@ $("#document").ready(function() {
         $("#photo-button").removeClass("btn-primary");
     });
 
-    // Like and Unlike
+    // Like and Unlike photo
     $(".like").click(function() {
         alert("like");
         user_id = $(this).attr('user_id');
         photo_id = $(this).attr('photo_id');
         like = this
-
+        if (user_id == -1) {
+          alert("You need to login");
+          return;
+        }
         console.log($(this).attr("liked"));
         if ($(this).attr("liked") == "false") {
             Rails.ajax({
@@ -70,11 +73,16 @@ $("#document").ready(function() {
         }
     });
 
+    // like photo
     $(".likePhotoIcon").click(function() {
         alert("like like cc");
         user_id = $(this).attr('user_id');
         photo_id = $(this).attr('photo_id');
-        like = this
+        like = this;
+        if (user_id == -1) {
+          alert("You need to login");
+          return;
+        }
 
         console.log($(this).attr("liked"));
         if ($(this).attr("liked") == "false") {
@@ -118,14 +126,70 @@ $("#document").ready(function() {
     });
 
 
+    // like album
+    $(".likeAlbumIcon").click(function() {
+    
+      user_id = $(this).attr('user_id');
+      album_id = $(this).attr('album_id');
+      like = this;
+      if (user_id == -1) {
+        alert("You need to login");
+        return;
+      }
+
+      console.log($(this).attr("liked"));
+      if ($(this).attr("liked") == "false") {
+        alert("like like cc");
+          Rails.ajax({
+              url: "/likeAlbum",
+              contentType: "application/json",
+              type: "post",
+              dataType: "json",
+              data: $.param({ Album_id: album_id, User_id: user_id }),
+
+              // data: "follower_id=>cc, following_id=>ccc",
+              success: function(data) {
+                  $(like).css("color", 'red');
+                  $(like).attr("liked", "true");
+                  $(like).text(" " + data["numOfLikes"]);
+              },
+              error: function(data) {
+                  alert(data)
+              }
+          });
+      } else {
+        alert("unlike unlike cc");
+          var mydata = { User_id: 1, Photo_id: 1 }
+          Rails.ajax({
+              url: "/unlikeAlbum",
+              contentType: "application/json",
+              type: "post",
+              dataType: "json",
+              data: $.param({ Album_id: album_id, User_id: user_id }),
+
+              // data: "follower_id=>cc, following_id=>ccc",
+              success: function(data) {
+                  $(like).css("color", 'blue');
+                  $(like).attr("liked", "false");
+                  $(like).text(" " + data["numOfLikes"]);
+              },
+              error: function(data) {
+                  alert(data)
+              }
+          });
+      }
+  });
+
 
     // Follow and Unfollow
     $(".follow").click(function() {
-        alert("cc");
         follower_id = $(this).attr('follower_id');
         following_id = $(this).attr('following_id');
         follow = this;
-
+        if (follower_id == -1) {
+          alert("You need to login");
+          return;
+        }
         if ($(this).attr("followed") == "false") {
             Rails.ajax({
                 url: "/follow",
@@ -177,6 +241,7 @@ $("#document").ready(function() {
         comment = this;
         content = $(this).val();
         Photo_id = $(this).attr("photo_id");
+        
         if (e.keyCode == 13) {
             if (content == "") {
                 alert("You must enter something");

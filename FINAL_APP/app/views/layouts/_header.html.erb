@@ -11,16 +11,16 @@
                 <%= form_tag('/discover', method: :post, class: "form-inline my-2 my-lg-0") do -%>
                     <input name="title" class="form-control mr-sm-2" type="search" placeholder="<%=t('search')%>">
                 <%end%>
-                <%= link_to "English", locale:"en" %>
-                <%= link_to "Vietnamese", locale:"vi" %>
+                <%= link_to "English", locale:"en", :"data-turbolinks" => false %>
+                <%= link_to "Vietnamese", locale:"vi", :"data-turbolinks" => false %>
                   <!--------------------------------Info------------------------------------------->
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#"> <img class="avatar-image" src="<%=@avatar%>"></a>
+                      <a class="nav-link" href="#"> <img class="avatar-image" src="<%=@user.avatar%>"></a>
                     </li>
                     <li class="nav-item">
-                        <%= link_to @name, profile_url, class: "nav-link", :"data-turbolinks" => false %>
+                        <%= link_to @user.firstName, profile_url, class: "nav-link", :"data-turbolinks" => false %>
                     </li>
                     <li class="nav-item">
                         <%= link_to t('logout'), logOut_url, class: "nav-link",method: :post %>

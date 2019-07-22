@@ -118,15 +118,21 @@ class ProfileController < ApplicationController
 
   #---------------Upload album------------------------#
   def uploadAlbum
+    puts "--------------------------------------------"
+    
     #---------Create a ablum for user--------#
+   
     album = Album.create(User: @user, name: params[:Album]["name"], des: params[:Album]["des"])
     for image in params[:Album]["image"]
-      photo = Photo.create(image: image, User: @user)
+      #-------------Create photo for album---------------#
+      photo = Photo.new
+      photo.image = image
+      photo.User = @user
+      photo.save(validate: false)
       albumRecord = AlbumRecord.create(Photo: photo, Album: album)
     end
 
-    puts params[:Album]["image"]
-    puts params[:Album]["image"].size
+    redirect_to profile_url
   end
 
   #--------take login input data from user-------------
@@ -182,6 +188,10 @@ class ProfileController < ApplicationController
   #------------Delete Album-------------------#
   def deleteAlbum
     @album = Album.find_by(id: params[:id])
+    #-----Delete all photos belong to album---------#
+    for album_record in @album.album_records
+      album_record.Photo.destroy
+    end
     @album.destroy
   end
 

@@ -12,12 +12,14 @@
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search">
                   </form>
+                   <%= link_to "English", locale:"en" %>
+                <%= link_to "Vietnamese", locale:"vi" %>
                   <!--------------------------------Info------------------------------------------->
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
                     
                     <li class="nav-item">
-                      <%= link_to "Register", register_url, class: "nav-link", :"data-turbolinks" => false %>
+                      <%= link_to t('register'), register_url, class: "nav-link", :"data-turbolinks" => false %>
                     </li>
                     </li>
                   </ul>                  
@@ -32,7 +34,7 @@
             
         
             <div class="container form-body">
-                    <h1 class="text-header text-primary">Login</h1>
+                    <h1 class="text-header text-primary"><%=t('login')%></h1>
                 </br>
                 <!--------------------Login Message---------------------->
                 <%= @message %>
@@ -42,9 +44,7 @@
                 <div class="row">
                 <div class="col-md-4"></div>
                     <!----------------------------------Login Form-------------------------------------------------->
-                    <form class="col-md-4" method="POST" action="/login">
-                      <input name="utf8" type="hidden" value="&#x2713;" />
-                      <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />  
+                    <%=form_tag('/login', method: :post, class: "col-md-4") do%> 
                         <div class="form-group">
                             <input type="email" name="User[email]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
@@ -57,10 +57,10 @@
                         
                         <a href="#" class="text-center">Fogot password?</a>
                         <br>
-                        <a href="/register">Register</a>
+                        <%= link_to t('register'), register_url, class: "nav-link", :"data-turbolinks" => false %>
                         <br />
                         <br />
-                    </form>
+                    <%end%>
                 <div class="col-md-4"></div>
                 </div>
             </div>

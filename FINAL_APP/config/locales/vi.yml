@@ -7,6 +7,7 @@ vi:
   login: "Đăng nhập"
   logout: "Đăng xuất"
   search: "Tìm kiếm"
+  register: "Đăng kí"
 
   #-----------Left tab-------------#
   discover: "Khám phá"
@@ -53,3 +54,4 @@ vi:
   remove: "Gỡ"
   cancel: "Hủy"
   exit: "Thoát"
+  back: "Quay lại"

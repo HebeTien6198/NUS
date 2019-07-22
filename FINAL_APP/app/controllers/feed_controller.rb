@@ -1,7 +1,9 @@
 class FeedController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:discover]
   before_action :set_discover_user, only: [:info]
+  before_action :set_user_for_discover, only: [:discover, :getLikes]
   before_action :getLikes, only: [:info, :discover, :feed]
+  
 
   #--------------------GET----------------#
   #-----feed------#
@@ -21,7 +23,11 @@ class FeedController < ApplicationController
     #----Get all their photos----#
     for following in @followings
       for p in following.photos
-        @photos.push(p)
+        #get all private and public
+        #sharingMode equal nil means that this is belong to album
+        if p.sharingMode != nil
+          @photos.push(p)
+        end
       end
     end
 
@@ -35,8 +41,8 @@ class FeedController < ApplicationController
 
   #------Discover----#
   def discover
-    puts "cccccccccccccccccccccccccccccccccc"
     puts params["title"]
+    #--------------------Search-------------------------#
     @photos = Photo.where(sharingMode: "isPublic").where("title like ?", "%#{params["title"]}%")
     puts "--------------#{@photos.count}------------------"
 
@@ -134,6 +140,23 @@ class FeedController < ApplicationController
     end
   end
 
+  #-------------Like Album----------------#
+  def likeAlbum
+    like = LikeAlbum.new
+    like.User_id = params[:User_id]
+    like.Album_id = params[:Album_id]
+    if like.save
+      render json: { numOfLikes: Album.find(params[:Album_id]).like_albums.size }
+    end
+  end 
+
+  #-------------UnLike Album----------------#
+  def unlikeAlbum
+    like = LikeAlbum.where(User_id: params[:User_id]).where(Album_id: params[:Album_id]).first
+    if like.destroy
+      render json: { numOfLikes: Album.find(params[:Album_id]).like_albums.size }
+    end
+  end
   def CreatePhotoComments
     comment = PhotoComment.new
     comment.User_id = @user.id
@@ -182,6 +205,26 @@ class FeedController < ApplicationController
       puts "-----Photo Records--------------"
       puts l.Photo_id
       @likes[l.Photo_id] = true
+    end
+
+    @album_likes = Hash.new
+    @user.like_albums.each do |like|
+      @album_likes[like.Album_id] = true
+    end
+  end
+
+  def set_user_for_discover
+    @user
+    if session[:user]
+      @user = User.where(id: session[:user]["id"]).first
+      @name = session[:user]["firstName"]
+      @fullName = "#{session[:user]["firstName"]} #{session[:user]["lastName"]}"
+      @avatar = @user.avatar
+    else
+      @user = User.new
+      @user.firstName = "Hi Guest"
+      @user.avatar = "/assets/default/avatar/avatar.svg"
+      @user.id = -1
     end
   end
 end

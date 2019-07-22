@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   scope "(:locale)", locale: /en|vi/ do
     get 'profile/profile'
   get 'profile/editProfile'
+  
   #------------------------GET-----------------------------
   get 'feed/feed'
   get 'register/register'
@@ -59,6 +60,8 @@ Rails.application.routes.draw do
   #-----------Like-Unlike------------#
   post 'like', to: "feed#like"
   post 'unlike', to: "feed#unlike"
+  post 'likeAlbum', to: "feed#likeAlbum"
+  post 'unlikeAlbum', to: "feed#unlikeAlbum"
   #---------------Comment------------#
   post 'comment', to: "feed#CreatePhotoComments"
   #--------------Edit------------

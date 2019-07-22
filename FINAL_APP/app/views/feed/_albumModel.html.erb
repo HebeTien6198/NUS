@@ -22,13 +22,19 @@
                       <%if albumRecord == albumRecords.first%>
 
                       <div class="carousel-item active">
-                        <%=album.name%>
+                        <div class="container">
+                        <h4><strong><%=album.name%></strong></h4>
+                        <hr>
+                        </div>
                         <img src="<%=photo.image.url%>" class="img-responsive">
-                        <p class="m-4"><%=photo.des%></p>
+                        <hp class="m-4"><%=photo.des%></p>
                       </div>
                       <%else%>
-                      <div class="carousel-item">
-                        <%=album.name%>
+                      <div class="carousel-item text-break">
+                        <div class="container">
+                        <h4><strong><%=album.name%></strong></h4>
+                        <hr>
+                        </div>
                         <img src="<%=photo.image.url%>" alt="Chicago">
                         <p class="m-4"><%=photo.des%></p>
                       </div>

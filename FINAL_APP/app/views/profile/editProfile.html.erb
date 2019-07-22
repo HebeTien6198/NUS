@@ -14,7 +14,10 @@
                     <div class="container">
                     <br />
                    
-                        <h6><strong><%=t('editInformation')%></strong></h6>
+                        <div class="row">
+          <div class="col-md-10"><h6><strong><%=t('editInfomarion')%></strong></h6></div>
+          <div class="col-md-2"><%= link_to  t("back"), profile_url, class: "btn btn-danger pull-right", :"data-turbolinks" => false %></div>
+          </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-5"></div>
@@ -111,7 +114,7 @@
                                     <label class="col-form-label d-flex justify-content-end"><strong><%=t('newPassword')%></strong></label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="password" class="form-control" id="new-password" name="newPassword" aria-describedby="emailHelp" placeholder="12345678">
+                                    <input type="password" class="form-control" id="password" name="newPassword" aria-describedby="emailHelp" placeholder="12345678">
                                     <small id="new-password-message" class="form-text text-muted">Your password should have more than 8 characters</small>
                                 </div>
                             </div>
@@ -132,7 +135,7 @@
                             <div class="row">
                                 <div class="col-md-5"></div>
                                 <div class="col-md-7">
-                                    <button type="submit" value="submit" class="btn btn-success" ><%=t('save')%></button>
+                                    <button type="submit" value="submit" class="btn btn-success" ><%=t('save')%>p</button>
                                 </div>
                             </div>
                        

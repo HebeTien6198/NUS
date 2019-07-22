@@ -38,6 +38,7 @@ en:
   login: "Login"
   logout: "Logout"
   search: "Search"
+  register: "Register"
 
   #-----------Left tab-------------#
   discover: "Discover"
@@ -86,3 +87,5 @@ en:
   remove: "Remove"
   cancel: "Cancel"
   exit: "Exit"
+  back: "Back"
+

@@ -33,13 +33,15 @@
 
                 <!----------------------------Search Bar------------------------------------->
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="<%=t('search')%>">
                   </form>
+                   <%= link_to "English", locale:"en" %>
+                <%= link_to "Vietnamese", locale:"vi" %>
                   <!--------------------------------Info------------------------------------------->
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
                     <li class="nav-item">
-                      <a class="nav-link" href="/login">Login</a>
+                      <%= link_to t('login'), login_url, class: "nav-link", :"data-turbolinks" => false %>
                     </li>
                     </li>
                   </ul>                  
@@ -54,14 +56,12 @@
             
         
             <div class="container form-body">
-                    <h1 class="text-header text-primary">Register</h1>
+                    <h1 class="text-header text-primary"><%=t('register') %></h1>
                 </br>
                 <div class="row">
                 <div class="col-md-4"></div>
                     <!----------------------------------Register Form-------------------------------------------------->
-                    <form name="register-form" class="col-md-4" method="POST" action="/register" onsubmit="return validation()">
-                    <input name="utf8" type="hidden" value="&#x2713;" />
-                    <input type="hidden" name="authenticity_token" value="lSt...hbIg==" />
+                    <%=form_tag('/register', method: :post, class: "col-md-4", onsubmit: "return validation()") do%>
                     <!--First name-->
                         <div class="form-group">
                             <input type="text" class="form-control" id="first-name" name="User[firstName]" aria-describedby="emailHelp" placeholder="Your First Name">
@@ -96,7 +96,7 @@
                         <button  type="submit" name="commit" class="btn btn-primary btn-block">Register</button>
                         <br />
                         <br />
-                    </form>
+                    <%end%>
                 <div class="col-md-4"></div>
                 </div>
             </div>

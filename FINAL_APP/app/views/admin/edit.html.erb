@@ -13,7 +13,10 @@
                     <div class="container">
                     <br />
                    
-                        <h6><strong>Edit User's Profile</strong></h6>
+                        <div class="row">
+          <div class="col-md-10"><h6><strong><%=t('editProfile')%></strong></h6></div>
+          <div class="col-md-2"><%= link_to  t("back"), admin_url, class: "btn btn-danger pull-right", :"data-turbolinks" => false %></div>
+          </div>
                         <hr>
                         <div class="row">
                             <div class="col-md-5"></div>
