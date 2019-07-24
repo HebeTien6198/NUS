@@ -32,12 +32,22 @@ class PhotosController < ApplicationController
     end
   end
 
+  #--DELELE Photo--#
+  def destroy
+    photo = Photo.find(params[:id])
+    if photo.destroy
+      redirect_to profile_index_url
+    else
+      puts photo.errors.messages
+    end
+  end
+
 #-----------Params------------------#
   def photo_params
-    return params.require(:Photo).permit(:id, :title, :sharingMode, :des)
+    return params.require(:Photo).permit(:id, :title, :sharing_mode, :des)
   end
 
   def upload_photo_params
-    return params.require(:Photo).permit(:title, :sharingMode, :image, :des)
+    return params.require(:Photo).permit(:title, :sharing_mode, :image, :des)
   end
 end

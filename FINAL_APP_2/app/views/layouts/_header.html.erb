@@ -17,10 +17,10 @@
                 <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
                   <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#"> <img class="avatar-image" src=""></a>
+                      <a class="nav-link" href="#"><img class="avatar-image" src="<%=@avatar%>"></a>
                     </li>
                     <li class="nav-item">
-                        <%= link_to "manh", profile_index_url, class: "nav-link", :"data-turbolinks" => false %>
+                        <%= link_to current_user.first_name, profile_index_url, class: "nav-link", :"data-turbolinks" => false %>
                     </li>
                     <li class="nav-item">
                         <%= link_to 'Log out', destroy_user_session_path, method: :delete %>

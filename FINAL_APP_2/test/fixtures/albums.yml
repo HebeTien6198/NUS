@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  des: MyString
+  sharing_mode: 1
+
+two:
+  title: MyString
+  des: MyString
+  sharing_mode: 1

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :setUser
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
     update_attrs = [:password, :password_confirmation, :current_password]
     devise_parameter_sanitizer.permit :account_update, keys: update_attrs
   end
@@ -21,5 +22,6 @@ class ApplicationController < ActionController::Base
   def setUser
     @avatar = Photo.first.image.url
     @user = current_user
+    @user.avatar = @avatar
   end
 end

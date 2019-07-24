@@ -1,0 +1,80 @@
+<body id="feed">
+  <!----------------Header from layout-------------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/left_tab"%>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+          <div class="row">
+          <div class="col-md-10"><h6><strong><%=t('newAlbum')%></strong></h6></div>
+          <div class="col-md-2"><%= link_to  t("back"), profile_index_url, class: "btn btn-danger pull-right", :"data-turbolinks" => false %></div>
+          </div>
+          <hr>
+          <!-------------------------New Photo Form------------------------------------------->
+          <%= form_for @album,  html: { multipart: true } do |f| %>
+          <div class="row">
+            <!----------Title--------->
+            <div class="col">
+              <div class="form-group">
+                <label for="title"><strong><%=t('title') %>:</strong></label>
+                <input type="text" value="Photo Title goes here" name="Album[title]" class="form-control" id="title">
+              </div>
+              <!-----------Mode---------->
+              <div class="form-group">
+                <label for="sharing-mode"><strong><%=t('sharingMode') %>:</strong></label>
+                <select type="text" class="form-control" name="Album[sharing_mode]" id="sharing">
+                  <option name="Album[sharing_mode]" value="is_private"><%=t('private') %></option>
+                  <option name="Album[sharing_mode]" value="is_public"><%=t('public') %></option>
+                </select>
+              </div>
+              <!-----------Image---------->
+
+              
+            </div>
+            <div class="col">
+              <!------------Description---------->
+              <div class="form-group">
+                <label for="des"><strong><%=t('description') %>:</strong></label>
+                <textarea rows="5" class="form-control" name="Album[des]" id="des">Description goes here</textarea>
+              </div>
+            </div>
+            
+          </div>
+          <!---------------------Upload Image------------------>
+          <div class="d-flex flex-wrap">
+          <div class="gallery"></div>
+              <input
+                style="background: url('<%=@image%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px"
+                type="file" name="images[]" multiple id="gallery-photo-add" >
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <!----------------Button-------------->
+            <div class="col-md-3">
+              <%= f.submit t('save'), class: "btn btn-success pull-left"%>
+              <%# <button value="submit" type="submit" class="btn btn-success pull-left">Save</button> %>
+              <button class="btn btn-danger pull-right"><%=t('delete') %></button>
+            </div>
+            <div class="col"></div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->
+
+</html>

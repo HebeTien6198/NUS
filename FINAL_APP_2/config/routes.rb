@@ -9,9 +9,17 @@ Rails.application.routes.draw do
     resources :custom_passwords
     resources :profile
     resources :photos
+    resources :albums
+    resources :album_records
+    resources :follow
+    resources :discovers
+
     
     root to: 'feeds#index'
     put "/edit/password", to: "custom_passwords#update"
+
+    delete "/follow", to: "follow#destroy"
+    post "/follow", to: "follow#create"
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

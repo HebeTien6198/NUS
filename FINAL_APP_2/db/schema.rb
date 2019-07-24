@@ -10,7 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_145421) do
+ActiveRecord::Schema.define(version: 2019_07_24_074548) do
+
+  create_table "album_records", force: :cascade do |t|
+    t.integer "photo_id"
+    t.integer "album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_album_records_on_album_id"
+    t.index ["photo_id"], name: "index_album_records_on_photo_id"
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.string "title"
+    t.string "des"
+    t.integer "sharing_mode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_albums_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id"], name: "index_follows_on_following_id"
+  end
 
   create_table "photos", force: :cascade do |t|
     t.string "title"
@@ -36,6 +64,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_145421) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

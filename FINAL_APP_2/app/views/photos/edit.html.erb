@@ -36,8 +36,8 @@
                   <label for="sharing-mode"><strong><%=t('sharingMode') %>:</strong></label>
                   <select type="text" class="form-control" name="Photo[sharing_mode]" id="sharing"
                     value="<%=@photo.sharing_mode%>">
-                    <option name="Photo[sharing_mode]" value="isPrivate">Private</option>
-                    <option name="Photo[sharing_mode]" value="isPublic">Public</option>
+                    <option name="Photo[sharing_mode]" value="is_private">Private</option>
+                    <option name="Photo[sharing_mode]" value="is_public">Public</option>
                   </select>
                 </div>
                 <!-----------Image---------->
@@ -59,9 +59,7 @@
               <!----------------Button-------------->
               <div class="col-md-3">
                 <button value="submit" type="submit" class="btn btn-success pull-left"><%=t('save') %></button>
-                <button
-                  class="btn btn-danger pull-right"><%= link_to t('delete'), photo_url(@photo.id), method: :delete%>
-                </button>
+                <%= link_to t('delete'), photo_url(@photo.id), class: "btn btn-danger pull-right", method: :delete%>
               </div>
               <div class="col"></div>
             </div>

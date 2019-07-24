@@ -4,5 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
-  has_many :photos
+  has_many :photos, dependent: :destroy
+  has_many :albums, dependent: :destroy
+
+  has_many :follower, :class_name => 'Follow', :foreign_key => 'follower_id', dependent: :destroy
+  has_many :following, :class_name => 'Follow', :foreign_key => 'following_id', dependent: :destroy
 end
