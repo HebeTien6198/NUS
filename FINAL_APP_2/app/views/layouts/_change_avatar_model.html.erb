@@ -1,0 +1,94 @@
+<!-- The Modal -->
+<div class="modal" id="avatarModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Update your avatar</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h5>Choose from your photo</h5>
+        <div class="d-flex flex-wrap">
+          <%photos.each do |photo|%>
+          <img class="chooseAvatar" src="<%=photo.image.url%>" style="height: 150px;" data-toggle="modal"
+            data-target="#avatarModal<%=photo.id%>">
+
+
+          <%= form_tag(@editAvatarAction, method: :post) do -%>
+          <!-- Confirm Avatar Modal -->
+          <div class="modal" id="avatarModal<%=photo.id%>">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+
+
+
+                  <h4 class="modal-title">Update your avatar</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <div class="container">
+                    <input type="text" value="<%=photo.des%>" class="form-control">
+                    <hr>
+                    <img src="<%=photo.image.url%>" style="width: 100%; height: auto">
+                  </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+
+                  <input type="hidden" name="avatar" value="<%=photo.image.url%>">
+                  <button type="submit" value="submit" class="btn btn-success">Save</button>
+                  <%end-%>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script type='text/javascript'>
+  function preview_image(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+      var output = document.getElementById('output_image');
+      output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+</script>
+<style>
+  body {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0px;
+    font-family: helvetica;
+    background-color: #0B3861;
+  }
+
+  #wrapper {
+
+    padding: 0px;
+
+  }
+</style>

@@ -1,0 +1,81 @@
+<body id="feed">
+  <!----------------Header from layout-------------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/left_tab"%>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+
+          <div class="row">
+            <div class="col-md-10">
+              <h6><strong><%=t('editPhoto')%></strong></h6>
+            </div>
+            <div class="col-md-2">
+              <%= link_to  t("back"), profile_index_url, class: "btn btn-danger pull-ritgh", :"data-turbolinks" => false %>
+            </div>
+          </div>
+          <hr>
+          <!-------------------------Edit Photo Form------------------------------------------->
+          <%=form_for @photo do |f|%>
+            <!----------ID----------->
+            <div class="row">
+              <!----------Title--------->
+              <div class="col">
+                <div class="form-group">
+                  <label for="title"><strong><%=t('title') %>:</strong></label>
+                  <input type="text" value="<%=@photo.title%>" name="Photo[title]" class="form-control" id="title">
+                </div>
+                <!-----------Mode---------->
+                <div class="form-group">
+                  <label for="sharing-mode"><strong><%=t('sharingMode') %>:</strong></label>
+                  <select type="text" class="form-control" name="Photo[sharing_mode]" id="sharing"
+                    value="<%=@photo.sharing_mode%>">
+                    <option name="Photo[sharing_mode]" value="isPrivate">Private</option>
+                    <option name="Photo[sharing_mode]" value="isPublic">Public</option>
+                  </select>
+                </div>
+                <!-----------Image---------->
+                <div class=''
+                  style="background: url('<%=@photo.image.url%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px">
+                </div>
+              </div>
+              <div class="col">
+                <!------------Description---------->
+                <div class="form-group">
+                  <label for="des"><strong><%=t('description') %>:</strong></label>
+                  <textarea rows="5" class="form-control" name="Photo[des]" id="des"><%=@photo.des%></textarea>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+              <!----------------Button-------------->
+              <div class="col-md-3">
+                <button value="submit" type="submit" class="btn btn-success pull-left"><%=t('save') %></button>
+                <button
+                  class="btn btn-danger pull-right"><%= link_to t('delete'), photo_url(@photo.id), method: :delete%>
+                </button>
+              </div>
+              <div class="col"></div>
+            </div>
+          <%end%>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->
+
+</html>

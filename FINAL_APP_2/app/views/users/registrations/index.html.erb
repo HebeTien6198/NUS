@@ -1,0 +1,90 @@
+
+
+<body id="feed">
+  <!---------------Header from Layput-------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/leftTab"%>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+          <div class="row justify-content-center">
+            <!--Avatar-->
+            <div class="col-md-3 text-center text-md-left">
+              <img class="profile-avatar" src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
+            </div>
+            <!---End Avatar------>
+            <!----Render avatar model------->
+            <%= render "/profile/changeAvatarModel" %>
+            <!------End render--------------->
+            <div class="col-md-8 text-center text-lg-left">
+              <!---Edit Profile Button--->
+              <%= link_to t("editProfile"), edit_user_registration_url, class: "btn btn-primary", id: "edit-profile", :"data-turbolinks" => false %>
+              <h2 class="text-primary">
+                <%= @fullName %>
+              </h2>
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#photo">
+                    <%=@photos.count%> <%=t('photo')%></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#album">
+                    <%=@albums.count%> <%=t('album')%></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#following">
+                    <%=@followingRecords.size%> <%=t('following')%></a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#follower">
+                    <%=@followerRecords.size%> <%=t('follower')%></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Tab panes -->
+
+          <div class="tab-content">
+            <!--Photo-->
+            <div class="tab-pane container active" id="photo">
+              Photo
+                <%end%>
+              </div>
+              </div>
+              </div>
+
+            </div>
+            <!--End Photo-->
+            <!--Album-->
+            <div class="tab-pane container" id="album">
+              Album
+            </div>
+            <!--End Album-->
+            <!--Following-->
+            <div class="tab-pane container fade" id="following">
+              Following
+            </div>
+            <!--Follower-->
+            <div class="tab-pane container fade" id="follower">
+              Follower
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->

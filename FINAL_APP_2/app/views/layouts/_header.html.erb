@@ -1,0 +1,35 @@
+<!---------------------------------------------------------HEADER---------------------------------------------------------------------->
+        <!-- <header> -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                <!---------------------------Logo------------------------------->
+                
+                <%= link_to 'Instagram', feeds_url, class: "navbar-brand", :"data-turbolinks" => false %>
+                
+
+                <!----------------------------Search Bar------------------------------------->
+                <%= form_tag('/discover', method: :post, class: "form-inline my-2 my-lg-0") do -%>
+                    <input name="title" class="form-control mr-sm-2" type="search" placeholder="<%=t('search')%>">
+                <%end%>
+                <%= link_to "English", locale:"en", :"data-turbolinks" => false %>
+                <%= link_to "Vietnamese", locale:"vi", :"data-turbolinks" => false %>
+                  <!--------------------------------Info------------------------------------------->
+                <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+                  <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#"> <img class="avatar-image" src=""></a>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to "manh", profile_index_url, class: "nav-link", :"data-turbolinks" => false %>
+                    </li>
+                    <li class="nav-item">
+                        <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+                    
+                    </li>
+                    </li>
+                  </ul>                  
+                </div>
+                </div>
+              </nav>
+              
+        <!-- </header> -->

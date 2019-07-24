@@ -1,0 +1,49 @@
+cc
+<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+
+</head>
+
+<body id="feed">
+  <%= render "/layouts/header"%>
+
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/left_tab"%>
+      <!------------------End left tab------------------->
+
+      <div class="col-md-8 col-xs-8 photo-body">
+        <!----------------------------------HEADER BUTTON----------------------------------------->
+        <div class="row photo-body">
+          <div class="col">
+            <button id="photo-button" href="#photo" type="button" role="tab" data-toggle="tab"
+              class="btn btn-primary pull-right photo-button"><%=t('photo').upcase%></button>
+          </div>
+          <div class="col">
+            <button id="album-button" href="#album" type="button" role="tab" data-toggle="tab"
+              class="btn btn-primary pull-left album-button"><%=t('album').upcase%></button>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+    </div>
+    </div>
+    <div class="col-md-2 col-xs-2">
+      right
+    </div>
+    </div>
+
+
+  </main>
+</body>
+<!-- Java Script -->
+<script>
+  $(document).ready(function () {
+    $("#feed_link").addClass("lead");
+  });
+</script>
+
+</html>

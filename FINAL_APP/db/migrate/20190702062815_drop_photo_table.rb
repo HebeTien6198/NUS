@@ -1,5 +1,5 @@
 class DropPhotoTable < ActiveRecord::Migration[5.2]
   def change
-    drop_table :photos
+    # drop_table :photos
   end
 end

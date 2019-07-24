@@ -1,0 +1,81 @@
+ <!----------------HEADER----------------->
+ <header>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <div class="container">
+       <!---------Logo------------->
+       <a class="navbar-brand" href="#">Instagram</a>
+       <!--------Search Bar-------------->
+       <form class="form-inline my-2 my-lg-0">
+         <input class="form-control mr-sm-2" type="search">
+       </form>
+       <%= link_to "English", locale:"en" %>
+       <%= link_to "Vietnamese", locale:"vi" %>
+       <!--------------------------------Info------------------------------------------->
+       <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+         <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
+           <li class="nav-item">
+              <%= link_to t("login"), new_session_path(resource_name), class: "nav-link", :"data-turbolinks" => false %><br />
+           </li>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </nav>
+ </header>
+ <!------------------End Header------------->
+ <!------------------Body------------------->
+ <div class="row">
+ <div class="col-md-4"></div>
+ <div class="col-md-4">
+ <h2 class="text-primary text-center">Sign up</h2>
+
+  <!-------------Form------------->
+ <%= form_for(resource, as: resource_name, url: registration_path(resource_name), onsubmit: "return validation()") do |f| %>
+ <%= render "devise/shared/error_messages", resource: resource %>
+<!-----First Name------>
+<div class="form-group">
+   <%= f.label :first_name %><br />
+   <%= f.text_field :first_name, autofocus: true, autocomplete: "email", class: "form-control first-name", id: "first_name" %>
+   <small id="first-name-message" class="form-text text-muted">It should be your first name</small>
+ </div>
+
+<!-----Last Name-------->
+ <div class="form-group">
+   <%= f.label :last_name %><br />
+   <%= f.text_field :last_name, autocomplete: "email", class: "form-control last-name", id: "last_name" %>
+   <small id="last-name-message" class="form-text text-muted">It should be your last name</small>
+ </div>
+
+<!------Email------>
+ <div class="form-group">
+   <%= f.label :email %><br />
+   <%= f.email_field :email, autocomplete: "email", class: "form-control email" %>
+   <small id="email-message" class="form-text text-muted">It should be your email</small>
+ </div>
+
+<!-----Password----->
+ <div class="form-group">
+   <%= f.label :password %>
+   <% if @minimum_password_length %>
+   <em>(<%= @minimum_password_length %> characters minimum)</em>
+   <% end %><br />
+   <%= f.password_field :password, autocomplete: "new-password", class: "form-control password", id: "password" %>
+   <small id="password-message" class="form-text text-muted">Your password should have more than 8 characters</small>
+ </div>
+
+<!----Confirm Password---->
+ <div class="form-group">
+   <%= f.label :password_confirmation %><br />
+   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control confirm-password", id: "confirm-password" %>
+   <small id="confirm-password-message" class="form-text text-muted">It should be the same as your password</small>
+ </div>
+
+ <div class="actions">
+   <%= f.submit "Sign up", class: "btn btn-success"%>
+   <button  type="submit" name="commit" class="btn btn-primary btn-block">Register</button>
+ </div>
+ <% end %>
+<!----------End form----------->
+<div class="col-md-4"></div>
+ <%= render "devise/shared/links" %>
+ </div>

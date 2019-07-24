@@ -6,6 +6,7 @@ class User < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :like_albums, dependent: :destroy
     has_many :photo_comments, dependent: :destroy
+    extend Devise::Models
 
     validates :firstName,
             presence: true,

@@ -1,0 +1,62 @@
+<!-- The Modal -->
+<div class="modal fade " id="myModal<%=photo.id%>">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <!-----Image------>
+      <div class="row">
+        <div class="col-md-8"><img class="center" src="<%=photo.image.url%>" style="height: 700px;width: 100%;"></div>
+        <div class="col-md-4">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <!------Avatar------>
+            
+
+            <!------User's Name------>
+            <div>
+              <h4 class="header-text text-primary" style="padding-left: 20px;">
+                <%= "  " + photo.user.first_name + " " + photo.user.last_name  %></h4>
+              <div style="padding-left: 20px;"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+            </div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body text-break overflow-auto mw-50">
+            <h4 class="modal-title"><%=photo.title%></h4>
+            <%=photo.des%>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <div class="row">
+              <!--Like Icon-->
+            
+            </div>
+
+          </div>
+          <div class="row">
+            <!--Like Button -->
+
+
+          <!---Comment----->
+ 
+
+          </div>
+          <div class="row">
+
+         
+            <div class="col-md-10">
+
+              <input style="border-radius: 10px; margin-right: 5px" class="form-control comment"
+                placeholder="Enter your comment here" Photo_id="<%=photo.id%>">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

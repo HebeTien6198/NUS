@@ -1,0 +1,47 @@
+<body>
+  <!---------------------------------------------------------HEADER---------------------------------------------------------------------->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <!---------------------------Logo------------------------------->
+        <a class="navbar-brand" href="#">Instagram</a>
+        <!----------------------------Search Bar------------------------------------->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        </form>
+        <%= link_to "English", locale:"en" %>
+        <%= link_to "Vietnamese", locale:"vi" %>
+        <!-------------Info----------------->
+        <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
+            <li class="nav-item">
+              <%= link_to t('register'), new_registration_path(resource_name), :"data-turbolinks" => false %><br />
+            </li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!---------------------End Head------------------------------->
+<!-------------------------------BODY------------------------------------------------>
+<div class="container mt-5">
+<h2>Forgot your password?</h2>
+<div class="row">
+<div class="col-md-4">
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Send me reset password instructions", class: "form-control" %>
+  </div>
+<% end %>
+</div>
+</div>
+<%= render "users/shared/links" %>
+</div>

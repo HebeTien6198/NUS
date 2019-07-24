@@ -1,0 +1,76 @@
+<body>
+  <!---------------------------------------------------------HEADER---------------------------------------------------------------------->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <!---------------------------Logo------------------------------->
+        <a class="navbar-brand" href="#">Instagram</a>
+        <!----------------------------Search Bar------------------------------------->
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        </form>
+        <%= link_to "English", locale:"en" %>
+        <%= link_to "Vietnamese", locale:"vi" %>
+        <!-------------Info----------------->
+        <div class="collapse navbar-collapse " id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0 ">
+            <li class="nav-item">
+              <%= link_to t('register'), new_registration_path(resource_name), :"data-turbolinks" => false %><br />
+            </li>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!--------------------------------------End Head------------------------------------------>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main>
+    <hr>
+    <div class="container form-body">
+      <!--------------------Login Message---------------------->
+      <%= @message %>
+      <div class="is-invalid">
+        <div class="invalid-feedback"> sadasd <%=@message%> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+        <h1 class="text-header text-primary text-center"><%=t('login')%></h1>
+
+        <!---------Login Form----------------->
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <!------Email------>
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", playholder: "Your email" %>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <!------Password------->
+        <div class="form-group">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control", playholder: "password" %>
+        </div>
+        <!------Rememeber----->
+        <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+        <% end %>
+        <!-----Sharelinks and submit--->
+        <button type="submit" class="btn btn-primary btn-block">Login</button>
+        <%= link_to "Forgot your password?", new_password_path(resource_name), class: "", :"data-turbolinks" => false %><br />
+        <%= link_to t('register'), new_registration_path(resource_name),class: "", :"data-turbolinks" => false %><br />
+
+        <br />
+        <br />
+        <%end%>
+        </div>
+        <!------------------End Form------------------>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </main>
+</body>
+<!---------------------------------------End body-------------------------------------------------->

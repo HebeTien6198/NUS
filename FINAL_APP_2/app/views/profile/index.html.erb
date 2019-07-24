@@ -1,0 +1,114 @@
+
+
+<body id="feed">
+  <!---------------Header from Layput-------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render "/layouts/left_tab"%>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+          <div class="row justify-content-center">
+            <!--Avatar-->
+            <div class="col-md-3 text-center text-md-left">
+              <img class="profile-avatar" src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
+            </div>
+            <!---End Avatar------>
+            <!----Render avatar model------->
+        
+            <!------End render--------------->
+            <div class="col-md-8 text-center text-lg-left">
+              <!---Edit Profile Button--->
+              <%= link_to t("editProfile"), edit_user_registration_url, class: "btn btn-primary", id: "edit-profile", :"data-turbolinks" => false %>
+              <h2 class="text-primary">
+                <%= @fullName %>
+              </h2>
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#photo">
+                     <%=t('photo')%></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#album">
+                    <%=t('album')%></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " data-toggle="tab" href="#following">
+                    <%=t('following')%></a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#follower">
+                  <%=t('follower')%></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Tab panes -->
+
+          <div class="tab-content">
+            <!--Photo-->
+            <div class="tab-pane container active" id="photo">
+            <!--Add Photo Button-->
+              <button class="btn btn-success pull-right"><%= link_to t('addPhoto'), new_photo_url, :"data-turbolinks" => false %></button>
+              <br />
+              <br />
+               <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="photo">
+              <div class="d-flex flex-wrap">
+                <%@photos.each do |photo|%>
+                <div class="photo-title">
+                  <div class="image m-3"
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px; width: 250px; height: 300px; position: relative"
+                    data-toggle="modal" data-target="#myModal<%=photo.id%>">
+                    <!---------------Private/Public-------------->
+                    <%if photo.is_private? %>
+                    <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
+                        class="fas fa-lock"></i></button>
+                    <%end%>
+                    <!---------------Edit Photo Button----------->
+                    <button
+                    
+                      class="btn btn-outline-success pull-down"><%= link_to t('edit'), edit_photo_url(photo.id), :"data-turbolinks" => false %></button>
+                  </div>
+                  <div class="title text-center"><strong><%=photo.title%></strong></div>
+                </div>
+                <!--------Render Photo Model---------------------->
+            <%= render "/layouts/photo_model", photo: photo%>
+            <!--------End Render Photo Model---------------------->
+                <%end%>
+              </div>
+              </div>
+              </div>
+              </div>
+          
+            <!--End Photo-->
+            <!--Album-->
+            <div class="tab-pane container" id="album">
+              Album
+            </div>
+            <!--End Album-->
+            <!--Following-->
+            <div class="tab-pane container fade" id="following">
+              Following
+            </div>
+            <!--Follower-->
+            <div class="tab-pane container fade" id="follower">
+              Follower
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+  </main>
+</body>
+<!-- Java Script -->
