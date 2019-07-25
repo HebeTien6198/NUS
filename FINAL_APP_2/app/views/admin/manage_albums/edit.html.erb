@@ -1,0 +1,90 @@
+<body id="feed">
+  <!----------------Header from layout-------------------->
+  <%= render "/layouts/header"%>
+  <!--------------------------------------------------------BODY------------------------------------------------------------------>
+  <main class="feed-body">
+    <hr>
+    <div class="row">
+      <!---------------Left tab from Layput-------------->
+      <%= render '/layouts/admin_left_tab' %>
+      <!------------------End left tab------------------->
+      <div class="col-md-8 col-xs-8 photo-body">
+        <div class="container">
+          <br />
+          <div class="row">
+          <div class="col-md-10"><h6><strong><%=t('editAlbum')%></strong></h6></div>
+          <div class="col-md-2"><%= link_to  t("back"), profile_index_url, class: "btn btn-danger pull-right", :"data-turbolinks" => false %></div>
+          </div>
+          <hr>
+          <!-------------------------Edit Album Form------------------------------------------->
+          <%= form_for [:admin, @album], :url => admin_manage_album_path, html: { multipart: true } do |f| -%>
+            <div class="row">
+              <!----------Title--------->
+              <div class="col">
+                <div class="form-group">
+                  <label for="title"><strong><%=t('title')%>:</strong></label>
+                  <input type="text" value="<%=@album.title%>" name="Album[title]" class="form-control" id="title">
+                </div>
+                <!-----------Mode---------->
+                <div class="form-group">
+                  <label for="sharing-mode"><strong><%=t('sharingMode')%>:</strong></label>
+                  <select type="text" class="form-control" name="Album[sharing_mode]" id="sharing"
+                    value="<%=@album.sharing_mode%>">
+                    <option name="Album[sharing_mode]" value="is_private"><%=t('private')%></option>
+                    <option name="Album[sharing_mode]" value="is_public"><%=t('public')%></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <!------------Description---------->
+                <div class="form-group">
+                  <label for="des"><strong><%=t('desctiption')%>:</strong></label>
+                  <textarea rows="5" class="form-control" name="Album[des]" id="des"><%=@album.des%></textarea>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+            <!-----------Image---------->
+            <%photos = Array.new%>
+            <%albumRecords = @album.album_records%>
+            <div class="d-flex flex-wrap">
+              <%for albumRecord in albumRecords%>
+              <%photos.push(albumRecord.photo_id)%>
+              <div class='position-relative'
+                style="background: url('<%=albumRecord.photo.image.url%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px">
+                <!------------Edit Photo-------------->
+                <%= link_to t('edit'), edit_photo_url(albumRecord.photo_id), class: "position-absolute btn btn-outline-success", style: "bottom: 1px; left: 1px" %>
+                <%= link_to t('remove'), album_record_url(albumRecord.id), class: "position-absolute btn btn-outline-danger", style: "bottom: 1px; right: 1px", method: :delete %>
+              </div>
+              <%end%>
+              <div class="gallery"></div>
+              <input
+                style="background: url('<%=@image%>'); width: 200px; height: 200px; background-size: 100% 100%; border-radius: 10px"
+                type="file" name="images[]" multiple id="gallery-photo-add">
+            </div>
+        </div>
+        
+        <br />
+        <br />     
+          <div class="row">
+            <!----------------Button-------------->
+            <div class="col-md-3">
+              <button value="submit" type="submit" class="btn btn-success pull-left"><%=t('save')%></button>
+              <%= link_to  t('delete'), album_url(@album.id), class: "btn btn-danger pull-right", method: :delete%></i>
+            </div>
+            <div class="col"></div>
+          </div>
+          <%end%>
+          <!---------------------------------------END FORM---------------------------------------------->
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-2">
+        right
+      </div>
+    </div>
+  </main>
+</body>
+<!-- Java Script -->
+
+</html>

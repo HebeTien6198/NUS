@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+  enum role: [:is_admin, :is_user]
   has_many :photos, dependent: :destroy
   has_many :albums, dependent: :destroy
 

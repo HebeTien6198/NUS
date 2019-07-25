@@ -1,0 +1,66 @@
+ <!----------------Header from layout-------------------->
+ <%= render "/layouts/header"%>
+ <main class="feed-body">
+   <hr>
+   <div class="row">
+     <!---------Render left tab from admin------->
+     <%= render '/layouts/admin_left_tab' %>
+     <!-------------End Render--------------->
+     <div class="col-md-8 col-xs-8 photo-body">
+       <div class="container">
+         <br />
+         <div class="row">
+           <div class="col-md-2">
+             <h6><strong><%=t('firstName')%></strong></h6>
+           </div>
+           <div class="col-md-2">
+             <h6><strong><%=t('lastName')%></strong></h6>
+           </div>
+           <div class="col-md-4">
+             <h6><strong><%=t('email')%></strong></h6>
+           </div>
+           <div class="col-md-2">
+             <h6><strong><%=t('lastLogin')%></strong></h6>
+           </div>
+           <div class="col-md-2">
+             <h6><strong>cc</strong></h6>
+           </div>
+         </div>
+         <hr>
+         <% for user in @users %>
+         <div class="row">
+           <div class="col-md-2">
+             <p><%=user.first_name%></p>
+           </div>
+           <div class="col-md-2">
+             <p><%=user.last_name%></p>
+           </div>
+           <div class="col-md-4">
+             <p><%=user.email%></p>
+           </div>
+           <div class="col-md-2">
+             
+           </div>
+           <div class="col-md-2">
+             <div class="row">
+               <%= link_to t('edit'), edit_admin_manage_user_url(user.id), class: "btn btn-success", :"data-turbolinks" => false %>
+               <%= link_to t('delete'), admin_manage_user_url(user.id), class: "btn btn-danger", method: :delete, :"data-turbolinks" => false %>
+             </div>
+           </div>
+         </div>
+         <%end%>
+       </div>
+     </div>
+     <div class="col-md-2 col-xs-2">
+       right
+     </div>
+   </div>
+
+
+ </main>
+ <!-- Java Script -->
+ <script>
+   $(document).ready(function () {
+     $("#admin_link").addClass("lead");
+   });
+ </script>

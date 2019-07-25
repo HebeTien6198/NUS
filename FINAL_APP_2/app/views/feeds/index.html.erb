@@ -1,11 +1,6 @@
-cc
-<%= link_to 'Log out', destroy_user_session_path, method: :delete %>
-
 </head>
-
 <body id="feed">
   <%= render "/layouts/header"%>
-
   <!--------------------------------------------------------BODY------------------------------------------------------------------>
   <main class="feed-body">
     <hr>
@@ -27,23 +22,105 @@ cc
           </div>
         </div>
         <br>
+        <!-------------------------------------PHOTO---------------------------------------------->
+        <!----------------------Photo Tab--------------------->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="photo">
+            <div class="wrap photo-body">
+              <!------------------------A photo----------------------------------->
+              <div></div>
+              <%@photos.each do |photo|%>
+              <div class="photo-container shadow-sm rounded " >
+                <div class="row">
+                  <div class="col-md-6">
+                    <img src="<%=photo.image.url%>" class="photo-review-image" data-toggle="modal" data-target="#myModal<%=photo.id%>"> 
+                  </div>
+                  <div class="col-md-6">
+                    <div class="review-header">
+                      <!------Avatar------>
+                      <img src="<%=photo.user.avatar%>" class="header-img">
+
+                      <!------User's Name------>
+                      <%= link_to photo.user.first_name,  person_url(photo.user.id) , :"data-turbolinks" => false%>
+                    </div>
+                    <div class="review-body addScroll">
+                      <p class="header-text"><%=photo.title%></p>
+                      <p><%=photo.des%></p>
+                    </div>
+                    <div class="review-footer">
+                
+
+                      <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!--------Render Photo Model---------------------->
+            <%= render "/layouts/photo_model", photo: photo%>
+            <!--------End Render Photo Model---------------------->              
+              <%end%>
+              <!------------------------END PHOTO------------------------------------------>
+            </div>
+          </div>
+          <!----------------------Album Tab--------------------->
+          <div role="tabpanel" class="tab-pane" id="album">
+            <div class="wrap photo-body">
+              <!------------------------A Album----------------------------------->
+              <%@albums.each do |album|%>
+              <!----------Get all album record--------------->
+              <%album_records = album.album_records%>
+
+              <!-------------Get first image------------------>
+              <%if album_records.first != nil%>
+              <%first_photo = album_records.first.photo%>
+              <div class="photo-container shadow-sm rounded " >
+                <div class="row" style="height: 100%;" >
+                  <div class="col albums-rotate">
+                    <img src="<%=first_photo.image.url%>" class="photo-review-image album-rotate img-thumbnail">
+                    <img src="<%=first_photo.image.url%>" class="photo-review-image album-rotate img-thumbnail">
+                    <img src="<%=first_photo.image.url%>" class="photo-review-image album-rotate img-thumbnail" data-toggle="modal"
+                data-target="#myAlbumModal<%=album.id%>">
+                    <h2 class="position-absolute" style="top: 10%; left: 50%; color: white">
+                      <strong><%=album_records.size%></strong></h2>
+                  </div>
+                  <div class="col">
+                    <div class="review-header">
+                      <!------Avatar------>
+                      <img src="<%=album.user.avatar%>" class="header-img">
+                      <!------User's Name------>
+                      <%= link_to album.user.first_name,  person_url(album.user.id) , :"data-turbolinks" => false%>
+                    </div>
+                    <div class="review-body">
+                      <p class="header-text"><%=album.title%></p>
+                      <p><%=album.des%></p>
+                    </div>
+                    <div class="review-footer">
+                   
+       
+                      <div class="date ml-auto"><%=album.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
+                  </div>
+                </div>
+              </div>
+              <%end%>
+            </div>
+            <!------------------------Render Album Model---------------->
+            <%= render "/layouts/album_model", album: album, album_records: album_records%>
+            <!---------------------End Render Album Model---------------->
+            <%end%>
+            <!------------------------END ALBUM------------------------------------------>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </div>
     <div class="col-md-2 col-xs-2">
       right
     </div>
     </div>
-
-
   </main>
 </body>
 <!-- Java Script -->
 <script>
-  $(document).ready(function () {
+  $(document).ready(function(){
     $("#feed_link").addClass("lead");
-  });
+  }); 
 </script>
-
-</html>

@@ -1,0 +1,33 @@
+ <!----------------Header from layout-------------------->
+ <%= render "/layouts/header"%>
+ <main class="feed-body">
+   <hr>
+   <div class="row">
+     <!---------Render left tab from admin------->
+     <%= render '/layouts/admin_left_tab' %>
+     <!-------------End Render--------------->
+     <div class="col-md-8 col-xs-8 photo-body">
+       <div class="container">
+         <br />
+         <div class="d-flex flex-wrap">
+           <%for photo in @photos%>
+
+           <div class="m-2"
+             style="position: relative; width: 250px; height: 250px; background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+             data-toggle="modal" data-target="#myModal<%=photo.id%>">
+             <!---------------Edit Photo Button----------->
+             <button
+               class="btn btn-outline-success pull-down"><%= link_to t('edit'), edit_admin_manage_photo_url(photo.id), :"data-turbolinks" => false %></button>
+             <div class="title text-center"><strong><%=photo.title%></strong></div>
+           </div>
+           <%end%>
+         </div>
+       </div>
+     </div>
+     <div class="col-md-2 col-xs-2">
+       right
+     </div>
+   </div>
+
+
+ </main>

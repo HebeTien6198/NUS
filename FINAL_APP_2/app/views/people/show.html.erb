@@ -1,4 +1,8 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+</head>
 
 <body id="feed">
   <!---------------Header from Layput-------------->
@@ -13,30 +17,31 @@
       <div class="col-md-8 col-xs-8 photo-body">
         <div class="container">
           <br />
-          <div class="row justify-content-center">
+          <div class="row">
             <!--Avatar-->
-            <div class="col-md-3 text-center text-md-left">
-              <img class="profile-avatar" src="<%=@avatar%>" data-toggle="modal" data-target="#avatarModal">
+            <div class="col-md-3">
+              <img class="profile-avatar" src="<%=@avatar%>">
             </div>
-            <!---End Avatar------>
-            <!----Render avatar model------->
-        
-            <!------End render--------------->
-            <div class="col-md-8 text-center text-lg-left">
-              <!---Edit Profile Button--->
-              <%= link_to t("editProfile"), edit_user_registration_url, class: "btn btn-primary", id: "edit-profile", :"data-turbolinks" => false %>
+            <div class="col-mid-8">
+              <!---Follow button--->
+              <%if @is_followed%>
+              <button class="btn btn-primary follow" followed="true" follower_id="<%=@user.id%>" ,
+                following_id="<%=@discover_user.id%>">following</button>
+              <%else%>
+              <button class="btn btn-outline-primary follow" followed="false" follower_id="<%=@user.id%>" ,
+                following_id="<%=@discover_user.id%>">follow</button>
+              <%end%>
               <h2 class="text-primary">
-                <%= @fullName %>
+               <%= link_to @full_name_discover, person_url(@discover_user.id), :"data-turbolinks" => false%>
               </h2>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#photo">
-                     <%=@photos.size%> <%=t('photo')%></a>
+                    <%=@photos.count%> <%=t('photo')%></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#album">
-                    <%=@albums.size%> <%=t('album')%></a>
+                  <a class="nav-link" data-toggle="tab" href="#album"><%=@albums.count%> <%=t('album')%></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link " data-toggle="tab" href="#following">
@@ -45,55 +50,41 @@
 
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#follower">
-                  <%=@follower_records.size%> <%=t('follower')%></a>
+                    <%=@follower_records.size%> <%=t('follower')%></a>
                 </li>
               </ul>
             </div>
           </div>
           <!-- Tab panes -->
 
+          <br />
           <div class="tab-content">
-            <!--Photo-->
+            <!--Photo--->
             <div class="tab-pane container active" id="photo">
-            <!--Add Photo Button-->
-              <%= link_to t('addPhoto'), new_photo_url, class: "btn btn-success pull-right", :"data-turbolinks" => false %>
-              <br />
-              <br />
-               <div class="tab-content">
-              <div role="tabpanel" class="tab-pane active" id="photo">
               <div class="d-flex flex-wrap">
                 <%@photos.each do |photo|%>
                 <div class="photo-title">
-                  <div class="image m-3"
+                  <div class="image"
                     style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px; width: 250px; height: 300px; position: relative"
                     data-toggle="modal" data-target="#myModal<%=photo.id%>">
-                    <!---------------Private/Public-------------->
-                    <%=photo.sharing_mode%>
-                    <%if photo.is_private? %>
-                    <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
-                        class="fas fa-lock"></i></button>
-                    <%end%>
-                    <!---------------Edit Photo Button----------->
-                    <%= link_to t('edit'), edit_photo_url(photo.id), class: "btn btn-outline-success pull-down", :"data-turbolinks" => false %>
+
                   </div>
                   <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
                 <!--------Render Photo Model---------------------->
-            <%= render "/layouts/photo_model", photo: photo%>
-            <!--------End Render Photo Model---------------------->
+                <%= render "/layouts/photo_model", photo: photo%>
+                <!--------End Render Photo Model---------------------->
                 <%end%>
               </div>
-              </div>
-              </div>
-              </div>
-          
+            </div>
             <!--End Photo-->
             <!--Album-->
             <div class="tab-pane container" id="album">
               <!--Add Album Button-->
-              <%= link_to t('addAlbum'), new_album_url, class: "btn btn-success pull-right", :"data-turbolinks" => false %>
+             
               <br />
               <br />
+
               <div class="d-flex flex-wrap">
                 <%@albums.each do |album|%>
                 <!--Get first photo-->
@@ -103,44 +94,42 @@
                 <%else%>
                 <%photo = Photo.first%>
                 <%end%>
-                <div class="photo-title pm-3">
+                <div class="photo-title">
                   <div class="image"
-                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%; border-radius: 5px; width: 250px; height: 300px; position: relative;"
+                    style="background: url('<%=photo.image.url%>'); background-size: 100% 100%;  border-radius: 5px; width: 250px; height: 300px; position: relative"
                     data-toggle="modal" data-target="#myAlbumModal<%=album.id%>">
                     <!---------------Private/Public-------------->
-                  <%if album.is_private? %>
+                    <%if album.is_private? %>
                     <button class="btn btn-secondary pull-right" style="border-radius: 50%;"><i
                         class="fas fa-lock"></i></button>
                     <%end%>
                     <!---------------Edit Photo Button----------->
-                    <%= link_to 'Edit', edit_album_url(album.id), class: "btn btn-outline-success pull-down", :"data-turbolinks" => false %>
                   </div>
-                  <div class="title text-center"><strong><%=album.title%></strong></div>
+                  <div class="title text-center"><strong><%=photo.title%></strong></div>
                 </div>
-    <!------------------------Render Album Model---------------->
-            <%= render "/layouts/album_model", album: album, album_records: album_records%>
-            <!---------------------End Render Album Model---------------->
+                <!------------------------Render Album Model---------------->
+                <%= render "/layouts/album_model", album: album, album_records: album_records%>
+                <!---------------------End Render Album Model---------------->
                 <%end%>
-            
-             
+
+
               </div>
             </div>
             <!--End Album-->
             <!--Following-->
             <div class="tab-pane container fade" id="following">
               <div class="d-flex flex-wrap">
-                <%for following_record in @following_records%>
+                <%@following_records.each do |following_record|%>
                 <%following = following_record.following%>
-                <div class="photo-title mb-3" style="width: 250px;">
-                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height: 40%; background: white;">
-
-                <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
-                      src="<%=following.avatar%>"> 
-
+                <div class="photo-title shadow-sm  bg-white rounded mb-3 ", style=" border-radius: 5px; width: 250px; height: 300px; position: relative">
+                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
+                    <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
+                      src="<%=following.avatar%>">
                   </div>
                   <div class="d-flex justify-content-center mt-2">
                     <h3>
-                    <%= link_to following.first_name, :"data-turbolinks" => false%>
+                    
+                      <%= link_to following.first_name,  person_url(following.id) , :"data-turbolinks" => false%>
                     </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
@@ -148,41 +137,44 @@
                       <h1>
                         <%=following.photos.count%>
                       </h1>
-                      <h6 style="padding-top: px;">Photos</h6>
+                      <h6 style="padding-top: px;"><%=t('photo')%></h6>
                     </div>
                     <div class="pull-right mr-4">
                       <h1>
                         <%=following.albums.count%>
                       </h1>
-                      <h6>Albums</h6>
+                      <h6><%=t('album')%></h6>
                     </div>
+
                   </div>
                   <div class="d-flex justify-content-center mt-2">
-                    <%if @following_records.where(following: following).first == nil%>
-                    <button class="btn btn-outline-primary follow m-3" followed="false" follower_id="<%=@user.id%>" ,
+                    <%if @following_list.where(following: following).first == nil%>
+                    <button class="btn btn-outline-primary follow" followed="false" follower_id="<%=@user.id%>" ,
                       following_id="<%=following.id%>">Follow</button>
                     <%else%>
-                    <button class="btn btn-primary follow m-3" followed="true" follower_id="<%=@user.id%>" ,
+                    <button class="btn btn-primary follow" followed="true" follower_id="<%=@user.id%>" ,
                       following_id="<%=following.id%>">Following</button>
                     <%end%>
                   </div>
+
                 </div>
+
                 <%end%>
               </div>
             </div>
             <!--Follower-->
             <div class="tab-pane container fade" id="follower">
               <div class="d-flex flex-wrap">
-                <%for follower_record in @follower_records%>
+                <%@follower_records.each do |follower_record|%>
                 <%follower = follower_record.follower%>
-                <div class="photo-title shadow-sm  bg-white rounded mb-3 text-primary" style=" border-radius: 5px; width: 250px; height: 300px; position: relative">
-                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height: 40%; backgrround:white;">
+                <div class="photo-title shadow-sm  bg-white rounded mb-3 text-primary", style=" border-radius: 5px; width: 250px; height: 300px; position: relative">
+                  <div class="d-flex justify-content-center mt-2" style="width: 100%; height 40%; backgrround: blue;">
                     <img class="" style="width: 100px; height: 100px; margin: auto; border-radius: 50%"
-                      src="<%=follower.avatar%>">
+                    src="<%=follower.avatar%>">
                   </div>
                   <div class="d-flex justify-content-center mt-2">
                     <h3>
-                      <%= link_to follower.first_name , :"data-turbolinks" => false%>
+                      <%= link_to follower.first_name,  person_url(follower.id) , :"data-turbolinks" => false%>
                     </h3>
                   </div>
                   <div class="mt-2" style="height: 80px;">
@@ -190,22 +182,22 @@
                       <h1>
                         <%=follower.photos.count%>
                       </h1>
-                      <h6 style="padding-top: px;">Photos</h6>
+                      <h6 style="padding-top: px;"><%=t('photo')%></h6>
                     </div>
                     <div class="pull-right mr-4">
                       <h1>
                         <%=follower.albums.count%>
                       </h1>
-                      <h6>Albums</h6>
+                      <h6><%=t('album')%></h6>
                     </div>
 
                   </div>
                   <div class="d-flex justify-content-center mt-2">
-                    <%if current_user.following.where(following: follower).first == nil%>
-                    <button class="btn btn-outline-primary follow m-3" followed="false" follower_id="<%=@user.id%>" ,
+                    <%if @following_list.where(following: follower).first == nil%>
+                    <button class="btn btn-outline-primary follow" followed="false" follower_id="<%=@user.id%>" ,
                       following_id="<%=follower.id%>">Follow</button>
                     <%else%>
-                    <button class="btn btn-primary follow m-3" followed="true" follower_id="<%=@user.id%>" ,
+                    <button class="btn btn-primary follow" followed="true" follower_id="<%=@user.id%>" ,
                       following_id="<%=follower.id%>">Following</button>
                     <%end%>
                   </div>
@@ -222,6 +214,10 @@
         right
       </div>
     </div>
+
+
   </main>
 </body>
 <!-- Java Script -->
+
+</html>

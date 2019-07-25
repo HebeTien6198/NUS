@@ -1,3 +1,4 @@
+
 <!-- The Modal -->
 <div class="modal" id="avatarModal">
   <div class="modal-dialog modal-lg">
@@ -13,12 +14,12 @@
       <div class="modal-body">
         <h5>Choose from your photo</h5>
         <div class="d-flex flex-wrap">
-          <%photos.each do |photo|%>
+          <%current_user.photos.each do |photo|%>
           <img class="chooseAvatar" src="<%=photo.image.url%>" style="height: 150px;" data-toggle="modal"
             data-target="#avatarModal<%=photo.id%>">
 
 
-          <%= form_tag(@editAvatarAction, method: :post) do -%>
+          <%= form_tag('/avatar/change', method: :post) do -%>
           <!-- Confirm Avatar Modal -->
           <div class="modal" id="avatarModal<%=photo.id%>">
             <div class="modal-dialog modal-lg">

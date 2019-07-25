@@ -1,0 +1,9 @@
+<div class="col-md-2 col-xs-2">
+  <div class="container">
+    <%= link_to t('managePhotos'), admin_manage_photos_url, class: "link", id: "manage_photo_link", :"data-turbolinks" => false %>
+    <br>
+    <%= link_to t('manageAlbums'), admin_manage_albums_url, class: "link", id: "manage_album_link", :"data-turbolinks" => false %>
+    <br>
+    <%= link_to t('admin'), admin_manage_users_path, class: "link", id: "manage_user_link", :"data-turbolinks" => false %>
+  </div>
+</div>

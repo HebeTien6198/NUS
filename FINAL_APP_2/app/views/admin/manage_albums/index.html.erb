@@ -1,0 +1,35 @@
+ <!----------------Header from layout-------------------->
+ <%= render "/layouts/header"%>
+ <main class="feed-body">
+   <hr>
+   <div class="row">
+     <!---------Render left tab from admin------->
+     <%= render '/layouts/admin_left_tab' %>
+     <!-------------End Render--------------->
+     <div class="col-md-8 col-xs-8 photo-body">
+       <div class="container">
+         <br />
+         <div class="d-flex flex-wrap">
+           <%@albums.each do |album|%>
+           <!----------Get all album record--------------->
+           <%album_records = album.album_records%>
+
+           <div class="m-2"
+             style="position: relative; width: 250px; height: 250px; background: url('<%=album_records.first.photo.image.url%>'); background-size: 100% 100%; border-radius: 5px;"
+             data-toggle="modal" data-target="#myModal<%=album.id%>">
+             <!---------------Edit Album Button----------->
+             <button
+               class="btn btn-outline-success pull-down"><%= link_to t('edit'), edit_admin_manage_album_url(album.id), :"data-turbolinks" => false %></button>
+             <div class="title text-center"><strong><%=album.title%></strong></div>
+           </div>
+           <%end%>
+         </div>
+       </div>
+     </div>
+     <div class="col-md-2 col-xs-2">
+       right
+     </div>
+   </div>
+
+
+ </main>

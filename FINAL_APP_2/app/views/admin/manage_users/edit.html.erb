@@ -40,8 +40,7 @@
             </div>
           </div>
           <!-------------------------------Basic Information------------------------------>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
+          <%= form_for [:admin, @edit_user], :url => admin_manage_user_path do |f| %>
           <!-----------------First Name---------------------->
           <div class="form-group">
             <div class="row">
@@ -50,7 +49,7 @@
                   for="User[firstName]"><strong><%=t('firstName')%></strong></label>
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" value="<%=current_user.first_name%>" id="first-name" name="User[first_name]"
+                <input type="text" class="form-control" value="<%=@edit_user.first_name%>" id="first-name" name="user[first_name]"
                   aria-describedby="emailHelp" placeholder="Your First Name">
                 <small id="first-name-message" class="form-text text-muted"></small>
               </div>
@@ -63,12 +62,13 @@
                 <label class="col-form-label d-flex justify-content-end"><strong><%=t('lastName')%></strong></label>
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" value="<%=current_user.last_name%>" id="last-name" name="User[last_name]"
+                <input type="text" class="form-control" value="<%=@edit_user.last_name%>" id="last-name" name="user[last_name]"
                   aria-describedby="emailHelp" placeholder="Your Last Name">
                 <div id="last-name-message" class="form-text text-muted">It should be your last name</div>
               </div>
             </div>
           </div>
+
           <!-----------------Email---------------------->
           <div class="form-group">
             <div class="row">
@@ -76,12 +76,28 @@
                 <label class="col-form-label d-flex justify-content-end"><strong><%=t('email')%></strong></label>
               </div>
               <div class="col-md-4">
-                <input type="text" class="form-control" value="<%=current_user.email%>" id="email" name="User[email]" aria-describedby="emailHelp"
+                <input type="text" class="form-control" value="<%=@edit_user.email%>" id="email" name="user[email]" aria-describedby="emailHelp"
                   placeholder="someone@example.com">
                 <small id="email-message" class="form-text text-muted">It should be your email</small>
               </div>
             </div>
           </div>
+
+          <!-----------------New Password---------------------->
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-5">
+                  <label
+                    class="col-form-label d-flex justify-content-end"><strong><%=t('newPassword')%></strong></label>
+                </div>
+                <div class="col-md-4">
+                  <%= f.password_field :password,class: "form-control", autofocus: true, autocomplete: "new-password" %>
+                  <small id="new-password-message" class="form-text text-muted">Your password should have more than 8
+                    characters</small>
+                </div>
+              </div>
+            </div>
+
           <div class="row">
             <div class="col-md-5"></div>
             <div class="col-md-7">
@@ -102,61 +118,6 @@
               <h6 class="text text-primary"><strong><%=t('password')%></strong></h6>
             </div>
           </div>
-          <!-------------------------------Password------------------------------>
-          <%= form_for(resource, as: resource_name, url: '/edit/password', html: { method: :put }) do |f| %>
-          <%= render "devise/shared/error_messages", resource: resource %>
-          <%= f.hidden_field :reset_password_token %>
-            <!-----------------Password---------------------->
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-5">
-                  <label class="col-form-label d-flex justify-content-end"
-                    for="current-password"><strong><%=t('currentPassword')%></strong></label>
-                </div>
-                <div class="col-md-4">
-                  <%= f.password_field :current_password, class: "form-control", placeholder: "Enter current password"%>
-                  <small id="password-message" class="form-text text-muted">Your password should have more than 8
-                    characters</small>
-                </div>
-              </div>
-            </div>
-            <!-----------------New Password---------------------->
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-5">
-                  <label
-                    class="col-form-label d-flex justify-content-end"><strong><%=t('newPassword')%></strong></label>
-                </div>
-                <div class="col-md-4">
-                  <%= f.password_field :password,class: "form-control", autofocus: true, autocomplete: "new-password" %>
-                  <small id="new-password-message" class="form-text text-muted">Your password should have more than 8
-                    characters</small>
-                </div>
-              </div>
-            </div>
-            <!-----------------Confirm password---------------------->
-            <div class="form-group">
-              <div class="row">
-                <div class="col-md-5">
-                  <label
-                    class="col-form-label d-flex justify-content-end"><strong><%=t('confirmPassword')%></strong></label>
-                </div>
-                <div class="col-md-4">
-                  <%= f.password_field :password_confirmation,class: "form-control", autocomplete: "off" %>
-                  <small id="confirm-password-message" class="form-text text-muted">It should be the same as your
-                    password</small>
-                </div>
-              </div>
-            </div>
-            <!-------------------Save button --------------->
-            <div class="row">
-              <div class="col-md-5"></div>
-              <div class="col-md-7">
-                <button type="submit" value="submit" class="btn btn-success"><%=t('save')%>p</button>
-              </div>
-            </div>
-
-          <%end%>
           <br />
           <br />
           <br />
@@ -167,7 +128,6 @@
       </div>
     </div>
 <%= link_to "Change your password", edit_user_registration_path %>
-
   </main>
 </body>
 <!-- Java Script -->

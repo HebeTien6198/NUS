@@ -20,8 +20,13 @@ class ApplicationController < ActionController::Base
   end
 
   def setUser
-    @avatar = Photo.first.image.url
     @user = current_user
-    @user.avatar = @avatar
+    if (@user != nil)
+      if @user.avatar == nil
+        @user.avatar = "assets/avatar.svg"
+        @user.save
+      end
+      @avatar = @user.avatar
+    end
   end
 end

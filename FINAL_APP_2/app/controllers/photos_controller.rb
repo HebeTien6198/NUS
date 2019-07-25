@@ -17,13 +17,13 @@ class PhotosController < ApplicationController
 
   #--GET Edit Photo--#
   def edit
-    @photo = Photo.find(params[:id])
+    @photo = current_user.photos.find(params[:id])
   end
 
   #--PUT Update Photo--#
   def update
     puts "ccccccccccc"
-    photo = Photo.find(params[:id])
+    photo = current_user.find(params[:id])
     photo.update(photo_params)
     if (photo.save)
       redirect_to profile_index_url
@@ -34,7 +34,7 @@ class PhotosController < ApplicationController
 
   #--DELELE Photo--#
   def destroy
-    photo = Photo.find(params[:id])
+    photo = current_user.find(params[:id])
     if photo.destroy
       redirect_to profile_index_url
     else

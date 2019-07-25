@@ -2,10 +2,10 @@
   <div class="container">
       <%= link_to t("discover"), discovers_url, class: "link", id: "discover_link", :"data-turbolinks" => false %>     
       <br>
-      <%= link_to t("feed"), class: "link", id: "feed_link", :"data-turbolinks" => false %>
-      <%if session[:admin]%>
+      <%= link_to t("feed"), feeds_url, class: "link", id: "feed_link", :"data-turbolinks" => false %>
+      <%if current_user.is_admin?%>
         <br>
-        <%= link_to t("admin"), class: "link", id: "admin", :"data-turbolinks" => false %>
+        <%= link_to t("admin"), admin_manage_users_path, class: "link", id: "admin", :"data-turbolinks" => false %>
       <%end%>  
   </div>
 </div>

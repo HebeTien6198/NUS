@@ -8,7 +8,7 @@
         <ul class="carousel-indicators">
 
           <li data-target="#demo<%=album.id%>" data-slide-to="0" class="active"></li>
-          <%for i in (1..albumRecords.size - 1)%>
+          <%for i in (1..album_records.size - 1)%>
           <li data-target="#demo<%=album.id%>" data-slide-to="<%=i%>"></li>
           <%end%>
         </ul>
@@ -16,10 +16,10 @@
         <!-- The slideshow -->
         <div class="carousel-inner">
 
-          <%for albumRecord in albumRecords%>
-          <%photo = albumRecord.photo%>
+          <%album_records.each do |album_record|%>
+          <%photo = album_record.photo%>
 
-          <%if albumRecord == albumRecords.first%>
+          <%if album_record == album_records.first%>
 
           <div class="carousel-item active">
             <div class="container">
