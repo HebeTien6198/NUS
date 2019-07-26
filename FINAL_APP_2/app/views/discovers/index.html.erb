@@ -62,7 +62,11 @@
                       <p><%=photo.des%></p>
                     </div>
                     <div class="review-footer">
-
+                    <%if current_user.likes.where("likeable_type = ? AND likeable_id = ?", "Photo", photo.id).first%>
+                      <button class="btn fa fa-heart like" style="color: red" action="unlike" likeable_type="Photo" likeable_id="<%=photo.id%>"> <%=photo.likes.size%></button>
+                    <%else%>
+                      <button class="btn fa fa-heart like" style="color: blue" action="like" likeable_type="Photo" likeable_id="<%=photo.id%>"> <%=photo.likes.size%></button>
+                    <%end%>
                       <div class="date ml-auto"><%=photo.created_at.strftime("%I:%M%P %m/%d/%Y")%>
                       </div>
                     </div>
@@ -121,7 +125,12 @@
                       <p><%=album.des%></p>
                     </div>
                     <div class="review-footer">
-
+                     <!------Like icon--->
+                    <%if current_user.likes.where("likeable_type = ? AND likeable_id = ?", "Album", album.id).first%>
+                      <button class="btn fa fa-heart like" style="color: red" action="unlike" likeable_type="Album" likeable_id="<%=album.id%>"> <%=album.likes.size%></button>
+                    <%else%>
+                      <button class="btn fa fa-heart like" style="color: blue" action="like" likeable_type="Album" likeable_id="<%=album.id%>"> <%=album.likes.size%></button>
+                    <%end%>
                       <div class="date ml-auto"><%=album.created_at.strftime("%I:%M%P %m/%d/%Y")%></div>
                     </div>
                   </div>

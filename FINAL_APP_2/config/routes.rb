@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :follow
     resources :discovers
     resources :people
+    resources :likes
     namespace :admin do
       resources :manage_users
       resources :manage_photos
@@ -27,6 +28,10 @@ Rails.application.routes.draw do
 
     delete "/follow", to: "follow#destroy"
     post "/follow", to: "follow#create"
+
+    post "/like", to: "likes#create"
+    delete "unlike", to: "likes#destroy"
+
     post "/avatar/change", to: "profile#change_avatar"
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
